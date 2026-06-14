@@ -1,52 +1,106 @@
-# Git 提交规范
+# Git workflow for agents
 
-本项目使用最小化提交规范。
+After completing each clear task, the agent should manage Git automatically.
 
-## 提交前检查
+## Before committing
 
-每次 commit 前必须运行：
+Always run:
 
 ```bash
+git status -sb
 git status --short
+git diff --stat
 ```
 
-确认以下文件/目录**没有**出现在待提交列表中：
+Do not commit if any of these are staged or about to be staged:
 
-- `repos/`
-- `.venv/`、`.venvs/`
-- `data/raw/`、`data/interim/`、`data/processed/`
-- `models/base/`、`models/checkpoints/`、`models/teachers/`、`models/final/`
-- `runs/train/`、`runs/eval/`、`runs/analysis/`
-- 大文件/模型文件：`.log`、`.pt`、`.bin`、`.safetensors`、`.parquet`
-
-## Commit message 格式
-
+```text
+repos/
+.venv/
+.venvs/
+data/raw/
+data/interim/
+data/processed/
+models/base/
+models/checkpoints/
+models/teachers/
+models/final/
+runs/train/
+runs/eval/
+runs/analysis/
+*.log
+*.pt
+*.bin
+*.safetensors
+*.parquet
 ```
+
+If these appear, stop and report the problem.
+
+## Commit rules
+
+Use:
+
+```text
 <type>(<scope>): <summary>
 ```
 
-## 允许的 type
+Allowed types:
 
-| type | 用途 |
-|------|------|
-| `feat` | 新增项目能力，例如数据脚本、训练脚本、评测脚本 |
-| `fix` | 修复错误 |
-| `docs` | 只改文档 |
-| `chore` | 仓库、环境、配置维护 |
-
-## 示例
-
+```text
+feat   new project capability
+fix    bug fix
+docs   documentation-only change
+chore  repo, environment, config, or maintenance change
 ```
+
+Examples:
+
+```text
 chore(repo): initialize project scaffold
-chore(repos): record external repository commits
-docs(env): document environment policy
+chore(env): add mirror configuration
+docs(runbook): document LlamaFactory setup
 feat(train): add CPT smoke launcher
-feat(eval): add generic model evaluation script
-fix(configs): correct LlamaFactory dataset path
+feat(eval): add model evaluation wrapper
+fix(configs): correct dataset path
 ```
 
-## 原则
+Each commit should have one clear topic. Do not mix environment setup, data scripts, training scripts, evaluation scripts, and documentation changes in one commit unless they are part of the same small task.
 
-- 每次 commit 只做一个清晰主题。
-- 不要把环境、数据、训练、评测混在一个 commit 里。
-- 不要自动 push；需要 push 时先询问项目所有者。
+## Push rules
+
+After a successful local commit, push to the current branch automatically.
+
+Use:
+
+```bash
+git push
+```
+
+If the current branch has no upstream, use:
+
+```bash
+git push -u origin <current-branch>
+```
+
+Never use:
+
+```bash
+git push --force
+git push -f
+```
+
+If push fails because of authentication, remote divergence, rejected updates, missing remote, or branch mismatch, stop and report. Do not rewrite history without explicit human approval.
+
+## End-of-task report
+
+At the end of each task, report:
+
+```text
+- Whether a commit was created
+- Commit message
+- Commit hash
+- Whether push succeeded
+- Current branch
+- Whether the working tree is clean
+```

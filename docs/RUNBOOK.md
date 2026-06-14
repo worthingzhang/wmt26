@@ -2,6 +2,57 @@
 
 项目脚本会自动加载 `configs/env/mirrors.env`；手动调试时才需要 `source` 它。
 
+## 当前里程碑（Checkpoint 2026-06-15）
+
+### 已完成
+
+- 项目骨架提交到 git：`configs/`、`scripts/`、`docs/`、`models/registry/`、`data/manifests/`。
+- 外部仓库已 clone 并配置 upstream：
+  - `repos/thunlp_opd`（origin: worthingzhang/OPD，upstream: thunlp/OPD）
+  - `repos/official_eval`（origin: worthingzhang/llms-lim-res-eval-2026，upstream: TUM-NLP/llms-limited-resources2026）
+- 主项目/评测环境 `.venv`（Python 3.12）已创建并可用：
+  - `pandas`, `pyyaml`, `tqdm`, `rich`, `jsonlines` ✅
+  - `official_eval` 以 editable 安装，`lm_eval` CLI 可用 ✅
+  - `torch==2.6.0+cu124`，CUDA 可用，8 × RTX 4090 识别 ✅
+- LlamaFactory 环境 `.venvs/llamafactory`（Python 3.11）已安装并可用：
+  - `torch==2.7.0+cu126`，CUDA 可用 ✅
+  - `llamafactory-cli` 0.9.5.dev0 可用 ✅
+- OPD/verl/vLLM/sglang 环境 `.conda/envs/verl`（conda prefix，Python 3.12）已安装并可用：
+  - `torch==2.8.0+cu128`，CUDA 可用 ✅
+  - `verl` 0.7.0.dev、`vllm` 0.11.0、`sglang` 0.5.2、`math_verify` 可 import ✅
+- Base 模型 `Qwen/Qwen3.5-2B` 已整理到标准路径 `/home/zc/wmt26/models/base/Qwen3.5-2B`。
+- 镜像配置已集中管理：`configs/env/mirrors.env`，所有项目脚本自动加载。
+- `tmux` 3.2a 已安装，可用于后台长时间任务。
+
+### 已验证命令
+
+```bash
+# 主项目环境
+cd /home/zc/wmt26
+source .venv/bin/activate
+python -c "import pandas, yaml, tqdm, rich, jsonlines; print('project deps ok')"
+python -c "import torch; print(torch.__version__, torch.cuda.is_available())"
+python -c "import transformers; print(transformers.__version__)"
+python -c "import lm_eval; print(lm_eval.__version__)"
+python -m lm_eval --help
+
+# LlamaFactory 环境
+source .venvs/llamafactory/bin/activate
+python -c "import torch; print(torch.__version__, torch.cuda.is_available())"
+llamafactory-cli version
+
+# OPD/verl 环境
+conda activate /home/zc/wmt26/.conda/envs/verl
+python -c "import torch; print(torch.__version__, torch.cuda.is_available())"
+python -c "import verl, vllm, sglang, math_verify; print('imports ok')"
+```
+
+### 未完成的下一步
+
+1. 准备/检查 CPT/SFT 数据格式，跑通 CPT smoke training。
+2. 跑通 SFT smoke training 和 OPD smoke training（可选，按实验计划）。
+3. 用 `scripts/eval/eval_model.sh` 评测 base model 和 smoke checkpoints。
+
 本文档给出常用命令模板。
 
 ## Main/Eval Environment
@@ -79,6 +130,30 @@ uv pip install torch --index-url https://download.pytorch.org/whl/cu124
 
 ```bash
 python -c "import torch; print(torch.__version__, torch.version.cuda, torch.cuda.is_available())"
+```
+
+## LlamaFactory Environment (CPT/SFT)
+
+CPT/SFT 使用独立的 Python 3.11 环境，位于 `.venvs/llamafactory`：
+
+```bash
+cd /home/zc/wmt26
+bash scripts/setup/setup_llamafactory_env.sh
+```
+
+脚本会自动加载 `configs/env/mirrors.env`、创建环境、单独安装 `torch==2.7.0+cu126`、安装 LlamaFactory，并强制检查 CUDA 可用性。如果 CUDA 检查失败，脚本会退出并报错，不会静默通过。
+
+手动调试时临时加载镜像配置：
+
+```bash
+source configs/env/mirrors.env
+```
+
+激活环境后验证：
+
+```bash
+source .venvs/llamafactory/bin/activate
+llamafactory-cli version
 ```
 
 ## 环境准备（速查）

@@ -56,6 +56,9 @@ wheels/
 .venvs/
 venv/
 
+# Conda prefix environments
+.conda/
+
 # Editor / IDE
 .vscode/settings.local.json
 .idea/
