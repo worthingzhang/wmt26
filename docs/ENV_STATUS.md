@@ -137,12 +137,47 @@ print("imports ok")
 PY
 ```
 
+## Baseline Smoke Evaluation
+
+A baseline smoke evaluation was successfully run on the base model using the official_eval backend.
+
+| Item | Value |
+|---|---|
+| eval_id | `eval_base_qwen35_2b_smoke` |
+| model_id | `base_qwen35_2b` |
+| model_path | `/home/zc/wmt26/models/base/Qwen3.5-2B` |
+| task | `hsbqa` (Upper Sorbian QA group) |
+| limit | 5 samples per subtask |
+| batch_size | 1 |
+| device | `cuda:0` |
+| dtype | `bfloat16` |
+| result path | `runs/eval/eval_base_qwen35_2b_smoke/__home__zc__wmt26__models__base__Qwen3.5-2B/results_2026-06-15T03-07-47.986261.json` |
+| status | ✅ success |
+
+### Results (smoke, limit=5)
+
+| Task / Group | acc |
+|---|---|
+| hsbqa (group) | 0.85 |
+| hsbqa::hsbqa-a1 | 1.00 |
+| hsbqa::hsbqa-a2 | 1.00 |
+| hsbqa::hsbqa-b1 | 0.60 |
+| hsbqa::hsbqa-b2 | 0.80 |
+
+### Notes
+
+- The base model loaded successfully with `trust_remote_code=True` and `dtype=bfloat16`.
+- RTX 4000 series NCCL issue was avoided by setting `NCCL_P2P_DISABLE=1` and `NCCL_IB_DISABLE=1` in the smoke script.
+- The official evaluation data repo (`TUM-NLP/llms-limited-resources2026`) was cloned to `data/raw/llms-limited-resources2026` so the relative paths in task configs resolve correctly.
+- The smoke script is saved at `scripts/eval/eval_base_smoke.sh`.
+
 ## Next Steps
 
 1. ✅ `verl` import fixed.
 2. ✅ FlashAttention wheel moved out of `repos/thunlp_opd/`.
-3. **Confirm official evaluation task names** in `configs/eval/official_all_tasks.yaml`.
+3. ✅ Baseline official_eval smoke completed successfully.
 4. **Proceed to CPT/SFT data format checks and smoke training**.
-5. **OPD smoke training** can now be attempted when ready; no training or evaluation has been run yet.
+5. **Run full baseline evaluation** on `sorbian_dev`, `ukrainian_dev`, `hsbqa`, `dsbqa`, etc. when ready.
+6. **OPD smoke training** can now be attempted when ready.
 
-No environments were reinstalled, no models were downloaded, and no training/evaluation was performed during this fix.
+No environments were reinstalled, no models were downloaded, and no training was performed.
