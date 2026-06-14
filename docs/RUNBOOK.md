@@ -1,5 +1,7 @@
 # 操作手册
 
+项目脚本会自动加载 `configs/env/mirrors.env`；手动调试时才需要 `source` 它。
+
 本文档给出常用命令模板。
 
 ## Main/Eval Environment

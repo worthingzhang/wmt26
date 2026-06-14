@@ -10,6 +10,11 @@
 #     --model-id sft_smoke_from_base_v1
 
 set -euo pipefail
+# Load mirror/env configuration
+set -a
+source "/home/zc/wmt26/configs/env/mirrors.env"
+set +a
+
 
 PROJECT_ROOT="/home/zc/wmt26"
 LLAMAFACTORY_DIR="${PROJECT_ROOT}/repos/thunlp_opd/LlamaFactory"

@@ -9,6 +9,11 @@
 #     --output-dir /home/zc/wmt26/runs/eval/eval_base_qwen35_2b_v1
 
 set -euo pipefail
+# Load mirror/env configuration
+set -a
+source "/home/zc/wmt26/configs/env/mirrors.env"
+set +a
+
 
 PROJECT_ROOT="/home/zc/wmt26"
 OFFICIAL_EVAL_DIR="${PROJECT_ROOT}/repos/official_eval"

@@ -17,6 +17,21 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
+
+# Load mirror/env configuration
+def _load_env():
+    env_path = Path(__file__).resolve().parents[2] / "configs" / "env" / "mirrors.env"
+    if env_path.exists():
+        with env_path.open("r", encoding="utf-8") as f:
+            for line in f:
+                line = line.strip()
+                if not line or line.startswith("#") or "=" not in line:
+                    continue
+                key, value = line.split("=", 1)
+                os.environ.setdefault(key, value)
+
+_load_env()
+
 REGISTRY_PATH = Path("/home/zc/wmt26/runs/eval_registry.csv")
 
 
