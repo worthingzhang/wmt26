@@ -2,13 +2,66 @@
 
 本文档给出常用命令模板。
 
-## 环境准备
+## Main/Eval Environment
+
+主项目和官方评测共用同一个 Python 环境：
+
+```
+/home/zc/wmt26/.venv
+```
+
+Python 版本：**3.12**
+
+### 创建环境
 
 ```bash
 cd /home/zc/wmt26
-# 推荐使用 uv 管理环境
-# uv venv
-# source .venv/bin/activate
+uv venv --python 3.12 .venv
+```
+
+### 激活环境
+
+```bash
+source .venv/bin/activate
+```
+
+### 检查主项目依赖
+
+```bash
+python -c "import pandas, yaml, tqdm, rich, jsonlines; print('project deps ok')"
+```
+
+### 检查 torch / transformers / CUDA
+
+```bash
+python -c "import torch; print(torch.__version__, torch.cuda.is_available())"
+python -c "import transformers; print(transformers.__version__)"
+```
+
+### 检查 official_eval
+
+official_eval 通过本地 `repos/official_eval/` 以 editable 方式安装，包名为 `lm_eval`：
+
+```bash
+python -c "import lm_eval; print(lm_eval.__version__)"
+python -m lm_eval --help
+```
+
+### 安装方式说明
+
+- 主项目轻量依赖：`uv pip install pandas pyyaml tqdm rich jsonlines ...`
+- official_eval：`uv pip install -e repos/official_eval[hf]`
+- 不安装：LlamaFactory、verl、vLLM、sglang。
+
+### 已知问题
+
+当前 NVIDIA 驱动版本较旧，torch 可能报告 `CUDA initialization: The NVIDIA driver on your system is too old`。此时 `torch.cuda.is_available()` 为 `False`。如需使用 GPU 训练/评测，请更新 NVIDIA 驱动或安装与当前驱动匹配的 PyTorch CUDA 版本。
+
+## 环境准备（速查）
+
+```bash
+cd /home/zc/wmt26
+source .venv/bin/activate
 ```
 
 ## 数据构建
