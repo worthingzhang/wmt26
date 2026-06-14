@@ -53,9 +53,31 @@ python -m lm_eval --help
 - official_eval：`uv pip install -e repos/official_eval[hf]`
 - 不安装：LlamaFactory、verl、vLLM、sglang。
 
-### 已知问题
+### 当前环境状态
 
-当前 NVIDIA 驱动版本较旧，torch 可能报告 `CUDA initialization: The NVIDIA driver on your system is too old`。此时 `torch.cuda.is_available()` 为 `False`。如需使用 GPU 训练/评测，请更新 NVIDIA 驱动或安装与当前驱动匹配的 PyTorch CUDA 版本。
+- NVIDIA Driver: 535.183.01
+- CUDA Version: 12.2
+- torch: `2.6.0+cu124`
+- `torch.cuda.is_available()`: `True`
+- 检测到 GPU: 8 × RTX 4090
+
+### 常见问题：torch CUDA 版本不匹配
+
+如果 `torch.cuda.is_available()` 返回 `False` 并提示 `The NVIDIA driver on your system is too old`，说明 PyTorch 的 CUDA 版本高于驱动支持。例如 uv 默认可能安装 `torch==2.12.0+cu130`。
+
+解决：卸载当前 torch/triton，换 CUDA 12.4 版本：
+
+```bash
+source .venv/bin/activate
+uv pip uninstall torch triton
+uv pip install torch --index-url https://download.pytorch.org/whl/cu124
+```
+
+验证：
+
+```bash
+python -c "import torch; print(torch.__version__, torch.version.cuda, torch.cuda.is_available())"
+```
 
 ## 环境准备（速查）
 
