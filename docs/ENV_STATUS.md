@@ -24,7 +24,7 @@ Report generated: 2026-06-15
 |---|---|---|---|---|---|---|---|
 | Main / Eval | `.venv` | 3.12.12 | 2.6.0+cu124 | 12.4 | ✅ True | lm_eval 0.4.12.dev0, transformers 5.12.0, datasets 5.0.0, pandas 3.0.3 | ✅ ready |
 | LlamaFactory CPT/SFT | `.venvs/llamafactory` | 3.11.14 | 2.7.0+cu126 | 12.6 | ✅ True | llamafactory-cli 0.9.5.dev0 | ✅ ready |
-| OPD / verl / vLLM / sglang | `.conda/envs/verl` | 3.12.13 | 2.8.0+cu128 | 12.8 | ✅ True | vllm 0.11.0, sglang 0.5.2, math-verify 0.9.0 | ⚠️ see verl note below |
+| OPD / verl / vLLM / sglang | `.conda/envs/verl` | 3.12.13 | 2.8.0+cu128 | 12.8 | ✅ True | verl 0.7.0.dev, vllm 0.11.0, sglang 0.5.2, math-verify 0.9.0 | ✅ ready |
 
 ### Main / Eval Environment Details
 
@@ -46,17 +46,23 @@ Report generated: 2026-06-15
 ### OPD / verl / vLLM / sglang Environment Details
 
 - **Activation**: `source /data/wyt/miniconda3/etc/profile.d/conda.sh && conda activate /home/zc/wmt26/.conda/envs/verl`
+- **verl installation**: installed in editable mode from source with `pip install -e . --no-deps` inside `/home/zc/wmt26/repos/thunlp_opd/verl`. This avoids re-resolving or overwriting the already-installed `torch`, `vllm`, `sglang`, and other heavy dependencies.
 - Checked imports:
+  - `verl` 0.7.0.dev ✅
   - `vllm` 0.11.0 ✅
   - `sglang` 0.5.2 ✅
   - `math_verify` (math-verify 0.9.0) ✅
-  - `verl` ❌ `ModuleNotFoundError: No module named 'verl'`
+- `torch.cuda.is_available()` remains `True` after the verl install.
+
+### FlashAttention Wheel Cleanup
+
+The prebuilt FlashAttention wheel that was originally placed at `repos/thunlp_opd/verl/flash_attn-2.8.1+cu12torch2.8cxx11abiFALSE-cp312-cp312-linux_x86_64.whl` has been moved to `data/cache/wheels/`. The root `.gitignore` now includes `*.whl` to prevent future wheel files from being tracked.
 
 ### Known Warnings / Issues
 
 | Issue | Severity | Details |
 |---|---|---|
-| `verl` not importable | 🔴 needs fix | The `verl` package is present as source code under `repos/thunlp_opd/verl` but is not installed into the conda environment. `pip show verl` reports "not installed". OPD smoke training will fail until this is resolved. Likely need to install verl from source (`pip install -e repos/thunlp_opd/verl`) or ensure the install script did so. |
+| `verl` not importable | ✅ resolved | Installed `verl` from source with `--no-deps`; `import verl` now succeeds and reports version `0.7.0.dev`. |
 | `pynvml` deprecation warning | 🟡 low | OPD/verl env prints `FutureWarning: The pynvml package is deprecated. Please install nvidia-ml-py instead.` when importing `torch.cuda`. Import still succeeds; can be ignored for now. |
 | numpy dependency conflicts | 🟡 low | pip resolver previously reported numpy version mismatches between opencv, cupy-cuda12x, outlines, numba, mistral-common. Current imports pass; may surface at OPD runtime. |
 
@@ -81,7 +87,7 @@ Report generated: 2026-06-15
 
 - Both repositories have the expected `origin` and `upstream` remotes configured.
 - `repos/official_eval` working tree is clean.
-- `repos/thunlp_opd` has an untracked file: `verl/flash_attn-2.8.1+cu12torch2.8cxx11abiFALSE-cp312-cp312-linux_x86_64.whl`. This is a prebuilt FlashAttention wheel placed inside the external repo during setup. Per project rules, large binary artifacts should not live in `repos/`; consider moving it to `data/cache/` or another ignored location.
+- `repos/thunlp_opd` working tree is clean; the previously untracked `flash_attn-*.whl` has been moved out of the external repo.
 
 ## Project Structure
 
@@ -126,18 +132,17 @@ python - <<'PY'
 import torch
 print("torch:", torch.__version__)
 print("cuda_available:", torch.cuda.is_available())
-import vllm, sglang, math_verify
+import verl, vllm, sglang, math_verify
 print("imports ok")
-import verl  # currently fails
-print("verl ok")
 PY
 ```
 
 ## Next Steps
 
-1. **Fix `verl` import** before any OPD smoke training. Options:
-   - Install verl from source: `pip install -e /home/zc/wmt26/repos/thunlp_opd/verl`
-   - Or re-run the OPD setup script and verify the install step actually installs verl.
-2. **Clean up `repos/thunlp_opd/verl/flash_attn-*.whl`** by moving it to an ignored cache directory.
+1. ✅ `verl` import fixed.
+2. ✅ FlashAttention wheel moved out of `repos/thunlp_opd/`.
 3. **Confirm official evaluation task names** in `configs/eval/official_all_tasks.yaml`.
-4. **Proceed to CPT/SFT data format checks and smoke training** once the above are resolved.
+4. **Proceed to CPT/SFT data format checks and smoke training**.
+5. **OPD smoke training** can now be attempted when ready; no training or evaluation has been run yet.
+
+No environments were reinstalled, no models were downloaded, and no training/evaluation was performed during this fix.

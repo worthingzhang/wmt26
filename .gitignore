@@ -9,6 +9,7 @@
 *.pth
 *.pkl
 *.npy
+*.whl
 
 # External repositories (cloned as training/evaluation backends)
 repos/thunlp_opd/
