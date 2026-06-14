@@ -1,0 +1,44 @@
+# CPT smoke 训练配置
+# LlamaFactory stage: pt (pre-training / continued pre-training)
+
+### model
+model_name_or_path: PLACEHOLDER   # 由脚本注入，例如 /home/zc/wmt26/models/base/Qwen3.5-2B
+
+### method
+stage: pt
+do_train: true
+finetuning_type: full
+# 小模型可先用 full；如显存不足可改为 lora
+deepspeed: PLACEHOLDER
+
+### dataset
+dataset_dir: /home/zc/wmt26/data/processed/cpt
+dataset: cpt_mix_v1
+cutoff_len: 4096
+packing: true
+
+### output
+output_dir: PLACEHOLDER   # 由脚本注入，例如 /home/zc/wmt26/models/checkpoints/cpt/cpt_smoke_base_v1
+logging_steps: 10
+save_steps: 50
+plot_loss: true
+overwrite_output_dir: true
+
+### train
+per_device_train_batch_size: 1
+gradient_accumulation_steps: 8
+learning_rate: 1.0e-5
+num_train_epochs: 1.0
+lr_scheduler_type: cosine
+warmup_ratio: 0.1
+bf16: true
+ddp_timeout: 180000000
+
+### eval
+# val_size: 0.01
+# per_device_eval_batch_size: 1
+# eval_strategy: steps
+# eval_steps: 50
+
+### report
+callbacks: []

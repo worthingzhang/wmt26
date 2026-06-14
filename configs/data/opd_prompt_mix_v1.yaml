@@ -1,0 +1,69 @@
+# OPD Prompt 池配置
+# 定义 OPD 训练使用的 prompt 来源、任务配比和输出格式。
+
+manifest_path: "data/manifests/opd_prompt_mix_v1.json"
+output_name: "opd_prompt_mix_v1.jsonl"
+output_dir: "data/processed/opd_prompts"
+
+# 输出格式: jsonl 或 parquet
+output_format: "jsonl"
+
+# Prompt 来源
+sources:
+  - task: "mt"
+    name: "sft_mt_prompts"
+    path: "data/processed/sft/sft_mix_v1.jsonl"
+    weight: 1.0
+    source_filter: "wmt26_mt_train"
+    languages: ["en-de", "en-fr", "en-zh", "de-en", "fr-en", "zh-en"]
+    description: "Prompts extracted from SFT MT data"
+
+  - task: "qa"
+    name: "sft_qa_prompts"
+    path: "data/processed/sft/sft_mix_v1.jsonl"
+    weight: 0.8
+    source_filter: "wmt26_qa_train"
+    description: "Prompts extracted from SFT QA data"
+
+  - task: "sc"
+    name: "sft_sc_prompts"
+    path: "data/processed/sft/sft_mix_v1.jsonl"
+    weight: 0.6
+    source_filter: "wmt26_sc_train"
+    description: "Prompts extracted from SFT SC data"
+
+  - task: "gc"
+    name: "sft_gc_prompts"
+    path: "data/processed/sft/sft_mix_v1.jsonl"
+    weight: 0.5
+    source_filter: "wmt26_gc_train"
+    description: "Prompts extracted from SFT GC data"
+
+  - task: "mr"
+    name: "sft_mr_prompts"
+    path: "data/processed/sft/sft_mix_v1.jsonl"
+    weight: 0.5
+    source_filter: "wmt26_mr_train"
+    description: "Prompts extracted from SFT MR data"
+
+# 字段映射（从 SFT ShareGPT 格式抽取 prompt）
+field_mapping:
+  prompt: "messages[0].content"
+  task: "task"
+  source: "source"
+  lang: "lang"
+
+# 采样策略
+mix_strategy: "sample_by_task"
+task_weights:
+  mt: 1.0
+  qa: 0.8
+  sc: 0.6
+  gc: 0.5
+  mr: 0.5
+seed: 42
+
+# Prompt 长度限制
+max_prompt_tokens: 2048
+
+notes: "Initial OPD prompt mix. Prompts are extracted from SFT data without reference answers."

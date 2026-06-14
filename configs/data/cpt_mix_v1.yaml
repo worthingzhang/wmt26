@@ -1,0 +1,43 @@
+# CPT 数据配比配置
+# 该文件定义继续预训练语料的来源和混合比例。
+
+manifest_path: "data/manifests/cpt_mix_v1.json"
+output_name: "cpt_mix_v1.jsonl"
+output_dir: "data/processed/cpt"
+
+# 数据源列表
+sources:
+  - name: "wmt26_official_mono"
+    path: "data/raw/wmt26/monolingual"
+    weight: 1.0
+    languages: ["en", "de", "fr", "es", "zh"]
+    description: "WMT26 official monolingual data"
+
+  - name: "parallel_back_translation"
+    path: "data/raw/synthetic/bt_parallel"
+    weight: 0.5
+    languages: ["en-de", "en-fr", "en-zh"]
+    description: "Synthetic parallel corpus from back-translation"
+
+  - name: "external_common_crawl_filtered"
+    path: "data/raw/external/cc_filtered"
+    weight: 0.3
+    languages: ["en", "de", "fr"]
+    description: "Filtered Common Crawl segments"
+
+# 处理参数
+tokenization:
+  # 由脚本注入，避免写死
+  tokenizer_path: "PLACEHOLDER"
+
+preprocessing:
+  min_length_chars: 50
+  max_length_chars: 10000
+  dedup_min_ngram: 13
+  langid_filter: true
+
+# 混合策略: "sample" 按 weight 采样，"concat" 按顺序拼接
+mix_strategy: "sample"
+seed: 42
+
+notes: "Initial CPT mix. Weights are placeholders for smoke test."

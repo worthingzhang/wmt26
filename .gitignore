@@ -1,0 +1,80 @@
+# Large/binary data
+*.log
+*.pt
+*.bin
+*.safetensors
+*.parquet
+*.h5
+*.ckpt
+*.pth
+*.pkl
+*.npy
+
+# External repositories (cloned as training/evaluation backends)
+repos/thunlp_opd/
+repos/official_eval/
+
+# Raw and intermediate data assets (large or reproducible)
+data/raw/
+data/interim/
+data/processed/
+data/cache/
+
+# Model weights and large artifacts
+models/base/
+models/checkpoints/
+models/teachers/
+models/final/
+
+# Experimental run outputs
+runs/train/
+runs/eval/
+runs/analysis/
+
+# Python / uv artifacts
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+.venv/
+.venvs/
+venv/
+
+# Editor / IDE
+.vscode/settings.local.json
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.bak
+
+# KEEP these under version control:
+# data/manifests/
+# models/registry/
+# configs/
+# scripts/
+# docs/
+# README.md

@@ -1,0 +1,31 @@
+# 官方评测统一配置占位
+# 该文件由 scripts/eval/eval_model.sh 读取并传给 repos/official_eval 的评测逻辑。
+
+# 模型路径（脚本注入）
+model_path: PLACEHOLDER
+
+# 评测任务列表
+# TODO: 根据 official_eval 仓库确认具体任务名称
+tasks:
+  - mt_todo
+  - qa_todo
+  - sc_todo
+  - gc_todo
+  - mr_todo
+
+# 推理参数
+batch_size: 8
+dtype: bfloat16
+device: cuda
+
+# 输出目录（脚本注入）
+output_dir: PLACEHOLDER
+
+# 可选：评测特定语言对
+languages: ["en-de", "en-fr", "en-zh", "de-en", "fr-en", "zh-en"]
+
+# 可选：是否生成 submission 文件
+write_submission: false
+submission_dir: submissions/dev
+
+notes: "Placeholder config. Task names must be confirmed with official_eval repo."

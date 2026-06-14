@@ -1,0 +1,67 @@
+# SFT 数据配比配置
+# 定义监督微调数据的来源、任务配比和格式。
+
+manifest_path: "data/manifests/sft_mix_v1.json"
+output_name: "sft_mix_v1.jsonl"
+output_dir: "data/processed/sft"
+dataset_info_path: "data/processed/sft/dataset_info.json"
+
+# 格式设置
+format: "sharegpt"
+conversation_key: "messages"
+
+# 数据源，按任务分类
+sources:
+  - task: "mt"
+    name: "wmt26_mt_train"
+    path: "data/raw/wmt26/mt/train"
+    weight: 1.0
+    languages: ["en-de", "en-fr", "en-zh", "de-en", "fr-en", "zh-en"]
+    description: "WMT26 MT training data"
+
+  - task: "qa"
+    name: "wmt26_qa_train"
+    path: "data/raw/wmt26/qa/train"
+    weight: 0.8
+    description: "WMT26 QA training data"
+
+  - task: "sc"
+    name: "wmt26_sc_train"
+    path: "data/raw/wmt26/sc/train"
+    weight: 0.6
+    description: "WMT26 SC training data"
+
+  - task: "gc"
+    name: "wmt26_gc_train"
+    path: "data/raw/wmt26/gc/train"
+    weight: 0.5
+    description: "WMT26 GC training data"
+
+  - task: "mr"
+    name: "wmt26_mr_train"
+    path: "data/raw/wmt26/mr/train"
+    weight: 0.5
+    description: "WMT26 MR training data"
+
+  - task: "mt"
+    name: "flores_mt"
+    path: "data/raw/external/flores"
+    weight: 0.3
+    languages: ["en-de", "en-fr", "en-zh"]
+    description: "Flores MT data"
+
+# 采样策略
+mix_strategy: "sample_by_task"
+task_weights:
+  mt: 1.0
+  qa: 0.8
+  sc: 0.6
+  gc: 0.5
+  mr: 0.5
+seed: 42
+
+# 样本长度限制
+max_total_tokens: 4096
+max_response_tokens: 2048
+
+notes: "Initial SFT mix. Weights are placeholders for smoke test."
