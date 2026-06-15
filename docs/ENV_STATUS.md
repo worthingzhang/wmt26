@@ -137,7 +137,9 @@ print("imports ok")
 PY
 ```
 
-## Baseline Smoke Evaluation
+## Baseline Evaluation
+
+### Smoke Evaluation
 
 A baseline smoke evaluation was successfully run on the base model using the official_eval backend.
 
@@ -154,7 +156,7 @@ A baseline smoke evaluation was successfully run on the base model using the off
 | result path | `runs/eval/eval_base_qwen35_2b_smoke/__home__zc__wmt26__models__base__Qwen3.5-2B/results_2026-06-15T03-07-47.986261.json` |
 | status | ✅ success |
 
-### Results (smoke, limit=5)
+#### Smoke Results (limit=5)
 
 | Task / Group | acc |
 |---|---|
@@ -164,20 +166,57 @@ A baseline smoke evaluation was successfully run on the base model using the off
 | hsbqa::hsbqa-b1 | 0.60 |
 | hsbqa::hsbqa-b2 | 0.80 |
 
+### Full Baseline Evaluation
+
+A full baseline evaluation was attempted on all Sorbian tasks. The QA portion completed successfully, but the generative portion failed due to a metric aggregation bug in official_eval.
+
+| Item | Value |
+|---|---|
+| eval_id | `eval_base_qwen35_2b_full` |
+| model_id | `base_qwen35_2b` |
+| model_path | `/home/zc/wmt26/models/base/Qwen3.5-2B` |
+| QA tasks | `hsbqa`, `dsbqa` |
+| Generative tasks | `sorbian_dev` (failed) |
+| batch_size | 1 |
+| device | `cuda:0` (single GPU; `parallelize=True` incompatible) |
+| dtype | `bfloat16` |
+| enable_thinking | `False` for generative tasks |
+| QA result path | `runs/eval/eval_base_qwen35_2b_full/qa/__home__zc__wmt26__models__base__Qwen3.5-2B/results_2026-06-15T03-25-23.017814.json` |
+| status | ⚠️ partial: QA success, generative failed |
+
+#### Full QA Results (no limit)
+
+| Group | acc |
+|---|---|
+| hsbqa | 0.5159 |
+| dsbqa | 0.4682 |
+
+#### Generative Failure
+
+- **Failed task group**: `sorbian_dev`
+- **Error**: `TypeError: unsupported operand type(s) for +: 'int' and 'list'`
+- **Location**: `repos/official_eval/lm_eval/api/metrics.py:36` (`mean` aggregation)
+- **Root cause**: The custom `chrf_pp` metric returns a list instead of a scalar for some samples, causing aggregation to fail.
+- **Log**: `runs/eval/eval_base_qwen35_2b_full/gen.log`
+
 ### Notes
 
 - The base model loaded successfully with `trust_remote_code=True` and `dtype=bfloat16`.
-- RTX 4000 series NCCL issue was avoided by setting `NCCL_P2P_DISABLE=1` and `NCCL_IB_DISABLE=1` in the smoke script.
+- RTX 4000 series NCCL issue was avoided by setting `NCCL_P2P_DISABLE=1` and `NCCL_IB_DISABLE=1`.
+- `parallelize=True` is incompatible with Qwen3.5-2B's custom attention (device mismatch error), so the full baseline ran on a single GPU.
 - The official evaluation data repo (`TUM-NLP/llms-limited-resources2026`) was cloned to `data/raw/llms-limited-resources2026` so the relative paths in task configs resolve correctly.
-- The smoke script is saved at `scripts/eval/eval_base_smoke.sh`.
+- Scripts saved at:
+  - `scripts/eval/eval_base_smoke.sh`
+  - `scripts/eval/eval_base_full.sh`
 
 ## Next Steps
 
 1. ✅ `verl` import fixed.
 2. ✅ FlashAttention wheel moved out of `repos/thunlp_opd/`.
 3. ✅ Baseline official_eval smoke completed successfully.
-4. **Proceed to CPT/SFT data format checks and smoke training**.
-5. **Run full baseline evaluation** on `sorbian_dev`, `ukrainian_dev`, `hsbqa`, `dsbqa`, etc. when ready.
-6. **OPD smoke training** can now be attempted when ready.
+4. ⚠️ Full baseline QA completed; generative tasks blocked by official_eval `chrf_pp` metric bug.
+5. **Decide whether to patch `repos/official_eval/lm_eval/api/metrics.py` or report upstream** to unblock generative baseline.
+6. **Proceed to CPT/SFT data format checks and smoke training**.
+7. **OPD smoke training** can now be attempted when ready.
 
 No environments were reinstalled, no models were downloaded, and no training was performed.
