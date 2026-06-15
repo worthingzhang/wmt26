@@ -80,7 +80,7 @@ The prebuilt FlashAttention wheel that was originally placed at `repos/thunlp_op
 
 | Repository | Path | origin | upstream | HEAD |
 |---|---|---|---|---|
-| official_eval | `repos/official_eval` | `worthingzhang/llms-lim-res-eval-2026` | `TUM-NLP/llms-limited-resources2026` | `3e2bd75cc6b1c153b7a9418a6bbb118c71f543e5` |
+| official_eval | `repos/official_eval` | `worthingzhang/llms-lim-res-eval-2026` | `TUM-NLP/llms-limited-resources2026` | `1e6ab97b005464fc0e4581cc850499eac4dc2bc9` |
 | thunlp_opd | `repos/thunlp_opd` | `worthingzhang/OPD` | `thunlp/OPD` | `1fd6cca846126af90d82ef122e8af261f59d2d37` |
 
 ### Repository Notes
@@ -168,7 +168,7 @@ A baseline smoke evaluation was successfully run on the base model using the off
 
 ### Full Baseline Evaluation
 
-A full baseline evaluation was attempted on all Sorbian tasks. The QA portion completed successfully, but the generative portion failed due to a metric aggregation bug in official_eval.
+A full baseline evaluation was run on all Sorbian tasks. The QA portion completed successfully, and the generative portion completed successfully after fixing the MR task metric in official_eval.
 
 | Item | Value |
 |---|---|
@@ -176,13 +176,14 @@ A full baseline evaluation was attempted on all Sorbian tasks. The QA portion co
 | model_id | `base_qwen35_2b` |
 | model_path | `/home/zc/wmt26/models/base/Qwen3.5-2B` |
 | QA tasks | `hsbqa`, `dsbqa` |
-| Generative tasks | `sorbian_dev` (failed) |
-| batch_size | 1 |
+| Generative tasks | `sorbian_dev` |
+| batch_size | 8 for generative; 1 for QA |
 | device | `cuda:0` (single GPU; `parallelize=True` incompatible) |
 | dtype | `bfloat16` |
 | enable_thinking | `False` for generative tasks |
 | QA result path | `runs/eval/eval_base_qwen35_2b_full/qa/__home__zc__wmt26__models__base__Qwen3.5-2B/results_2026-06-15T03-25-23.017814.json` |
-| status | ⚠️ partial: QA success, generative failed |
+| Generative result path | `runs/eval/eval_base_qwen35_2b_full/gen_fixed/__home__zc__wmt26__models__base__Qwen3.5-2B/results_2026-06-15T19-02-45.151488.json` |
+| status | ✅ success（QA 与生成式均已完成） |
 
 #### Full QA Results (no limit)
 
@@ -191,13 +192,39 @@ A full baseline evaluation was attempted on all Sorbian tasks. The QA portion co
 | hsbqa | 0.5159 |
 | dsbqa | 0.4682 |
 
-#### Generative Failure
+#### Full Generative Results (sorbian_dev, no limit)
 
-- **Failed task group**: `sorbian_dev`
-- **Error**: `TypeError: unsupported operand type(s) for +: 'int' and 'list'`
-- **Location**: `repos/official_eval/lm_eval/api/metrics.py:36` (`mean` aggregation)
-- **Root cause**: The custom `chrf_pp` metric returns a list instead of a scalar for some samples, causing aggregation to fail.
-- **Log**: `runs/eval/eval_base_qwen35_2b_full/gen.log`
+| Category | Metric | Value |
+|---|---|---|
+| MT (avg) | chrf_pp (chrF++) | 22.04 |
+| MT (avg) | bleu | 3.99 |
+| SC (avg) | exact_match_corrected | 0.084 |
+| GC (avg) | exact_match_corrected | 0.004 |
+| MR (avg) | exact_match | 0.042 |
+
+| Task | Metric | Value |
+|---|---|---|
+| deu-dsb | chrf_pp / bleu | 11.06 / 1.18 |
+| deu-hsb | chrf_pp / bleu | 13.68 / 1.11 |
+| dsb-deu | chrf_pp / bleu | 23.50 / 4.84 |
+| dsb-hsb | chrf_pp / bleu | 29.67 / 5.44 |
+| hsb-deu | chrf_pp / bleu | 26.59 / 6.37 |
+| hsb-dsb | chrf_pp / bleu | 27.76 / 4.99 |
+| dsbsc | exact_match_corrected / wrong | 0.074 / 0.070 |
+| hsbsc | exact_match_corrected / wrong | 0.095 / 0.096 |
+| dsbgc | exact_match_corrected / wrong | 0.004 / 0.029 |
+| hsbgc | exact_match_corrected / wrong | 0.004 / 0.030 |
+| dsbmr | exact_match / chrf | 0.042 / 1.79 |
+| hsbmr | exact_match / chrf | 0.042 / 1.92 |
+
+#### Generative Failure and Fix
+
+- **Initial failure**: `TypeError: unsupported operand type(s) for +: 'int' and 'list'` at `repos/official_eval/lm_eval/api/metrics.py:36` (`mean` aggregation).
+- **Root cause**: Sorbian MR tasks used `metric: acc`, which is not valid for `generate_until` output and returned `[gold, pred]` lists.
+- **Fix**: Changed `acc` to `exact_match` in `repos/official_eval/lm_eval/tasks/wmt26-lrl/sorbian/mr/hsbmr.yaml` and `dsbmr.yaml`.
+- **Fix commit**: `1e6ab97b005464fc0e4581cc850499eac4dc2bc9`.
+- **Original failure log**: `runs/eval/eval_base_qwen35_2b_full/gen.log`
+- **Successful generative log**: `runs/eval/eval_base_qwen35_2b_full/gen_fixed/run.log`
 
 ### Notes
 
@@ -214,9 +241,8 @@ A full baseline evaluation was attempted on all Sorbian tasks. The QA portion co
 1. ✅ `verl` import fixed.
 2. ✅ FlashAttention wheel moved out of `repos/thunlp_opd/`.
 3. ✅ Baseline official_eval smoke completed successfully.
-4. ⚠️ Full baseline QA completed; generative tasks blocked by official_eval `chrf_pp` metric bug.
-5. **Decide whether to patch `repos/official_eval/lm_eval/api/metrics.py` or report upstream** to unblock generative baseline.
-6. **Proceed to CPT/SFT data format checks and smoke training**.
-7. **OPD smoke training** can now be attempted when ready.
+4. ✅ Full Sorbian baseline completed successfully (QA + generative).
+5. **Proceed to CPT/SFT data format checks and smoke training**.
+6. **OPD smoke training** can now be attempted when ready.
 
 No environments were reinstalled, no models were downloaded, and no training was performed.

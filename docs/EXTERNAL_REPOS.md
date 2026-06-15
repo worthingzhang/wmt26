@@ -25,12 +25,19 @@
 | 本地路径 | `/home/zc/wmt26/repos/official_eval` |
 | origin | `https://github.com/worthingzhang/llms-lim-res-eval-2026.git` |
 | upstream | `https://github.com/TUM-NLP/llms-limited-resources2026.git` |
-| 当前 commit | `3e2bd75cc6b1c153b7a9418a6bbb118c71f543e5` |
+| 当前 commit | `1e6ab97b005464fc0e4581cc850499eac4dc2bc9` |
 
 用途：
 
 - 官方评测后端。
 - 负责读取模型路径并执行 WMT26 Limited Resources LLM 任务评测。
+
+**修改记录**：
+
+- 修复 Sorbian MR 任务在 `generate_until` 输出下使用 `acc` metric 导致的聚合错误。
+- 修改文件：`lm_eval/tasks/wmt26-lrl/sorbian/mr/hsbmr.yaml`、`lm_eval/tasks/wmt26-lrl/sorbian/mr/dsbmr.yaml`。
+- 修改内容：将 `metric: acc` 改为 `metric: exact_match`。
+- 原因：`acc` 是面向 loglikelihood/multiple_choice 的 metric，在生成任务中会返回 `[gold, pred]` list，被 `mean` 聚合时触发 `TypeError: unsupported operand type(s) for +: 'int' and 'list'`。
 
 ## 常用维护命令
 
