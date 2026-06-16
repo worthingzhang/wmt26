@@ -9,10 +9,10 @@ task:
   - task: dsbqa-b2_devsplit_fs1_v1
     process_docs: !function lm_eval.tasks.wmt26-lrl.utils.process_level_b2
 dataset_path: json
+dataset_name: null
 dataset_kwargs:
   data_files:
     test: /home/zc/wmt26/configs/eval/devsplits/sorbian_devsplit_fewshot_v1/eval/dsbqa.jsonl
-dataset_name: null
 test_split: test
 num_fewshot: 1
 fewshot_config:

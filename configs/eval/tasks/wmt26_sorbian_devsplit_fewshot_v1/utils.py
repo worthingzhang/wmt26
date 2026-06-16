@@ -1,3 +1,15 @@
+"""Local utility module for WMT26 Sorbian devsplit few-shot overlay tasks.
+
+This module provides shot-loading helpers used by the overlay YAMLs under
+``configs/eval/tasks/wmt26_sorbian_devsplit_fewshot_v1/``.  Each subdirectory
+(qa, mt, sc, gc, mr) contains a symlink to this file so that lm-eval can
+resolve ``!function utils.X`` relative to each YAML's directory.
+
+The separate ``lm_eval.tasks.wmt26-lrl.utils`` module (inside the official eval
+repo) is used for ``process_docs``, ``process_results``, and the ``chrf_pp``
+metric function.
+"""
+
 from __future__ import annotations
 
 import json
