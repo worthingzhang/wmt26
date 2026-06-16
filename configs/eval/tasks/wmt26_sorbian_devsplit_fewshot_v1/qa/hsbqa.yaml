@@ -1,0 +1,36 @@
+group: hsbqa_devsplit_fs1_v1
+task:
+  - task: hsbqa-a1_devsplit_fs1_v1
+    process_docs: !function lm_eval.tasks.wmt26-lrl.utils.process_level_a1
+  - task: hsbqa-a2_devsplit_fs1_v1
+    process_docs: !function lm_eval.tasks.wmt26-lrl.utils.process_level_a2
+  - task: hsbqa-b1_devsplit_fs1_v1
+    process_docs: !function lm_eval.tasks.wmt26-lrl.utils.process_level_b1
+  - task: hsbqa-b2_devsplit_fs1_v1
+    process_docs: !function lm_eval.tasks.wmt26-lrl.utils.process_level_b2
+dataset_path: json
+dataset_kwargs:
+  data_files:
+    test: /home/zc/wmt26/configs/eval/devsplits/sorbian_devsplit_fewshot_v1/eval/hsbqa.jsonl
+dataset_name: null
+test_split: test
+num_fewshot: 1
+fewshot_config:
+  sampler: first_n
+  samples: !function utils.hsbqa_shots
+  fewshot_delimiter: "\n\n"
+  target_delimiter: " "
+output_type: multiple_choice
+doc_to_text: "{{context.strip() if context else ''}}\n\nQuestion:\n{{question.strip() if question else ''}}\n\nPossible answers:\n{% for k, v in possible_answers|dictsort %}{{k}}: {{v}}\n{% endfor %}\nAnswer:"
+doc_to_choice: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16"]
+doc_to_target: "{{(correct_answer_num|int)-1}}"
+metric_list:
+  - metric: acc
+    aggregation: mean
+    higher_is_better: true
+aggregate_metric_list:
+  - metric: acc
+    aggregation: mean
+    weight_by_size: false
+metadata:
+  version: 1.0
