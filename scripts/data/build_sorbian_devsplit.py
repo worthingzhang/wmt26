@@ -29,18 +29,20 @@ SHOT_COUNTS = {
 }
 
 TASKS: list[dict[str, Any]] = [
-    {"name": "hsbqa", "source": "QA/hsb_qa_dev.jsonl", "shot_name": "hsbqa"},
-    {"name": "dsbqa", "source": "QA/dsb_qa_dev.jsonl", "shot_name": "dsbqa"},
-    {"name": "hsbsc", "source": "SC/hsb_sc_dev.jsonl", "shot_name": "hsbsc"},
-    {"name": "dsbsc", "source": "SC/dsb_sc_dev.jsonl", "shot_name": "dsbsc"},
-    {"name": "hsbgc", "source": "GC/hsb_gc_dev.jsonl", "shot_name": "hsbgc"},
-    {"name": "dsbgc", "source": "GC/dsb_gc_dev.jsonl", "shot_name": "dsbgc"},
-    {"name": "hsbmr", "source": "MR/hsb_mr_dev.jsonl", "shot_name": "hsbmr"},
-    {"name": "dsbmr", "source": "MR/dsb_mr_dev.jsonl", "shot_name": "dsbmr"},
-    {"name": "de-hsb_mt", "source": "MT/de-hsb_mt_dev.jsonl", "shot_name": "de-hsb_mt"},
-    {"name": "de-dsb_mt", "source": "MT/de-dsb_mt_dev.jsonl", "shot_name": "de-dsb_mt"},
-    {"name": "hsb-dsb_mt", "source": "MT/hsb-dsb_mt_dev.jsonl", "shot_name": "hsb-dsb_mt"},
+    {"name": "hsbqa", "source": "QA/hsb_qa_dev.jsonl"},
+    {"name": "dsbqa", "source": "QA/dsb_qa_dev.jsonl"},
+    {"name": "hsbsc", "source": "SC/hsb_sc_dev.jsonl"},
+    {"name": "dsbsc", "source": "SC/dsb_sc_dev.jsonl"},
+    {"name": "hsbgc", "source": "GC/hsb_gc_dev.jsonl"},
+    {"name": "dsbgc", "source": "GC/dsb_gc_dev.jsonl"},
+    {"name": "hsbmr", "source": "MR/hsb_mr_dev.jsonl"},
+    {"name": "dsbmr", "source": "MR/dsb_mr_dev.jsonl"},
+    {"name": "de-hsb_mt", "source": "MT/de-hsb_mt_dev.jsonl"},
+    {"name": "de-dsb_mt", "source": "MT/de-dsb_mt_dev.jsonl"},
+    {"name": "hsb-dsb_mt", "source": "MT/hsb-dsb_mt_dev.jsonl"},
 ]
+
+assert all(t["name"] in SHOT_COUNTS for t in TASKS), "Every TASKS entry must have a matching SHOT_COUNTS key"
 
 
 def sha256_file(path: Path) -> str:
@@ -55,10 +57,24 @@ def load_jsonl(path: Path) -> list[dict[str, Any]]:
     docs: list[dict[str, Any]] = []
     with open(path, "r", encoding="utf-8") as f:
         for i, line in enumerate(f):
-            doc = json.loads(line)
-            doc.setdefault("_devsplit_index", i)
+            try:
+                doc = {**json.loads(line), "_devsplit_index": i}
+            except json.JSONDecodeError as exc:
+                raise json.JSONDecodeError(
+                    f"JSON decode error in {path} at line {i + 1}: {exc.msg}",
+                    exc.doc,
+                    exc.pos,
+                ) from exc
             docs.append(doc)
     return docs
+
+
+def _get_level(doc: dict[str, Any]) -> str:
+    if "question_level" in doc:
+        return str(doc["question_level"])
+    if "level" in doc:
+        return str(doc["level"])
+    raise KeyError(f"Document missing both 'question_level' and 'level' keys: {doc.keys()}")
 
 
 def save_jsonl(path: Path, docs: list[dict[str, Any]]) -> None:
@@ -70,18 +86,20 @@ def save_jsonl(path: Path, docs: list[dict[str, Any]]) -> None:
 
 def build_task(task: dict[str, Any], dry_run: bool) -> dict[str, Any]:
     source_path = RAW_DIR / task["source"]
-    shot_path = OUT_DIR / "shots" / f"{task['shot_name']}.jsonl"
-    eval_path = OUT_DIR / "eval" / f"{task['shot_name']}.jsonl"
-    shot_count = SHOT_COUNTS[task["shot_name"]]
+    if not source_path.exists():
+        raise FileNotFoundError(f"Source file not found: {source_path}")
+
+    shot_path = OUT_DIR / "shots" / f"{task['name']}.jsonl"
+    eval_path = OUT_DIR / "eval" / f"{task['name']}.jsonl"
+    shot_count = SHOT_COUNTS[task["name"]]
 
     docs = load_jsonl(source_path)
     source_count = len(docs)
     if shot_count >= source_count:
         raise ValueError(f"{task['name']}: shot_count {shot_count} >= source_count {source_count}")
 
-    selected_indices = list(range(shot_count))
-    shots = [docs[i] for i in selected_indices]
-    eval_docs = [docs[i] for i in range(source_count) if i not in set(selected_indices)]
+    shots = docs[:shot_count]
+    eval_docs = docs[shot_count:]
 
     record = {
         "task": task["name"],
@@ -91,11 +109,11 @@ def build_task(task: dict[str, Any], dry_run: bool) -> dict[str, Any]:
         "source_count": source_count,
         "shot_count": len(shots),
         "eval_count": len(eval_docs),
-        "selected_indices": selected_indices,
+        "selected_indices": list(range(shot_count)),
     }
 
     if task["name"].endswith("qa"):
-        record["shot_levels"] = [str(s.get("question_level", s.get("level", ""))) for s in shots]
+        record["shot_levels"] = [_get_level(s) for s in shots]
 
     if dry_run:
         record["shots_sha256"] = "dry-run"
@@ -109,7 +127,7 @@ def build_task(task: dict[str, Any], dry_run: bool) -> dict[str, Any]:
     return record
 
 
-def main():
+def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--dry-run", action="store_true")
     args = parser.parse_args()
@@ -121,12 +139,12 @@ def main():
         "tasks": entries,
     }
 
-    if not args.dry_run:
-        OUT_DIR.mkdir(parents=True, exist_ok=True)
-        manifest_path = OUT_DIR / "manifest.json"
-        with open(manifest_path, "w", encoding="utf-8") as f:
-            json.dump(manifest, f, indent=2, ensure_ascii=False)
-        print(f"Wrote {manifest_path}")
+    OUT_DIR.mkdir(parents=True, exist_ok=True)
+    manifest_name = "manifest.dryrun.json" if args.dry_run else "manifest.json"
+    manifest_path = OUT_DIR / manifest_name
+    with open(manifest_path, "w", encoding="utf-8") as f:
+        json.dump(manifest, f, indent=2, ensure_ascii=False)
+    print(f"Wrote {manifest_path}")
 
     print(json.dumps(manifest, indent=2, ensure_ascii=False))
 

@@ -1,0 +1,178 @@
+{
+  "profile": "devsplit_fewshot_v1",
+  "raw_dir": "/home/zc/wmt26/data/raw/llms-limited-resources2026/Sorbian",
+  "tasks": [
+    {
+      "task": "hsbqa",
+      "source_file": "/home/zc/wmt26/data/raw/llms-limited-resources2026/Sorbian/QA/hsb_qa_dev.jsonl",
+      "shots_file": "/home/zc/wmt26/configs/eval/devsplits/sorbian_devsplit_fewshot_v1/shots/hsbqa.jsonl",
+      "eval_file": "/home/zc/wmt26/configs/eval/devsplits/sorbian_devsplit_fewshot_v1/eval/hsbqa.jsonl",
+      "source_count": 158,
+      "shot_count": 1,
+      "eval_count": 157,
+      "selected_indices": [
+        0
+      ],
+      "shot_levels": [
+        "A1"
+      ],
+      "shots_sha256": "dry-run",
+      "eval_sha256": "dry-run"
+    },
+    {
+      "task": "dsbqa",
+      "source_file": "/home/zc/wmt26/data/raw/llms-limited-resources2026/Sorbian/QA/dsb_qa_dev.jsonl",
+      "shots_file": "/home/zc/wmt26/configs/eval/devsplits/sorbian_devsplit_fewshot_v1/shots/dsbqa.jsonl",
+      "eval_file": "/home/zc/wmt26/configs/eval/devsplits/sorbian_devsplit_fewshot_v1/eval/dsbqa.jsonl",
+      "source_count": 158,
+      "shot_count": 1,
+      "eval_count": 157,
+      "selected_indices": [
+        0
+      ],
+      "shot_levels": [
+        "A1"
+      ],
+      "shots_sha256": "dry-run",
+      "eval_sha256": "dry-run"
+    },
+    {
+      "task": "hsbsc",
+      "source_file": "/home/zc/wmt26/data/raw/llms-limited-resources2026/Sorbian/SC/hsb_sc_dev.jsonl",
+      "shots_file": "/home/zc/wmt26/configs/eval/devsplits/sorbian_devsplit_fewshot_v1/shots/hsbsc.jsonl",
+      "eval_file": "/home/zc/wmt26/configs/eval/devsplits/sorbian_devsplit_fewshot_v1/eval/hsbsc.jsonl",
+      "source_count": 2000,
+      "shot_count": 1,
+      "eval_count": 1999,
+      "selected_indices": [
+        0
+      ],
+      "shots_sha256": "dry-run",
+      "eval_sha256": "dry-run"
+    },
+    {
+      "task": "dsbsc",
+      "source_file": "/home/zc/wmt26/data/raw/llms-limited-resources2026/Sorbian/SC/dsb_sc_dev.jsonl",
+      "shots_file": "/home/zc/wmt26/configs/eval/devsplits/sorbian_devsplit_fewshot_v1/shots/dsbsc.jsonl",
+      "eval_file": "/home/zc/wmt26/configs/eval/devsplits/sorbian_devsplit_fewshot_v1/eval/dsbsc.jsonl",
+      "source_count": 2000,
+      "shot_count": 1,
+      "eval_count": 1999,
+      "selected_indices": [
+        0
+      ],
+      "shots_sha256": "dry-run",
+      "eval_sha256": "dry-run"
+    },
+    {
+      "task": "hsbgc",
+      "source_file": "/home/zc/wmt26/data/raw/llms-limited-resources2026/Sorbian/GC/hsb_gc_dev.jsonl",
+      "shots_file": "/home/zc/wmt26/configs/eval/devsplits/sorbian_devsplit_fewshot_v1/shots/hsbgc.jsonl",
+      "eval_file": "/home/zc/wmt26/configs/eval/devsplits/sorbian_devsplit_fewshot_v1/eval/hsbgc.jsonl",
+      "source_count": 2000,
+      "shot_count": 1,
+      "eval_count": 1999,
+      "selected_indices": [
+        0
+      ],
+      "shots_sha256": "dry-run",
+      "eval_sha256": "dry-run"
+    },
+    {
+      "task": "dsbgc",
+      "source_file": "/home/zc/wmt26/data/raw/llms-limited-resources2026/Sorbian/GC/dsb_gc_dev.jsonl",
+      "shots_file": "/home/zc/wmt26/configs/eval/devsplits/sorbian_devsplit_fewshot_v1/shots/dsbgc.jsonl",
+      "eval_file": "/home/zc/wmt26/configs/eval/devsplits/sorbian_devsplit_fewshot_v1/eval/dsbgc.jsonl",
+      "source_count": 1250,
+      "shot_count": 1,
+      "eval_count": 1249,
+      "selected_indices": [
+        0
+      ],
+      "shots_sha256": "dry-run",
+      "eval_sha256": "dry-run"
+    },
+    {
+      "task": "hsbmr",
+      "source_file": "/home/zc/wmt26/data/raw/llms-limited-resources2026/Sorbian/MR/hsb_mr_dev.jsonl",
+      "shots_file": "/home/zc/wmt26/configs/eval/devsplits/sorbian_devsplit_fewshot_v1/shots/hsbmr.jsonl",
+      "eval_file": "/home/zc/wmt26/configs/eval/devsplits/sorbian_devsplit_fewshot_v1/eval/hsbmr.jsonl",
+      "source_count": 24,
+      "shot_count": 1,
+      "eval_count": 23,
+      "selected_indices": [
+        0
+      ],
+      "shots_sha256": "dry-run",
+      "eval_sha256": "dry-run"
+    },
+    {
+      "task": "dsbmr",
+      "source_file": "/home/zc/wmt26/data/raw/llms-limited-resources2026/Sorbian/MR/dsb_mr_dev.jsonl",
+      "shots_file": "/home/zc/wmt26/configs/eval/devsplits/sorbian_devsplit_fewshot_v1/shots/dsbmr.jsonl",
+      "eval_file": "/home/zc/wmt26/configs/eval/devsplits/sorbian_devsplit_fewshot_v1/eval/dsbmr.jsonl",
+      "source_count": 24,
+      "shot_count": 1,
+      "eval_count": 23,
+      "selected_indices": [
+        0
+      ],
+      "shots_sha256": "dry-run",
+      "eval_sha256": "dry-run"
+    },
+    {
+      "task": "de-hsb_mt",
+      "source_file": "/home/zc/wmt26/data/raw/llms-limited-resources2026/Sorbian/MT/de-hsb_mt_dev.jsonl",
+      "shots_file": "/home/zc/wmt26/configs/eval/devsplits/sorbian_devsplit_fewshot_v1/shots/de-hsb_mt.jsonl",
+      "eval_file": "/home/zc/wmt26/configs/eval/devsplits/sorbian_devsplit_fewshot_v1/eval/de-hsb_mt.jsonl",
+      "source_count": 4000,
+      "shot_count": 5,
+      "eval_count": 3995,
+      "selected_indices": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "shots_sha256": "dry-run",
+      "eval_sha256": "dry-run"
+    },
+    {
+      "task": "de-dsb_mt",
+      "source_file": "/home/zc/wmt26/data/raw/llms-limited-resources2026/Sorbian/MT/de-dsb_mt_dev.jsonl",
+      "shots_file": "/home/zc/wmt26/configs/eval/devsplits/sorbian_devsplit_fewshot_v1/shots/de-dsb_mt.jsonl",
+      "eval_file": "/home/zc/wmt26/configs/eval/devsplits/sorbian_devsplit_fewshot_v1/eval/de-dsb_mt.jsonl",
+      "source_count": 4000,
+      "shot_count": 5,
+      "eval_count": 3995,
+      "selected_indices": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "shots_sha256": "dry-run",
+      "eval_sha256": "dry-run"
+    },
+    {
+      "task": "hsb-dsb_mt",
+      "source_file": "/home/zc/wmt26/data/raw/llms-limited-resources2026/Sorbian/MT/hsb-dsb_mt_dev.jsonl",
+      "shots_file": "/home/zc/wmt26/configs/eval/devsplits/sorbian_devsplit_fewshot_v1/shots/hsb-dsb_mt.jsonl",
+      "eval_file": "/home/zc/wmt26/configs/eval/devsplits/sorbian_devsplit_fewshot_v1/eval/hsb-dsb_mt.jsonl",
+      "source_count": 4000,
+      "shot_count": 5,
+      "eval_count": 3995,
+      "selected_indices": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "shots_sha256": "dry-run",
+      "eval_sha256": "dry-run"
+    }
+  ]
+}
