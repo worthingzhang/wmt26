@@ -9,8 +9,8 @@ num_fewshot: 5
 fewshot_config:
   sampler: first_n
   samples: !function utils.hsb_dsb_mt_shots
-  fewshot_delimiter: "\n\n"
-  target_delimiter: " "
+fewshot_delimiter: "\n\n"
+target_delimiter: " "
 doc_to_text: "Translate the following Upper Sorbian text to Lower Sorbian. Put it in this format <dsb> Lower Sorbian translation </dsb>.\n<hsb> {{hsb}} </hsb>"
 doc_to_target: "{{dsb}}"
 generation_kwargs:

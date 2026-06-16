@@ -9,8 +9,8 @@ num_fewshot: 1
 fewshot_config:
   sampler: first_n
   samples: !function utils.hsbsc_shots
-  fewshot_delimiter: "\n\n"
-  target_delimiter: " "
+fewshot_delimiter: "\n\n"
+target_delimiter: " "
 doc_to_text: "The following sentence contains at most one misspelled word. Respond with exactly these two tags and nothing else:\n<wrong> misspelled word </wrong> <corrected> correct spelling </corrected>\nIf the sentence has no error, use the literal string CORRECT in both tags:\n<wrong> CORRECT </wrong> <corrected> CORRECT </corrected>\n<sentence> {{input_sentence}} </sentence>"
 doc_to_target: "{{incorrect_word}}, {{correct_word}}"
 generation_kwargs:

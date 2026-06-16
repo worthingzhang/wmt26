@@ -18,8 +18,8 @@ num_fewshot: 1
 fewshot_config:
   sampler: first_n
   samples: !function utils.hsbqa_shots
-  fewshot_delimiter: "\n\n"
-  target_delimiter: " "
+fewshot_delimiter: "\n\n"
+target_delimiter: " "
 output_type: multiple_choice
 doc_to_text: "{{context.strip() if context else ''}}\n\nQuestion:\n{{question.strip() if question else ''}}\n\nPossible answers:\n{% for k, v in possible_answers|dictsort %}{{k}}: {{v}}\n{% endfor %}\nAnswer:"
 doc_to_choice: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16"]
