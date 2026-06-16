@@ -1,0 +1,1 @@
+{"dataset_id": "wmt2026_lrllm_dev_gc_hsb", "id": "0000", "input_sentence": "Kóždy sedmy Europjanom tuž jednej narodnej mjeńšinje přisłuša.", "original_sentence": "Kóždy sedmy Europjan tuž jednej narodnej mjeńšinje přisłuša.", "incorrect_word": "Europjanom", "correct_word": "Europjan", "_devsplit_index": 0}
