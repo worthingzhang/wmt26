@@ -10,19 +10,19 @@
 - 外部仓库已 clone 并配置 upstream：
   - `repos/thunlp_opd`（origin: worthingzhang/OPD，upstream: thunlp/OPD）
   - `repos/official_eval`（origin: worthingzhang/llms-lim-res-eval-2026，upstream: TUM-NLP/llms-limited-resources2026）
-- 主项目/评测环境 `.venv`（Python 3.12）已创建并可用：
-  - `pandas`, `pyyaml`, `tqdm`, `rich`, `jsonlines` ✅
-  - `official_eval` 以 editable 安装，`lm_eval` CLI 可用 ✅
-  - `torch==2.6.0+cu124`，CUDA 可用，8 × RTX 4090 识别 ✅
-- LlamaFactory 环境 `.venvs/llamafactory`（Python 3.11）已安装并可用：
-  - `torch==2.7.0+cu126`，CUDA 可用 ✅
-  - `llamafactory-cli` 0.9.5.dev0 可用 ✅
-- OPD/verl/vLLM/sglang 环境 `.conda/envs/verl`（conda prefix，Python 3.12）已安装并可用：
-  - `torch==2.8.0+cu128`，CUDA 可用 ✅
-  - `verl` 0.7.0.dev、`vllm` 0.11.0、`sglang` 0.5.2、`math_verify` 可 import ✅
+- 三个训练/评测环境全部就绪：
+  - 主项目/评测 `.venv`（Python 3.12，torch 2.6.0+cu124）✅
+  - LlamaFactory CPT/SFT `.venvs/llamafactory`（Python 3.11，torch 2.7.0+cu126）✅
+  - OPD/verl/vLLM/sglang `.conda/envs/verl`（Python 3.12，torch 2.8.0+cu128）✅
 - Base 模型 `Qwen/Qwen3.5-2B` 已整理到标准路径 `/home/zc/wmt26/models/base/Qwen3.5-2B`。
 - 镜像配置已集中管理：`configs/env/mirrors.env`，所有项目脚本自动加载。
 - `tmux` 3.2a 已安装，可用于后台长时间任务。
+- **Sorbian baseline 评测已完成**：
+  - QA smoke（hsbqa limit=5）成功。
+  - 完整 QA（hsbqa + dsbqa，无 limit）成功：hsbqa=0.5159，dsbqa=0.4682。
+  - 生成式 smoke（sorbian_dev limit=5）成功。
+  - 完整生成式 baseline（sorbian_dev，无 limit，batch_size=8）成功：MT chrf++ avg=22.04，bleu avg=3.99；SC corrected avg=0.084；GC corrected avg=0.004；MR exact_match avg=0.042。
+- `repos/official_eval` 已做最小修复：将 Sorbian MR 任务的 `acc` metric 改为 `exact_match`，解决生成式 baseline 的 TypeError。commit `1e6ab97b`。
 
 ### 已验证命令
 
@@ -42,16 +42,39 @@ python -c "import torch; print(torch.__version__, torch.cuda.is_available())"
 llamafactory-cli version
 
 # OPD/verl 环境
+source /data/wyt/miniconda3/etc/profile.d/conda.sh
 conda activate /home/zc/wmt26/.conda/envs/verl
 python -c "import torch; print(torch.__version__, torch.cuda.is_available())"
 python -c "import verl, vllm, sglang, math_verify; print('imports ok')"
+```
+
+### 已验证评测命令
+
+```bash
+# Sorbian QA smoke
+cd /home/zc/wmt26/data/raw
+CUDA_VISIBLE_DEVICES=0 NCCL_P2P_DISABLE=1 NCCL_IB_DISABLE=1 \
+python -m lm_eval run \
+  --model hf \
+  --model_args "pretrained=/home/zc/wmt26/models/base/Qwen3.5-2B,trust_remote_code=True,dtype=bfloat16" \
+  --tasks hsbqa --limit 5 --batch_size 1 --device cuda:0 \
+  --output_path /home/zc/wmt26/runs/eval/eval_base_qwen35_2b_smoke --log_samples
+
+# 完整 Sorbian 生成式 baseline
+cd /home/zc/wmt26/data/raw
+CUDA_VISIBLE_DEVICES=0 NCCL_P2P_DISABLE=1 NCCL_IB_DISABLE=1 \
+python -m lm_eval run \
+  --model hf \
+  --model_args "pretrained=/home/zc/wmt26/models/base/Qwen3.5-2B,trust_remote_code=True,dtype=bfloat16,enable_thinking=False" \
+  --tasks sorbian_dev --apply_chat_template --batch_size 8 --device cuda:0 \
+  --output_path /home/zc/wmt26/runs/eval/eval_base_qwen35_2b_full/gen_fixed --log_samples
 ```
 
 ### 未完成的下一步
 
 1. 准备/检查 CPT/SFT 数据格式，跑通 CPT smoke training。
 2. 跑通 SFT smoke training 和 OPD smoke training（可选，按实验计划）。
-3. 用 `scripts/eval/eval_model.sh` 评测 base model 和 smoke checkpoints。
+3. 用 `scripts/eval/eval_model.sh` 评测 smoke checkpoints，并与 base model baseline 对比。
 
 本文档给出常用命令模板。
 

@@ -75,5 +75,34 @@
 **Rationale**：
 
 - THUNLP/OPD README 明确要求使用 conda 安装 OPD/verl 依赖。
-- Prefix 环境将环境文件保留在项目目录内，便于管理和迁移。
-- 与 `.venv`、`.venvs/llamafactory` 的隔离策略一致。
+## ADR-7: 外部 backend 的 task-specific 修复优先于全局框架修改
+
+**Decision**：
+
+- 当外部 backend（如 `repos/official_eval`）出现 task-specific 错误时，优先修改该 task 的 YAML 或 utils，而不是直接 patch backend 的全局代码。
+- 若必须修改 backend 源码，需记录原因、文件、commit hash，并同步更新 `docs/EXTERNAL_REPOS.md`。
+
+**Rationale**：
+
+- 保持对 backend 改动的最小化，降低后续同步 upstream 的冲突成本。
+- 全局 metric 或框架修改可能影响其他任务，风险更高。
+- 详细的修改记录便于复现和回滚。
+
+**本次应用**：
+
+- Sorbian MR 任务在 `generate_until` 输出下错误使用 `acc` metric，导致 `mean` 聚合 TypeError。
+- 未修改 `lm_eval/api/metrics.py`，而是将 `lm_eval/tasks/wmt26-lrl/sorbian/mr/{hsbmr,dsbmr}.yaml` 中的 `acc` 改为 `exact_match`。
+- 修改 commit：`repos/official_eval@1e6ab97b005464fc0e4581cc850499eac4dc2bc9`。
+
+## ADR-8: 单卡 fallback 作为多 GPU 不兼容时的默认策略
+
+**Decision**：
+
+- 当模型自定义架构（如 Qwen3.5-2B 的 `qwen3_5` attention）与 `parallelize=True` 或多卡并行冲突时，默认回退到单卡 `cuda:0` 运行。
+- 不为此类模型单独维护 patch，除非用户明确要求性能优化。
+
+**Rationale**：
+
+- 结果正确性优先于速度。
+- `parallelize=True` 的设备分配逻辑与部分自定义 layer 不兼容，强行使用会导致运行时 device mismatch。
+- 单卡 batch_size 调优（如生成式任务从 1 提到 8）已能在合理时间内完成 full dev 评测。

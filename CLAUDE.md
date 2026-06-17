@@ -13,6 +13,7 @@ CPT, SFT, and OPD are parallel operators; any model can feed any later training 
 - [docs/EXPERIMENT_PLAN.md](docs/EXPERIMENT_PLAN.md) — model experiment DAG design
 - [docs/DATA_PLAN.md](docs/DATA_PLAN.md) — data formats and restrictions
 - [docs/RUNBOOK.md](docs/RUNBOOK.md) — commands and current milestone
+- [docs/ENV_STATUS.md](docs/ENV_STATUS.md) — environment and baseline status
 - [docs/EXPERIMENTS.md](docs/EXPERIMENTS.md) — naming conventions
 - [docs/EXTERNAL_REPOS.md](docs/EXTERNAL_REPOS.md) — external backend repos
 - [docs/ADR.md](docs/ADR.md) — durable architecture decisions
@@ -129,10 +130,20 @@ bash scripts/eval/eval_model.sh --eval-id ... --model-id ... --model-path ... --
 - LlamaFactory env ready; `torch==2.7.0+cu126`, `llamafactory-cli` 0.9.5.dev0 available.
 - OPD/verl env ready; `torch==2.8.0+cu128`, `verl`/`vllm`/`sglang`/`math_verify` importable.
 - `tmux` 3.2a available.
-- Data/train/eval scripts are skeletons awaiting real data formats.
+- **Sorbian baseline evaluation completed**:
+  - QA smoke (`hsbqa`, limit=5): acc=0.85.
+  - Full QA (`hsbqa` + `dsbqa`): hsbqa=0.5159, dsbqa=0.4682.
+  - Generative smoke (`sorbian_dev`, limit=5): success.
+  - Full generative (`sorbian_dev`, no limit, batch_size=8): success.
+    - MT chrf++ avg=22.04, bleu avg=3.99
+    - SC exact_match_corrected avg=0.084
+    - GC exact_match_corrected avg=0.004
+    - MR exact_match avg=0.042
+- `repos/official_eval` patched: Sorbian MR tasks use `exact_match` instead of `acc` to fix `generate_until` aggregation. Commit `1e6ab97b`.
+- Latest un-pushed main project commit: `a91335d`.
 
 ## Next TODOs
 
 1. Prepare/check CPT/SFT data formats and run CPT smoke training.
 2. Run SFT smoke training and optionally OPD smoke training.
-3. Evaluate base model and smoke checkpoints with `scripts/eval/eval_model.sh`.
+3. Evaluate smoke checkpoints with `scripts/eval/eval_model.sh` and compare against the recorded baseline.
