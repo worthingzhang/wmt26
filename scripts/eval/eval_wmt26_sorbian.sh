@@ -68,6 +68,7 @@ COMMAND=(
     --model_args "pretrained=${MODEL_PATH},trust_remote_code=True,dtype=${DTYPE},enable_thinking=False"
     --include_path "${TASKS_DIR}"
     --tasks wmt26_sorbian_devsplit_fewshot_v1
+    --apply_chat_template
     --batch_size "${BATCH_SIZE}"
     --device "${DEVICE}"
     --output_path "${OUTPUT_DIR}"
@@ -150,6 +151,10 @@ if [[ ${EVAL_STATUS} -eq 0 ]]; then
 else
     STATUS="failed"
 fi
+RESULT_FILE="$(find "${OUTPUT_DIR}" -type f -name 'results_*.json' | sort | tail -n 1)"
+if [[ -z "${RESULT_FILE}" ]]; then
+    RESULT_FILE="${OUTPUT_DIR}/results.json"
+fi
 
 # Register the run
 python3 "${PROJECT_ROOT}/scripts/utils/register_eval.py" \
@@ -157,7 +162,7 @@ python3 "${PROJECT_ROOT}/scripts/utils/register_eval.py" \
     --model-id "${MODEL_NAME}" \
     --model-path "${MODEL_PATH}" \
     --eval-config "${TASKS_DIR}/group.yaml" \
-    --result-path "${OUTPUT_DIR}/results.json" \
+    --result-path "${RESULT_FILE}" \
     --status "${STATUS}" \
     --notes "profile=${PROFILE} debug=${DEBUG}"
 

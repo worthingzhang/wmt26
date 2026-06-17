@@ -16,7 +16,7 @@ doc_to_target: "{{hsb}}"
 generation_kwargs:
   until:
     - "<|endoftext|>"
-    - "შჩ"
+    - "<|im_end|>"
   max_gen_toks: 256
   temperature: 1
   top_p: 1.0

@@ -7,6 +7,7 @@ Appends one CSV line describing the evaluation run.
 import argparse
 import csv
 import logging
+import os
 import sys
 from datetime import datetime, timezone
 from pathlib import Path

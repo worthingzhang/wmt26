@@ -139,12 +139,12 @@ def main() -> None:
         "tasks": entries,
     }
 
-    OUT_DIR.mkdir(parents=True, exist_ok=True)
-    manifest_name = "manifest.dryrun.json" if args.dry_run else "manifest.json"
-    manifest_path = OUT_DIR / manifest_name
-    with open(manifest_path, "w", encoding="utf-8") as f:
-        json.dump(manifest, f, indent=2, ensure_ascii=False)
-    print(f"Wrote {manifest_path}")
+    if not args.dry_run:
+        OUT_DIR.mkdir(parents=True, exist_ok=True)
+        manifest_path = OUT_DIR / "manifest.json"
+        with open(manifest_path, "w", encoding="utf-8") as f:
+            json.dump(manifest, f, indent=2, ensure_ascii=False)
+        print(f"Wrote {manifest_path}")
 
     print(json.dumps(manifest, indent=2, ensure_ascii=False))
 
