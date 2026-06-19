@@ -1,0 +1,41 @@
+### model
+model_name_or_path: /home/zc/wmt26/models/base/Qwen3.5-2B
+trust_remote_code: true
+
+### method
+stage: pt
+do_train: true
+finetuning_type: full
+deepspeed: /home/zc/wmt26/repos/thunlp_opd/LlamaFactory/examples/deepspeed/ds_z3_config.json
+
+### dataset
+dataset_dir: /home/zc/wmt26/data/processed/llamafactory
+dataset: cpt_v1_official_plaintext_dsb4x
+template: qwen3_5_nothink
+cutoff_len: 1024
+packing: true
+preprocessing_num_workers: 16
+dataloader_num_workers: 4
+
+### output
+output_dir: /home/zc/wmt26/models/cpt/cpt_v1_official_plaintext_dsb4x_smoke
+logging_steps: 1
+save_strategy: steps
+save_steps: 10
+save_total_limit: 2
+save_only_model: false
+plot_loss: true
+overwrite_output_dir: true
+report_to: none
+
+### train
+max_steps: 20
+per_device_train_batch_size: 1
+gradient_accumulation_steps: 1
+learning_rate: 1.0e-5
+lr_scheduler_type: cosine
+warmup_ratio: 0.03
+bf16: true
+gradient_checkpointing: true
+ddp_timeout: 180000000
+ddp_find_unused_parameters: false
