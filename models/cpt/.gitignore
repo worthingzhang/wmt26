@@ -1,0 +1,2 @@
+# Large tokenizer vocabulary files are derived from the base model and should not be tracked.
+tokenizer.json
