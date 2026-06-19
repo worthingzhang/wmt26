@@ -1,0 +1,4 @@
+dataset_id: HuggingFaceFW/fineweb-2
+candidate_configs:
+- dsb_Latn
+- hsb_Latn

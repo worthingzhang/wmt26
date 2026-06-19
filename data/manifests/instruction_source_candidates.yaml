@@ -1,0 +1,16 @@
+instruction_sources:
+  - name: Magpie
+    status: needs_verification
+    notes: "Find exact dataset id used or compatible with TartuNLP-style instruction data."
+  - name: Aya
+    status: needs_verification
+    notes: "Find exact dataset id and language fields; later filter to English, German, and close Slavic languages."
+  - name: EuroBlocks
+    status: needs_verification
+    notes: "Find exact dataset id and license."
+  - name: OpenAssistant2
+    status: needs_verification
+    notes: "Find exact dataset id, license, and conversation format."
+  - name: FLAN v2
+    status: needs_verification
+    notes: "Find exact dataset id and size; do not download full data without sampling plan."

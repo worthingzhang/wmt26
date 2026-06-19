@@ -1,0 +1,60 @@
+raw_sources:
+  - name: llms-limited-resources2026
+    type: git
+    url: https://github.com/TUM-NLP/llms-limited-resources2026
+    local_path: data/raw/official/llms-limited-resources2026
+    status: downloaded
+    commit: cc3579a45ae17a62b77e7b119b88749c6f41f7db
+    size: 138M
+    notes: "Official WMT26 shared task data."
+
+  - name: llms-limited-resources2025
+    type: git
+    url: https://github.com/TUM-NLP/llms-limited-resources2025
+    local_path: data/raw/official/llms-limited-resources2025
+    status: downloaded
+    commit: 9310fa5b6e791dcba1613842dd03c9fde67ef620
+    size: 282M
+    notes: "Official WMT25 shared task data."
+
+  - name: WMT22_UnsupVeryLowResMT_Data
+    type: git
+    url: https://github.com/mariondimarco/WMT22_UnsupVeryLowResMT_Data
+    local_path: data/raw/official/WMT22_UnsupVeryLowResMT_Data
+    status: downloaded
+    commit: 3c71b5147b52adb9c2c8ab752babe53fa6690d5b
+    size: 185M
+    notes: "Previous WMT Sorbian data."
+
+  - name: hsbwiki_latest_pages_articles
+    type: wikimedia_dump
+    url: https://dumps.wikimedia.org/hsbwiki/latest/hsbwiki-latest-pages-articles.xml.bz2
+    local_path: data/raw/external/wikipedia/hsbwiki/hsbwiki-latest-pages-articles.xml.bz2
+    status: downloaded
+    bytes: 11672324
+    sha256: d060e510ce4b3aed5e033b367c21f0628f5daac06a9d9527910157e8918a667e
+
+  - name: dsbwiki_latest_pages_articles
+    type: wikimedia_dump
+    url: https://dumps.wikimedia.org/dsbwiki/latest/dsbwiki-latest-pages-articles.xml.bz2
+    local_path: data/raw/external/wikipedia/dsbwiki/dsbwiki-latest-pages-articles.xml.bz2
+    status: downloaded
+    bytes: 3933467
+    sha256: 0027f1b85a204e10cb14a32e81edd0dd312462551ef00c074136c7210b57c7a5
+
+  - name: fineweb2_sorbian
+    type: huggingface_streaming
+    dataset_id: HuggingFaceFW/fineweb-2
+    local_path: data/raw/external/fineweb2
+    status: dry_run
+    candidate_configs:
+      hsb: hsb_Latn
+      dsb: dsb_Latn
+    exported_samples: 0
+    notes: "Do not full-download. Use streaming and hsb/dsb configs only."
+
+  - name: instruction_sources
+    type: registry
+    local_path: data/manifests/instruction_source_candidates.yaml
+    status: registered_only
+    notes: "Instruction datasets are not downloaded in this stage."
