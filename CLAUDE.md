@@ -17,6 +17,7 @@ CPT, SFT, and OPD are parallel operators; any model can feed any later training 
 - [docs/EXPERIMENTS.md](docs/EXPERIMENTS.md) — naming conventions
 - [docs/EXTERNAL_REPOS.md](docs/EXTERNAL_REPOS.md) — external backend repos
 - [docs/ADR.md](docs/ADR.md) — durable architecture decisions
+- [docs/eval/EVAL_RESULT_STANDARD.md](docs/eval/EVAL_RESULT_STANDARD.md) — tracked eval summary layout
 - [docs/SESSION_LOG.md](docs/SESSION_LOG.md) — session history
 - [docs/agents/git.md](docs/agents/git.md) — commit conventions
 - [.claude/rules/project-rules.md](.claude/rules/project-rules.md) — rules and pitfalls

@@ -1,0 +1,166 @@
+model_tag: "base_qwen35_2b"
+model_path: "/home/zc/wmt26/models/base/Qwen3.5-2B"
+eval_setting: "zero_shot"
+shot_setting: "zero_shot"
+parallel_setting: "mixed"
+status: "aggregated"
+source_run_dir: "runs/eval/eval_base_qwen35_2b_full"
+source_run_dirs:
+  - "runs/eval/eval_base_qwen35_2b_full"
+standard_run_dir: "reports/eval/base_qwen35_2b__zero_shot"
+created_by: "scripts/eval/aggregate_eval_results.py"
+generated_at: "2026-06-19T22:47:37"
+parsed_result_files:
+  - "runs/eval/eval_base_qwen35_2b_full/gen_fixed/__home__zc__wmt26__models__base__Qwen3.5-2B/results_2026-06-15T19-02-45.151488.json"
+  - "runs/eval/eval_base_qwen35_2b_full/qa/__home__zc__wmt26__models__base__Qwen3.5-2B/results_2026-06-15T03-25-23.017814.json"
+detected_tasks:
+  - "deu-dsb"
+  - "deu-hsb"
+  - "dsb-deu"
+  - "dsb-hsb"
+  - "dsbgc"
+  - "dsbmr"
+  - "dsbqa"
+  - "dsbqa::dsbqa-a1"
+  - "dsbqa::dsbqa-a2"
+  - "dsbqa::dsbqa-b1"
+  - "dsbqa::dsbqa-b2"
+  - "dsbsc"
+  - "hsb-deu"
+  - "hsb-dsb"
+  - "hsbgc"
+  - "hsbmr"
+  - "hsbqa"
+  - "hsbqa::hsbqa-a1"
+  - "hsbqa::hsbqa-a2"
+  - "hsbqa::hsbqa-b1"
+  - "hsbqa::hsbqa-b2"
+  - "hsbsc"
+  - "sorbian_dev"
+sample_files:
+  -
+    path: "runs/eval/eval_base_qwen35_2b_full/gen_fixed/__home__zc__wmt26__models__base__Qwen3.5-2B/samples_deu-dsb_2026-06-15T19-02-45.151488.jsonl"
+    lines: 4000
+    size_bytes: 6869794
+    source_run_dir: "runs/eval/eval_base_qwen35_2b_full"
+    shard: ""
+  -
+    path: "runs/eval/eval_base_qwen35_2b_full/gen_fixed/__home__zc__wmt26__models__base__Qwen3.5-2B/samples_deu-hsb_2026-06-15T19-02-45.151488.jsonl"
+    lines: 4000
+    size_bytes: 7643147
+    source_run_dir: "runs/eval/eval_base_qwen35_2b_full"
+    shard: ""
+  -
+    path: "runs/eval/eval_base_qwen35_2b_full/gen_fixed/__home__zc__wmt26__models__base__Qwen3.5-2B/samples_dsb-deu_2026-06-15T19-02-45.151488.jsonl"
+    lines: 4000
+    size_bytes: 6893283
+    source_run_dir: "runs/eval/eval_base_qwen35_2b_full"
+    shard: ""
+  -
+    path: "runs/eval/eval_base_qwen35_2b_full/gen_fixed/__home__zc__wmt26__models__base__Qwen3.5-2B/samples_dsb-hsb_2026-06-15T19-02-45.151488.jsonl"
+    lines: 4000
+    size_bytes: 8131769
+    source_run_dir: "runs/eval/eval_base_qwen35_2b_full"
+    shard: ""
+  -
+    path: "runs/eval/eval_base_qwen35_2b_full/gen_fixed/__home__zc__wmt26__models__base__Qwen3.5-2B/samples_dsbgc_2026-06-15T19-02-45.151488.jsonl"
+    lines: 1250
+    size_bytes: 2042424
+    source_run_dir: "runs/eval/eval_base_qwen35_2b_full"
+    shard: ""
+  -
+    path: "runs/eval/eval_base_qwen35_2b_full/gen_fixed/__home__zc__wmt26__models__base__Qwen3.5-2B/samples_dsbmr_2026-06-15T19-02-45.151488.jsonl"
+    lines: 24
+    size_bytes: 64268
+    source_run_dir: "runs/eval/eval_base_qwen35_2b_full"
+    shard: ""
+  -
+    path: "runs/eval/eval_base_qwen35_2b_full/gen_fixed/__home__zc__wmt26__models__base__Qwen3.5-2B/samples_dsbsc_2026-06-15T19-02-45.151488.jsonl"
+    lines: 2000
+    size_bytes: 3402903
+    source_run_dir: "runs/eval/eval_base_qwen35_2b_full"
+    shard: ""
+  -
+    path: "runs/eval/eval_base_qwen35_2b_full/gen_fixed/__home__zc__wmt26__models__base__Qwen3.5-2B/samples_hsb-deu_2026-06-15T19-02-45.151488.jsonl"
+    lines: 4000
+    size_bytes: 7648844
+    source_run_dir: "runs/eval/eval_base_qwen35_2b_full"
+    shard: ""
+  -
+    path: "runs/eval/eval_base_qwen35_2b_full/gen_fixed/__home__zc__wmt26__models__base__Qwen3.5-2B/samples_hsb-dsb_2026-06-15T19-02-45.151488.jsonl"
+    lines: 4000
+    size_bytes: 8009601
+    source_run_dir: "runs/eval/eval_base_qwen35_2b_full"
+    shard: ""
+  -
+    path: "runs/eval/eval_base_qwen35_2b_full/gen_fixed/__home__zc__wmt26__models__base__Qwen3.5-2B/samples_hsbgc_2026-06-15T19-02-45.151488.jsonl"
+    lines: 2000
+    size_bytes: 3384380
+    source_run_dir: "runs/eval/eval_base_qwen35_2b_full"
+    shard: ""
+  -
+    path: "runs/eval/eval_base_qwen35_2b_full/gen_fixed/__home__zc__wmt26__models__base__Qwen3.5-2B/samples_hsbmr_2026-06-15T19-02-45.151488.jsonl"
+    lines: 24
+    size_bytes: 65088
+    source_run_dir: "runs/eval/eval_base_qwen35_2b_full"
+    shard: ""
+  -
+    path: "runs/eval/eval_base_qwen35_2b_full/gen_fixed/__home__zc__wmt26__models__base__Qwen3.5-2B/samples_hsbsc_2026-06-15T19-02-45.151488.jsonl"
+    lines: 2000
+    size_bytes: 3438585
+    source_run_dir: "runs/eval/eval_base_qwen35_2b_full"
+    shard: ""
+  -
+    path: "runs/eval/eval_base_qwen35_2b_full/qa/__home__zc__wmt26__models__base__Qwen3.5-2B/samples_dsbqa::dsbqa-a1_2026-06-15T03-25-23.017814.jsonl"
+    lines: 30
+    size_bytes: 202994
+    source_run_dir: "runs/eval/eval_base_qwen35_2b_full"
+    shard: ""
+  -
+    path: "runs/eval/eval_base_qwen35_2b_full/qa/__home__zc__wmt26__models__base__Qwen3.5-2B/samples_dsbqa::dsbqa-a2_2026-06-15T03-25-23.017814.jsonl"
+    lines: 28
+    size_bytes: 343385
+    source_run_dir: "runs/eval/eval_base_qwen35_2b_full"
+    shard: ""
+  -
+    path: "runs/eval/eval_base_qwen35_2b_full/qa/__home__zc__wmt26__models__base__Qwen3.5-2B/samples_dsbqa::dsbqa-b1_2026-06-15T03-25-23.017814.jsonl"
+    lines: 44
+    size_bytes: 1024920
+    source_run_dir: "runs/eval/eval_base_qwen35_2b_full"
+    shard: ""
+  -
+    path: "runs/eval/eval_base_qwen35_2b_full/qa/__home__zc__wmt26__models__base__Qwen3.5-2B/samples_dsbqa::dsbqa-b2_2026-06-15T03-25-23.017814.jsonl"
+    lines: 56
+    size_bytes: 2453595
+    source_run_dir: "runs/eval/eval_base_qwen35_2b_full"
+    shard: ""
+  -
+    path: "runs/eval/eval_base_qwen35_2b_full/qa/__home__zc__wmt26__models__base__Qwen3.5-2B/samples_hsbqa::hsbqa-a1_2026-06-15T03-25-23.017814.jsonl"
+    lines: 30
+    size_bytes: 200857
+    source_run_dir: "runs/eval/eval_base_qwen35_2b_full"
+    shard: ""
+  -
+    path: "runs/eval/eval_base_qwen35_2b_full/qa/__home__zc__wmt26__models__base__Qwen3.5-2B/samples_hsbqa::hsbqa-a2_2026-06-15T03-25-23.017814.jsonl"
+    lines: 28
+    size_bytes: 343879
+    source_run_dir: "runs/eval/eval_base_qwen35_2b_full"
+    shard: ""
+  -
+    path: "runs/eval/eval_base_qwen35_2b_full/qa/__home__zc__wmt26__models__base__Qwen3.5-2B/samples_hsbqa::hsbqa-b1_2026-06-15T03-25-23.017814.jsonl"
+    lines: 44
+    size_bytes: 1011633
+    source_run_dir: "runs/eval/eval_base_qwen35_2b_full"
+    shard: ""
+  -
+    path: "runs/eval/eval_base_qwen35_2b_full/qa/__home__zc__wmt26__models__base__Qwen3.5-2B/samples_hsbqa::hsbqa-b2_2026-06-15T03-25-23.017814.jsonl"
+    lines: 56
+    size_bytes: 2569462
+    source_run_dir: "runs/eval/eval_base_qwen35_2b_full"
+    shard: ""
+outputs:
+  results_md: "reports/eval/base_qwen35_2b__zero_shot/RESULTS.md"
+  scores_csv: "reports/eval/base_qwen35_2b__zero_shot/scores.csv"
+  run_yaml: "reports/eval/base_qwen35_2b__zero_shot/run.yaml"
+warnings: []
+notes: "Official base zero-shot full run aggregated from eval_base_qwen35_2b_full; smoke runs excluded."

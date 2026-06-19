@@ -1,0 +1,171 @@
+model_tag: "base_qwen35_2b"
+model_path: "/home/zc/wmt26/models/base/Qwen3.5-2B"
+eval_setting: "fewshot_devsplit_v1"
+shot_setting: "fewshot"
+parallel_setting: "8gpu"
+status: "aggregated"
+source_run_dir: "runs/eval/Qwen3.5-2B/devsplit_fewshot_v1_8gpu/20260618_162149"
+source_run_dirs:
+  - "runs/eval/Qwen3.5-2B/devsplit_fewshot_v1_8gpu/20260618_162149"
+standard_run_dir: "reports/eval/base_qwen35_2b__fewshot_devsplit_v1"
+created_by: "scripts/eval/aggregate_eval_results.py"
+generated_at: "2026-06-19T22:47:37"
+parsed_result_files:
+  - "runs/eval/Qwen3.5-2B/devsplit_fewshot_v1_8gpu/20260618_162149/shards/gpu0_qa/__home__zc__wmt26__models__base__Qwen3.5-2B/results_2026-06-18T16-23-58.984302.json"
+  - "runs/eval/Qwen3.5-2B/devsplit_fewshot_v1_8gpu/20260618_162149/shards/gpu1_sc/__home__zc__wmt26__models__base__Qwen3.5-2B/results_2026-06-18T17-06-48.563686.json"
+  - "runs/eval/Qwen3.5-2B/devsplit_fewshot_v1_8gpu/20260618_162149/shards/gpu2_gc/__home__zc__wmt26__models__base__Qwen3.5-2B/results_2026-06-18T17-01-41.000561.json"
+  - "runs/eval/Qwen3.5-2B/devsplit_fewshot_v1_8gpu/20260618_162149/shards/gpu3_mr/__home__zc__wmt26__models__base__Qwen3.5-2B/results_2026-06-18T16-31-36.561326.json"
+  - "runs/eval/Qwen3.5-2B/devsplit_fewshot_v1_8gpu/20260618_162149/shards/gpu4_mt_de_hsb/__home__zc__wmt26__models__base__Qwen3.5-2B/results_2026-06-18T19-29-33.399739.json"
+  - "runs/eval/Qwen3.5-2B/devsplit_fewshot_v1_8gpu/20260618_162149/shards/gpu5_mt_de_dsb/__home__zc__wmt26__models__base__Qwen3.5-2B/results_2026-06-18T18-59-51.868706.json"
+  - "runs/eval/Qwen3.5-2B/devsplit_fewshot_v1_8gpu/20260618_162149/shards/gpu6_mt_dsb_hsb/__home__zc__wmt26__models__base__Qwen3.5-2B/results_2026-06-18T18-10-36.519447.json"
+  - "runs/eval/Qwen3.5-2B/devsplit_fewshot_v1_8gpu/20260618_162149/shards/gpu7_mt_hsb_dsb/__home__zc__wmt26__models__base__Qwen3.5-2B/results_2026-06-18T18-05-42.958650.json"
+detected_tasks:
+  - "deu-dsb_devsplit_fs5_v1"
+  - "deu-hsb_devsplit_fs5_v1"
+  - "dsb-deu_devsplit_fs5_v1"
+  - "dsb-hsb_devsplit_fs5_v1"
+  - "dsbgc_devsplit_fs1_v1"
+  - "dsbmr_devsplit_fs1_v1"
+  - "dsbqa_devsplit_fs1_v1"
+  - "dsbqa_devsplit_fs1_v1::dsbqa-a1_devsplit_fs1_v1"
+  - "dsbqa_devsplit_fs1_v1::dsbqa-a2_devsplit_fs1_v1"
+  - "dsbqa_devsplit_fs1_v1::dsbqa-b1_devsplit_fs1_v1"
+  - "dsbqa_devsplit_fs1_v1::dsbqa-b2_devsplit_fs1_v1"
+  - "dsbsc_devsplit_fs1_v1"
+  - "hsb-deu_devsplit_fs5_v1"
+  - "hsb-dsb_devsplit_fs5_v1"
+  - "hsbgc_devsplit_fs1_v1"
+  - "hsbmr_devsplit_fs1_v1"
+  - "hsbqa_devsplit_fs1_v1"
+  - "hsbqa_devsplit_fs1_v1::hsbqa-a1_devsplit_fs1_v1"
+  - "hsbqa_devsplit_fs1_v1::hsbqa-a2_devsplit_fs1_v1"
+  - "hsbqa_devsplit_fs1_v1::hsbqa-b1_devsplit_fs1_v1"
+  - "hsbqa_devsplit_fs1_v1::hsbqa-b2_devsplit_fs1_v1"
+  - "hsbsc_devsplit_fs1_v1"
+sample_files:
+  -
+    path: "runs/eval/Qwen3.5-2B/devsplit_fewshot_v1_8gpu/20260618_162149/shards/gpu0_qa/__home__zc__wmt26__models__base__Qwen3.5-2B/samples_dsbqa_devsplit_fs1_v1::dsbqa-a1_devsplit_fs1_v1_2026-06-18T16-23-58.984302.jsonl"
+    lines: 29
+    size_bytes: 377589
+    source_run_dir: "runs/eval/Qwen3.5-2B/devsplit_fewshot_v1_8gpu/20260618_162149"
+    shard: "gpu0_qa"
+  -
+    path: "runs/eval/Qwen3.5-2B/devsplit_fewshot_v1_8gpu/20260618_162149/shards/gpu0_qa/__home__zc__wmt26__models__base__Qwen3.5-2B/samples_dsbqa_devsplit_fs1_v1::dsbqa-a2_devsplit_fs1_v1_2026-06-18T16-23-58.984302.jsonl"
+    lines: 28
+    size_bytes: 517877
+    source_run_dir: "runs/eval/Qwen3.5-2B/devsplit_fewshot_v1_8gpu/20260618_162149"
+    shard: "gpu0_qa"
+  -
+    path: "runs/eval/Qwen3.5-2B/devsplit_fewshot_v1_8gpu/20260618_162149/shards/gpu0_qa/__home__zc__wmt26__models__base__Qwen3.5-2B/samples_dsbqa_devsplit_fs1_v1::dsbqa-b1_devsplit_fs1_v1_2026-06-18T16-23-58.984302.jsonl"
+    lines: 44
+    size_bytes: 1299174
+    source_run_dir: "runs/eval/Qwen3.5-2B/devsplit_fewshot_v1_8gpu/20260618_162149"
+    shard: "gpu0_qa"
+  -
+    path: "runs/eval/Qwen3.5-2B/devsplit_fewshot_v1_8gpu/20260618_162149/shards/gpu0_qa/__home__zc__wmt26__models__base__Qwen3.5-2B/samples_dsbqa_devsplit_fs1_v1::dsbqa-b2_devsplit_fs1_v1_2026-06-18T16-23-58.984302.jsonl"
+    lines: 56
+    size_bytes: 2802915
+    source_run_dir: "runs/eval/Qwen3.5-2B/devsplit_fewshot_v1_8gpu/20260618_162149"
+    shard: "gpu0_qa"
+  -
+    path: "runs/eval/Qwen3.5-2B/devsplit_fewshot_v1_8gpu/20260618_162149/shards/gpu0_qa/__home__zc__wmt26__models__base__Qwen3.5-2B/samples_hsbqa_devsplit_fs1_v1::hsbqa-a1_devsplit_fs1_v1_2026-06-18T16-23-58.984302.jsonl"
+    lines: 29
+    size_bytes: 373995
+    source_run_dir: "runs/eval/Qwen3.5-2B/devsplit_fewshot_v1_8gpu/20260618_162149"
+    shard: "gpu0_qa"
+  -
+    path: "runs/eval/Qwen3.5-2B/devsplit_fewshot_v1_8gpu/20260618_162149/shards/gpu0_qa/__home__zc__wmt26__models__base__Qwen3.5-2B/samples_hsbqa_devsplit_fs1_v1::hsbqa-a2_devsplit_fs1_v1_2026-06-18T16-23-58.984302.jsonl"
+    lines: 28
+    size_bytes: 517005
+    source_run_dir: "runs/eval/Qwen3.5-2B/devsplit_fewshot_v1_8gpu/20260618_162149"
+    shard: "gpu0_qa"
+  -
+    path: "runs/eval/Qwen3.5-2B/devsplit_fewshot_v1_8gpu/20260618_162149/shards/gpu0_qa/__home__zc__wmt26__models__base__Qwen3.5-2B/samples_hsbqa_devsplit_fs1_v1::hsbqa-b1_devsplit_fs1_v1_2026-06-18T16-23-58.984302.jsonl"
+    lines: 44
+    size_bytes: 1283943
+    source_run_dir: "runs/eval/Qwen3.5-2B/devsplit_fewshot_v1_8gpu/20260618_162149"
+    shard: "gpu0_qa"
+  -
+    path: "runs/eval/Qwen3.5-2B/devsplit_fewshot_v1_8gpu/20260618_162149/shards/gpu0_qa/__home__zc__wmt26__models__base__Qwen3.5-2B/samples_hsbqa_devsplit_fs1_v1::hsbqa-b2_devsplit_fs1_v1_2026-06-18T16-23-58.984302.jsonl"
+    lines: 56
+    size_bytes: 2916012
+    source_run_dir: "runs/eval/Qwen3.5-2B/devsplit_fewshot_v1_8gpu/20260618_162149"
+    shard: "gpu0_qa"
+  -
+    path: "runs/eval/Qwen3.5-2B/devsplit_fewshot_v1_8gpu/20260618_162149/shards/gpu1_sc/__home__zc__wmt26__models__base__Qwen3.5-2B/samples_dsbsc_devsplit_fs1_v1_2026-06-18T17-06-48.563686.jsonl"
+    lines: 1999
+    size_bytes: 4450334
+    source_run_dir: "runs/eval/Qwen3.5-2B/devsplit_fewshot_v1_8gpu/20260618_162149"
+    shard: "gpu1_sc"
+  -
+    path: "runs/eval/Qwen3.5-2B/devsplit_fewshot_v1_8gpu/20260618_162149/shards/gpu1_sc/__home__zc__wmt26__models__base__Qwen3.5-2B/samples_hsbsc_devsplit_fs1_v1_2026-06-18T17-06-48.563686.jsonl"
+    lines: 1999
+    size_bytes: 4465236
+    source_run_dir: "runs/eval/Qwen3.5-2B/devsplit_fewshot_v1_8gpu/20260618_162149"
+    shard: "gpu1_sc"
+  -
+    path: "runs/eval/Qwen3.5-2B/devsplit_fewshot_v1_8gpu/20260618_162149/shards/gpu2_gc/__home__zc__wmt26__models__base__Qwen3.5-2B/samples_dsbgc_devsplit_fs1_v1_2026-06-18T17-01-41.000561.jsonl"
+    lines: 1249
+    size_bytes: 2776700
+    source_run_dir: "runs/eval/Qwen3.5-2B/devsplit_fewshot_v1_8gpu/20260618_162149"
+    shard: "gpu2_gc"
+  -
+    path: "runs/eval/Qwen3.5-2B/devsplit_fewshot_v1_8gpu/20260618_162149/shards/gpu2_gc/__home__zc__wmt26__models__base__Qwen3.5-2B/samples_hsbgc_devsplit_fs1_v1_2026-06-18T17-01-41.000561.jsonl"
+    lines: 1999
+    size_bytes: 4519313
+    source_run_dir: "runs/eval/Qwen3.5-2B/devsplit_fewshot_v1_8gpu/20260618_162149"
+    shard: "gpu2_gc"
+  -
+    path: "runs/eval/Qwen3.5-2B/devsplit_fewshot_v1_8gpu/20260618_162149/shards/gpu3_mr/__home__zc__wmt26__models__base__Qwen3.5-2B/samples_dsbmr_devsplit_fs1_v1_2026-06-18T16-31-36.561326.jsonl"
+    lines: 23
+    size_bytes: 69896
+    source_run_dir: "runs/eval/Qwen3.5-2B/devsplit_fewshot_v1_8gpu/20260618_162149"
+    shard: "gpu3_mr"
+  -
+    path: "runs/eval/Qwen3.5-2B/devsplit_fewshot_v1_8gpu/20260618_162149/shards/gpu3_mr/__home__zc__wmt26__models__base__Qwen3.5-2B/samples_hsbmr_devsplit_fs1_v1_2026-06-18T16-31-36.561326.jsonl"
+    lines: 23
+    size_bytes: 74117
+    source_run_dir: "runs/eval/Qwen3.5-2B/devsplit_fewshot_v1_8gpu/20260618_162149"
+    shard: "gpu3_mr"
+  -
+    path: "runs/eval/Qwen3.5-2B/devsplit_fewshot_v1_8gpu/20260618_162149/shards/gpu4_mt_de_hsb/__home__zc__wmt26__models__base__Qwen3.5-2B/samples_deu-hsb_devsplit_fs5_v1_2026-06-18T19-29-33.399739.jsonl"
+    lines: 3995
+    size_bytes: 15094322
+    source_run_dir: "runs/eval/Qwen3.5-2B/devsplit_fewshot_v1_8gpu/20260618_162149"
+    shard: "gpu4_mt_de_hsb"
+  -
+    path: "runs/eval/Qwen3.5-2B/devsplit_fewshot_v1_8gpu/20260618_162149/shards/gpu4_mt_de_hsb/__home__zc__wmt26__models__base__Qwen3.5-2B/samples_hsb-deu_devsplit_fs5_v1_2026-06-18T19-29-33.399739.jsonl"
+    lines: 3995
+    size_bytes: 15142838
+    source_run_dir: "runs/eval/Qwen3.5-2B/devsplit_fewshot_v1_8gpu/20260618_162149"
+    shard: "gpu4_mt_de_hsb"
+  -
+    path: "runs/eval/Qwen3.5-2B/devsplit_fewshot_v1_8gpu/20260618_162149/shards/gpu5_mt_de_dsb/__home__zc__wmt26__models__base__Qwen3.5-2B/samples_deu-dsb_devsplit_fs5_v1_2026-06-18T18-59-51.868706.jsonl"
+    lines: 3995
+    size_bytes: 14024202
+    source_run_dir: "runs/eval/Qwen3.5-2B/devsplit_fewshot_v1_8gpu/20260618_162149"
+    shard: "gpu5_mt_de_dsb"
+  -
+    path: "runs/eval/Qwen3.5-2B/devsplit_fewshot_v1_8gpu/20260618_162149/shards/gpu5_mt_de_dsb/__home__zc__wmt26__models__base__Qwen3.5-2B/samples_dsb-deu_devsplit_fs5_v1_2026-06-18T18-59-51.868706.jsonl"
+    lines: 3995
+    size_bytes: 14063759
+    source_run_dir: "runs/eval/Qwen3.5-2B/devsplit_fewshot_v1_8gpu/20260618_162149"
+    shard: "gpu5_mt_de_dsb"
+  -
+    path: "runs/eval/Qwen3.5-2B/devsplit_fewshot_v1_8gpu/20260618_162149/shards/gpu6_mt_dsb_hsb/__home__zc__wmt26__models__base__Qwen3.5-2B/samples_dsb-hsb_devsplit_fs5_v1_2026-06-18T18-10-36.519447.jsonl"
+    lines: 3995
+    size_bytes: 17669544
+    source_run_dir: "runs/eval/Qwen3.5-2B/devsplit_fewshot_v1_8gpu/20260618_162149"
+    shard: "gpu6_mt_dsb_hsb"
+  -
+    path: "runs/eval/Qwen3.5-2B/devsplit_fewshot_v1_8gpu/20260618_162149/shards/gpu7_mt_hsb_dsb/__home__zc__wmt26__models__base__Qwen3.5-2B/samples_hsb-dsb_devsplit_fs5_v1_2026-06-18T18-05-42.958650.jsonl"
+    lines: 3995
+    size_bytes: 17665013
+    source_run_dir: "runs/eval/Qwen3.5-2B/devsplit_fewshot_v1_8gpu/20260618_162149"
+    shard: "gpu7_mt_hsb_dsb"
+outputs:
+  results_md: "reports/eval/base_qwen35_2b__fewshot_devsplit_v1/RESULTS.md"
+  scores_csv: "reports/eval/base_qwen35_2b__fewshot_devsplit_v1/scores.csv"
+  run_yaml: "reports/eval/base_qwen35_2b__fewshot_devsplit_v1/run.yaml"
+warnings: []
+notes: "Latest fixed 8GPU devsplit few-shot run aggregated from 20260618_162149."
