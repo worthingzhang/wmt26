@@ -9,6 +9,7 @@ num_fewshot: 1
 fewshot_config:
   sampler: first_n
   samples: !function utils.hsbmr_shots
+  doc_to_target: !function utils.target_answer
 fewshot_delimiter: "\n\n"
 target_delimiter: " "
 doc_to_text: "Answer this mathematical reasoning question. Place your final answer, using LateX when appropriate, in this format: <answer> answer </answer> {{question}}"

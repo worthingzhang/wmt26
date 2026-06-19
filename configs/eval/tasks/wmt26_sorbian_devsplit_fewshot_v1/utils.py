@@ -36,3 +36,23 @@ def dsbmr_shots() -> list[dict]: return _load_shots("dsbmr")
 def de_hsb_mt_shots() -> list[dict]: return _load_shots("de-hsb_mt")
 def de_dsb_mt_shots() -> list[dict]: return _load_shots("de-dsb_mt")
 def hsb_dsb_mt_shots() -> list[dict]: return _load_shots("hsb-dsb_mt")
+
+
+def target_hsb(doc: dict) -> str:
+    return f"<hsb> {doc['hsb']} </hsb>"
+
+
+def target_dsb(doc: dict) -> str:
+    return f"<dsb> {doc['dsb']} </dsb>"
+
+
+def target_deu(doc: dict) -> str:
+    return f"<deu> {doc['de']} </deu>"
+
+
+def target_answer(doc: dict) -> str:
+    return f"<answer> {doc['answer']} </answer>"
+
+
+def target_wrong_corrected(doc: dict) -> str:
+    return f"<wrong> {doc['incorrect_word']} </wrong> <corrected> {doc['correct_word']} </corrected>"

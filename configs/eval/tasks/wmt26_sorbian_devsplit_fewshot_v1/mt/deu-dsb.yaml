@@ -9,6 +9,7 @@ num_fewshot: 5
 fewshot_config:
   sampler: first_n
   samples: !function utils.de_dsb_mt_shots
+  doc_to_target: !function utils.target_dsb
 fewshot_delimiter: "\n\n"
 target_delimiter: " "
 doc_to_text: "Translate the following German text to Lower Sorbian. Put it in this format <dsb> Lower Sorbian translation </dsb>.\n<deu> {{de}} </deu>"

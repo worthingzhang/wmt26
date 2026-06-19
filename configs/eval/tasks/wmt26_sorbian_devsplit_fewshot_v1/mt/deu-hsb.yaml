@@ -9,6 +9,7 @@ num_fewshot: 5
 fewshot_config:
   sampler: first_n
   samples: !function utils.de_hsb_mt_shots
+  doc_to_target: !function utils.target_hsb
 fewshot_delimiter: "\n\n"
 target_delimiter: " "
 doc_to_text: "Translate the following German text to Upper Sorbian. Put it in this format <hsb> Upper Sorbian translation </hsb>.\n<deu> {{de}} </deu>"

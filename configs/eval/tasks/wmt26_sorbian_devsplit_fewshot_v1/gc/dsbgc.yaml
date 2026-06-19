@@ -9,6 +9,7 @@ num_fewshot: 1
 fewshot_config:
   sampler: first_n
   samples: !function utils.dsbgc_shots
+  doc_to_target: !function utils.target_wrong_corrected
 fewshot_delimiter: "\n\n"
 target_delimiter: " "
 doc_to_text: "The following sentence contains at most one grammatically incorrect word. Respond with exactly these two tags and nothing else:\n<wrong> incorrect word </wrong> <corrected> correct form </corrected>\nIf the sentence has no error, use the literal string CORRECT in both tags:\n<wrong> CORRECT </wrong> <corrected> CORRECT </corrected>\n<sentence> {{input_sentence}} </sentence>"
