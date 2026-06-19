@@ -1,0 +1,36 @@
+run_id: cpt_v1_official_mono
+stage: interim_cleaning
+raw_sources:
+- llms-limited-resources2026
+- llms-limited-resources2025
+- WMT22_UnsupVeryLowResMT_Data
+included_data:
+- official hsb/dsb monolingual train
+- official hsb/dsb target side from parallel train
+excluded_data:
+- dev
+- valid
+- validation
+- test
+- eval
+- sample
+- QA
+- SC
+- GC
+- MR
+- external FineWeb-2
+- external Wikipedia
+- instruction data
+cleaning:
+  normalize_for_hash: NFC + strip + collapse_spaces + lowercase
+  final_text_preserves_case: true
+  exact_dedup: true
+  heldout_filtering: true
+outputs:
+  mono_hsb_clean: data/interim/sorbian/cpt_v1_official_mono/mono_hsb_clean.jsonl
+  mono_dsb_clean: data/interim/sorbian/cpt_v1_official_mono/mono_dsb_clean.jsonl
+  mono_all_clean: data/interim/sorbian/cpt_v1_official_mono/mono_all_clean.jsonl
+counts:
+  mono_hsb_clean: 2279102
+  mono_dsb_clean: 386488
+  mono_all_clean: 2665590

@@ -1,0 +1,863 @@
+train_mono_candidates:
+- repo_name: WMT22_UnsupVeryLowResMT_Data
+  relative_path: 66408_DSB_monolingual.txt.gz
+  absolute_path: /home/zc/wmt26/data/raw/official/WMT22_UnsupVeryLowResMT_Data/66408_DSB_monolingual.txt.gz
+  lang: dsb
+  data_type: train_mono
+  reason: explicit hsb/dsb monolingual train source
+- repo_name: WMT22_UnsupVeryLowResMT_Data
+  relative_path: 8815_DSB_wikipedia_2021.txt.gz
+  absolute_path: /home/zc/wmt26/data/raw/official/WMT22_UnsupVeryLowResMT_Data/8815_DSB_wikipedia_2021.txt.gz
+  lang: dsb
+  data_type: train_mono
+  reason: explicit hsb/dsb monolingual train source
+- repo_name: WMT22_UnsupVeryLowResMT_Data
+  relative_path: HSB_monolingual.txt.gz
+  absolute_path: /home/zc/wmt26/data/raw/official/WMT22_UnsupVeryLowResMT_Data/HSB_monolingual.txt.gz
+  lang: hsb
+  data_type: train_mono
+  reason: explicit hsb/dsb monolingual train source
+- repo_name: WMT22_UnsupVeryLowResMT_Data
+  relative_path: mono.dsb.gz
+  absolute_path: /home/zc/wmt26/data/raw/official/WMT22_UnsupVeryLowResMT_Data/mono.dsb.gz
+  lang: dsb
+  data_type: train_mono
+  reason: explicit hsb/dsb monolingual train source
+- repo_name: WMT22_UnsupVeryLowResMT_Data
+  relative_path: sorbian_institute_monolingual.hsb.gz
+  absolute_path: /home/zc/wmt26/data/raw/official/WMT22_UnsupVeryLowResMT_Data/sorbian_institute_monolingual.hsb.gz
+  lang: hsb
+  data_type: train_mono
+  reason: explicit hsb/dsb monolingual train source
+- repo_name: WMT22_UnsupVeryLowResMT_Data
+  relative_path: web_monolingual.hsb.gz
+  absolute_path: /home/zc/wmt26/data/raw/official/WMT22_UnsupVeryLowResMT_Data/web_monolingual.hsb.gz
+  lang: hsb
+  data_type: train_mono
+  reason: explicit hsb/dsb monolingual train source
+- repo_name: WMT22_UnsupVeryLowResMT_Data
+  relative_path: witaj_monolingual.hsb.gz
+  absolute_path: /home/zc/wmt26/data/raw/official/WMT22_UnsupVeryLowResMT_Data/witaj_monolingual.hsb.gz
+  lang: hsb
+  data_type: train_mono
+  reason: explicit hsb/dsb monolingual train source
+- repo_name: llms-limited-resources2025
+  relative_path: Sorbian/dsb/MT/witaj_dsb_monolingual.txt
+  absolute_path: /home/zc/wmt26/data/raw/official/llms-limited-resources2025/Sorbian/dsb/MT/witaj_dsb_monolingual.txt
+  lang: dsb
+  data_type: train_mono
+  reason: explicit hsb/dsb monolingual train source
+- repo_name: llms-limited-resources2025
+  relative_path: Sorbian/hsb/MT/wiki_hsb_monolingual.txt
+  absolute_path: /home/zc/wmt26/data/raw/official/llms-limited-resources2025/Sorbian/hsb/MT/wiki_hsb_monolingual.txt
+  lang: hsb
+  data_type: train_mono
+  reason: explicit hsb/dsb monolingual train source
+- repo_name: llms-limited-resources2025
+  relative_path: Sorbian/hsb/MT/witaj_hsb_monolingual.txt
+  absolute_path: /home/zc/wmt26/data/raw/official/llms-limited-resources2025/Sorbian/hsb/MT/witaj_hsb_monolingual.txt
+  lang: hsb
+  data_type: train_mono
+  reason: explicit hsb/dsb monolingual train source
+- repo_name: llms-limited-resources2026
+  relative_path: Sorbian/MT/dsb_monolingual_2026.csv
+  absolute_path: /home/zc/wmt26/data/raw/official/llms-limited-resources2026/Sorbian/MT/dsb_monolingual_2026.csv
+  lang: dsb
+  data_type: train_mono
+  reason: explicit hsb/dsb monolingual train source
+- repo_name: llms-limited-resources2026
+  relative_path: Sorbian/MT/hsb_monolingual_2026.csv
+  absolute_path: /home/zc/wmt26/data/raw/official/llms-limited-resources2026/Sorbian/MT/hsb_monolingual_2026.csv
+  lang: hsb
+  data_type: train_mono
+  reason: explicit hsb/dsb monolingual train source
+train_parallel_candidates:
+- repo_name: WMT22_UnsupVeryLowResMT_Data
+  relative_path: train_dsb_hsb_62564.hsb.gz
+  absolute_path: /home/zc/wmt26/data/raw/official/WMT22_UnsupVeryLowResMT_Data/train_dsb_hsb_62564.hsb.gz
+  lang: hsb
+  data_type: train_parallel
+  reason: explicit train parallel hsb/dsb target side
+- repo_name: llms-limited-resources2025
+  relative_path: Sorbian/dsb/MT/train.de-dsb.dsb
+  absolute_path: /home/zc/wmt26/data/raw/official/llms-limited-resources2025/Sorbian/dsb/MT/train.de-dsb.dsb
+  lang: dsb
+  data_type: train_parallel
+  reason: explicit train parallel hsb/dsb target side
+- repo_name: llms-limited-resources2025
+  relative_path: Sorbian/hsb/MT/train.de-hsb.hsb
+  absolute_path: /home/zc/wmt26/data/raw/official/llms-limited-resources2025/Sorbian/hsb/MT/train.de-hsb.hsb
+  lang: hsb
+  data_type: train_parallel
+  reason: explicit train parallel hsb/dsb target side
+- repo_name: llms-limited-resources2026
+  relative_path: Sorbian/MT/train_de-dsb_2026.csv
+  absolute_path: /home/zc/wmt26/data/raw/official/llms-limited-resources2026/Sorbian/MT/train_de-dsb_2026.csv
+  lang: dsb
+  data_type: train_parallel
+  reason: explicit train parallel table with hsb/dsb target column
+- repo_name: llms-limited-resources2026
+  relative_path: Sorbian/MT/train_de-hsb_2026.csv
+  absolute_path: /home/zc/wmt26/data/raw/official/llms-limited-resources2026/Sorbian/MT/train_de-hsb_2026.csv
+  lang: hsb
+  data_type: train_parallel
+  reason: explicit train parallel table with hsb/dsb target column
+- repo_name: llms-limited-resources2026
+  relative_path: Sorbian/MT/train_hsb-dsb_2026.csv
+  absolute_path: /home/zc/wmt26/data/raw/official/llms-limited-resources2026/Sorbian/MT/train_hsb-dsb_2026.csv
+  lang: dsb
+  data_type: train_parallel
+  reason: explicit train parallel table with hsb/dsb target column
+heldout_candidates:
+- repo_name: WMT22_UnsupVeryLowResMT_Data
+  relative_path: HSB-DE_dev.tsv.gz
+  absolute_path: /home/zc/wmt26/data/raw/official/WMT22_UnsupVeryLowResMT_Data/HSB-DE_dev.tsv.gz
+  lang: hsb
+  data_type: heldout
+  reason: path/name contains heldout signal
+- repo_name: WMT22_UnsupVeryLowResMT_Data
+  relative_path: devtest.dsb-de.tgz
+  absolute_path: /home/zc/wmt26/data/raw/official/WMT22_UnsupVeryLowResMT_Data/devtest.dsb-de.tgz
+  lang: dsb
+  data_type: heldout
+  reason: path/name contains heldout signal
+- repo_name: WMT22_UnsupVeryLowResMT_Data
+  relative_path: devtest.tar.gz
+  absolute_path: /home/zc/wmt26/data/raw/official/WMT22_UnsupVeryLowResMT_Data/devtest.tar.gz
+  lang: unknown
+  data_type: heldout
+  reason: path/name contains heldout signal
+- repo_name: WMT22_UnsupVeryLowResMT_Data
+  relative_path: devtest_dsb_hsb_2022.tar.gz
+  absolute_path: /home/zc/wmt26/data/raw/official/WMT22_UnsupVeryLowResMT_Data/devtest_dsb_hsb_2022.tar.gz
+  lang: hsb
+  data_type: heldout
+  reason: path/name contains heldout signal
+- repo_name: WMT22_UnsupVeryLowResMT_Data
+  relative_path: valid.de.gz
+  absolute_path: /home/zc/wmt26/data/raw/official/WMT22_UnsupVeryLowResMT_Data/valid.de.gz
+  lang: deu
+  data_type: heldout
+  reason: path/name contains heldout signal
+- repo_name: WMT22_UnsupVeryLowResMT_Data
+  relative_path: valid.dsb.gz
+  absolute_path: /home/zc/wmt26/data/raw/official/WMT22_UnsupVeryLowResMT_Data/valid.dsb.gz
+  lang: dsb
+  data_type: heldout
+  reason: path/name contains heldout signal
+- repo_name: llms-limited-resources2025
+  relative_path: Sorbian/dsb/MT/dev.de-dsb.de
+  absolute_path: /home/zc/wmt26/data/raw/official/llms-limited-resources2025/Sorbian/dsb/MT/dev.de-dsb.de
+  lang: deu
+  data_type: heldout
+  reason: path/name contains heldout signal
+- repo_name: llms-limited-resources2025
+  relative_path: Sorbian/dsb/MT/dev.de-dsb.dsb
+  absolute_path: /home/zc/wmt26/data/raw/official/llms-limited-resources2025/Sorbian/dsb/MT/dev.de-dsb.dsb
+  lang: dsb
+  data_type: heldout
+  reason: path/name contains heldout signal
+- repo_name: llms-limited-resources2025
+  relative_path: Sorbian/dsb/MT/test.de-dsb.de
+  absolute_path: /home/zc/wmt26/data/raw/official/llms-limited-resources2025/Sorbian/dsb/MT/test.de-dsb.de
+  lang: deu
+  data_type: heldout
+  reason: path/name contains heldout signal
+- repo_name: llms-limited-resources2025
+  relative_path: Sorbian/dsb/QA/test/test_DSB_A1.csv
+  absolute_path: /home/zc/wmt26/data/raw/official/llms-limited-resources2025/Sorbian/dsb/QA/test/test_DSB_A1.csv
+  lang: dsb
+  data_type: heldout
+  reason: path/name contains heldout signal
+- repo_name: llms-limited-resources2025
+  relative_path: Sorbian/dsb/QA/test/test_DSB_A1.json
+  absolute_path: /home/zc/wmt26/data/raw/official/llms-limited-resources2025/Sorbian/dsb/QA/test/test_DSB_A1.json
+  lang: dsb
+  data_type: heldout
+  reason: path/name contains heldout signal
+- repo_name: llms-limited-resources2025
+  relative_path: Sorbian/dsb/QA/test/test_DSB_A2.csv
+  absolute_path: /home/zc/wmt26/data/raw/official/llms-limited-resources2025/Sorbian/dsb/QA/test/test_DSB_A2.csv
+  lang: dsb
+  data_type: heldout
+  reason: path/name contains heldout signal
+- repo_name: llms-limited-resources2025
+  relative_path: Sorbian/dsb/QA/test/test_DSB_A2.json
+  absolute_path: /home/zc/wmt26/data/raw/official/llms-limited-resources2025/Sorbian/dsb/QA/test/test_DSB_A2.json
+  lang: dsb
+  data_type: heldout
+  reason: path/name contains heldout signal
+- repo_name: llms-limited-resources2025
+  relative_path: Sorbian/dsb/QA/test/test_DSB_B1.csv
+  absolute_path: /home/zc/wmt26/data/raw/official/llms-limited-resources2025/Sorbian/dsb/QA/test/test_DSB_B1.csv
+  lang: dsb
+  data_type: heldout
+  reason: path/name contains heldout signal
+- repo_name: llms-limited-resources2025
+  relative_path: Sorbian/dsb/QA/test/test_DSB_B1.json
+  absolute_path: /home/zc/wmt26/data/raw/official/llms-limited-resources2025/Sorbian/dsb/QA/test/test_DSB_B1.json
+  lang: dsb
+  data_type: heldout
+  reason: path/name contains heldout signal
+- repo_name: llms-limited-resources2025
+  relative_path: Sorbian/dsb/QA/test/test_DSB_B2.csv
+  absolute_path: /home/zc/wmt26/data/raw/official/llms-limited-resources2025/Sorbian/dsb/QA/test/test_DSB_B2.csv
+  lang: dsb
+  data_type: heldout
+  reason: path/name contains heldout signal
+- repo_name: llms-limited-resources2025
+  relative_path: Sorbian/dsb/QA/test/test_DSB_B2.json
+  absolute_path: /home/zc/wmt26/data/raw/official/llms-limited-resources2025/Sorbian/dsb/QA/test/test_DSB_B2.json
+  lang: dsb
+  data_type: heldout
+  reason: path/name contains heldout signal
+- repo_name: llms-limited-resources2025
+  relative_path: Sorbian/dsb/QA/test/test_DSB_C1.csv
+  absolute_path: /home/zc/wmt26/data/raw/official/llms-limited-resources2025/Sorbian/dsb/QA/test/test_DSB_C1.csv
+  lang: dsb
+  data_type: heldout
+  reason: path/name contains heldout signal
+- repo_name: llms-limited-resources2025
+  relative_path: Sorbian/dsb/QA/test/test_DSB_C1.json
+  absolute_path: /home/zc/wmt26/data/raw/official/llms-limited-resources2025/Sorbian/dsb/QA/test/test_DSB_C1.json
+  lang: dsb
+  data_type: heldout
+  reason: path/name contains heldout signal
+- repo_name: llms-limited-resources2025
+  relative_path: Sorbian/hsb/MT/dev.de-hsb.de
+  absolute_path: /home/zc/wmt26/data/raw/official/llms-limited-resources2025/Sorbian/hsb/MT/dev.de-hsb.de
+  lang: deu
+  data_type: heldout
+  reason: path/name contains heldout signal
+- repo_name: llms-limited-resources2025
+  relative_path: Sorbian/hsb/MT/dev.de-hsb.hsb
+  absolute_path: /home/zc/wmt26/data/raw/official/llms-limited-resources2025/Sorbian/hsb/MT/dev.de-hsb.hsb
+  lang: hsb
+  data_type: heldout
+  reason: path/name contains heldout signal
+- repo_name: llms-limited-resources2025
+  relative_path: Sorbian/hsb/MT/test.de-hsb.de
+  absolute_path: /home/zc/wmt26/data/raw/official/llms-limited-resources2025/Sorbian/hsb/MT/test.de-hsb.de
+  lang: deu
+  data_type: heldout
+  reason: path/name contains heldout signal
+- repo_name: llms-limited-resources2025
+  relative_path: Sorbian/hsb/QA/test/test_HSB_A1.csv
+  absolute_path: /home/zc/wmt26/data/raw/official/llms-limited-resources2025/Sorbian/hsb/QA/test/test_HSB_A1.csv
+  lang: hsb
+  data_type: heldout
+  reason: path/name contains heldout signal
+- repo_name: llms-limited-resources2025
+  relative_path: Sorbian/hsb/QA/test/test_HSB_A1.json
+  absolute_path: /home/zc/wmt26/data/raw/official/llms-limited-resources2025/Sorbian/hsb/QA/test/test_HSB_A1.json
+  lang: hsb
+  data_type: heldout
+  reason: path/name contains heldout signal
+- repo_name: llms-limited-resources2025
+  relative_path: Sorbian/hsb/QA/test/test_HSB_A2.csv
+  absolute_path: /home/zc/wmt26/data/raw/official/llms-limited-resources2025/Sorbian/hsb/QA/test/test_HSB_A2.csv
+  lang: hsb
+  data_type: heldout
+  reason: path/name contains heldout signal
+- repo_name: llms-limited-resources2025
+  relative_path: Sorbian/hsb/QA/test/test_HSB_A2.json
+  absolute_path: /home/zc/wmt26/data/raw/official/llms-limited-resources2025/Sorbian/hsb/QA/test/test_HSB_A2.json
+  lang: hsb
+  data_type: heldout
+  reason: path/name contains heldout signal
+- repo_name: llms-limited-resources2025
+  relative_path: Sorbian/hsb/QA/test/test_HSB_B1.csv
+  absolute_path: /home/zc/wmt26/data/raw/official/llms-limited-resources2025/Sorbian/hsb/QA/test/test_HSB_B1.csv
+  lang: hsb
+  data_type: heldout
+  reason: path/name contains heldout signal
+- repo_name: llms-limited-resources2025
+  relative_path: Sorbian/hsb/QA/test/test_HSB_B1.json
+  absolute_path: /home/zc/wmt26/data/raw/official/llms-limited-resources2025/Sorbian/hsb/QA/test/test_HSB_B1.json
+  lang: hsb
+  data_type: heldout
+  reason: path/name contains heldout signal
+- repo_name: llms-limited-resources2025
+  relative_path: Sorbian/hsb/QA/test/test_HSB_B2.csv
+  absolute_path: /home/zc/wmt26/data/raw/official/llms-limited-resources2025/Sorbian/hsb/QA/test/test_HSB_B2.csv
+  lang: hsb
+  data_type: heldout
+  reason: path/name contains heldout signal
+- repo_name: llms-limited-resources2025
+  relative_path: Sorbian/hsb/QA/test/test_HSB_B2.json
+  absolute_path: /home/zc/wmt26/data/raw/official/llms-limited-resources2025/Sorbian/hsb/QA/test/test_HSB_B2.json
+  lang: hsb
+  data_type: heldout
+  reason: path/name contains heldout signal
+- repo_name: llms-limited-resources2025
+  relative_path: Sorbian/hsb/QA/test/test_HSB_C1.csv
+  absolute_path: /home/zc/wmt26/data/raw/official/llms-limited-resources2025/Sorbian/hsb/QA/test/test_HSB_C1.csv
+  lang: hsb
+  data_type: heldout
+  reason: path/name contains heldout signal
+- repo_name: llms-limited-resources2025
+  relative_path: Sorbian/hsb/QA/test/test_HSB_C1.json
+  absolute_path: /home/zc/wmt26/data/raw/official/llms-limited-resources2025/Sorbian/hsb/QA/test/test_HSB_C1.json
+  lang: hsb
+  data_type: heldout
+  reason: path/name contains heldout signal
+- repo_name: llms-limited-resources2026
+  relative_path: Sorbian/GC/dsb_gc_dev.jsonl
+  absolute_path: /home/zc/wmt26/data/raw/official/llms-limited-resources2026/Sorbian/GC/dsb_gc_dev.jsonl
+  lang: dsb
+  data_type: heldout
+  reason: path/name contains heldout signal
+- repo_name: llms-limited-resources2026
+  relative_path: Sorbian/GC/hsb_gc_dev.jsonl
+  absolute_path: /home/zc/wmt26/data/raw/official/llms-limited-resources2026/Sorbian/GC/hsb_gc_dev.jsonl
+  lang: hsb
+  data_type: heldout
+  reason: path/name contains heldout signal
+- repo_name: llms-limited-resources2026
+  relative_path: Sorbian/MR/dsb_mr_dev.jsonl
+  absolute_path: /home/zc/wmt26/data/raw/official/llms-limited-resources2026/Sorbian/MR/dsb_mr_dev.jsonl
+  lang: dsb
+  data_type: heldout
+  reason: path/name contains heldout signal
+- repo_name: llms-limited-resources2026
+  relative_path: Sorbian/MR/hsb_mr_dev.jsonl
+  absolute_path: /home/zc/wmt26/data/raw/official/llms-limited-resources2026/Sorbian/MR/hsb_mr_dev.jsonl
+  lang: hsb
+  data_type: heldout
+  reason: path/name contains heldout signal
+- repo_name: llms-limited-resources2026
+  relative_path: Sorbian/MT/de-dsb_mt_dev.jsonl
+  absolute_path: /home/zc/wmt26/data/raw/official/llms-limited-resources2026/Sorbian/MT/de-dsb_mt_dev.jsonl
+  lang: dsb
+  data_type: heldout
+  reason: path/name contains heldout signal
+- repo_name: llms-limited-resources2026
+  relative_path: Sorbian/MT/de-hsb_mt_dev.jsonl
+  absolute_path: /home/zc/wmt26/data/raw/official/llms-limited-resources2026/Sorbian/MT/de-hsb_mt_dev.jsonl
+  lang: hsb
+  data_type: heldout
+  reason: path/name contains heldout signal
+- repo_name: llms-limited-resources2026
+  relative_path: Sorbian/MT/hsb-dsb_mt_dev.jsonl
+  absolute_path: /home/zc/wmt26/data/raw/official/llms-limited-resources2026/Sorbian/MT/hsb-dsb_mt_dev.jsonl
+  lang: hsb
+  data_type: heldout
+  reason: path/name contains heldout signal
+- repo_name: llms-limited-resources2026
+  relative_path: Sorbian/QA/dsb_qa_dev.jsonl
+  absolute_path: /home/zc/wmt26/data/raw/official/llms-limited-resources2026/Sorbian/QA/dsb_qa_dev.jsonl
+  lang: dsb
+  data_type: heldout
+  reason: path/name contains heldout signal
+- repo_name: llms-limited-resources2026
+  relative_path: Sorbian/QA/hsb_qa_dev.jsonl
+  absolute_path: /home/zc/wmt26/data/raw/official/llms-limited-resources2026/Sorbian/QA/hsb_qa_dev.jsonl
+  lang: hsb
+  data_type: heldout
+  reason: path/name contains heldout signal
+- repo_name: llms-limited-resources2026
+  relative_path: Sorbian/SC/dsb_sc_dev.jsonl
+  absolute_path: /home/zc/wmt26/data/raw/official/llms-limited-resources2026/Sorbian/SC/dsb_sc_dev.jsonl
+  lang: dsb
+  data_type: heldout
+  reason: path/name contains heldout signal
+- repo_name: llms-limited-resources2026
+  relative_path: Sorbian/SC/hsb_sc_dev.jsonl
+  absolute_path: /home/zc/wmt26/data/raw/official/llms-limited-resources2026/Sorbian/SC/hsb_sc_dev.jsonl
+  lang: hsb
+  data_type: heldout
+  reason: path/name contains heldout signal
+excluded_task_or_metadata:
+- repo_name: WMT22_UnsupVeryLowResMT_Data
+  relative_path: README.md
+  absolute_path: /home/zc/wmt26/data/raw/official/WMT22_UnsupVeryLowResMT_Data/README.md
+  lang: unknown
+  data_type: metadata
+  reason: readme/license/metadata
+- repo_name: llms-limited-resources2025
+  relative_path: README.md
+  absolute_path: /home/zc/wmt26/data/raw/official/llms-limited-resources2025/README.md
+  lang: unknown
+  data_type: metadata
+  reason: readme/license/metadata
+- repo_name: llms-limited-resources2025
+  relative_path: Sorbian/LICENCE
+  absolute_path: /home/zc/wmt26/data/raw/official/llms-limited-resources2025/Sorbian/LICENCE
+  lang: unknown
+  data_type: metadata
+  reason: readme/license/metadata
+- repo_name: llms-limited-resources2025
+  relative_path: Sorbian/README.md
+  absolute_path: /home/zc/wmt26/data/raw/official/llms-limited-resources2025/Sorbian/README.md
+  lang: unknown
+  data_type: metadata
+  reason: readme/license/metadata
+- repo_name: llms-limited-resources2025
+  relative_path: Sorbian/dsb/QA/DSB_A1.csv
+  absolute_path: /home/zc/wmt26/data/raw/official/llms-limited-resources2025/Sorbian/dsb/QA/DSB_A1.csv
+  lang: dsb
+  data_type: task_data
+  reason: QA/SC/GC/MR task data excluded from CPT v1
+- repo_name: llms-limited-resources2025
+  relative_path: Sorbian/dsb/QA/DSB_A1.json
+  absolute_path: /home/zc/wmt26/data/raw/official/llms-limited-resources2025/Sorbian/dsb/QA/DSB_A1.json
+  lang: dsb
+  data_type: task_data
+  reason: QA/SC/GC/MR task data excluded from CPT v1
+- repo_name: llms-limited-resources2025
+  relative_path: Sorbian/dsb/QA/DSB_A2.csv
+  absolute_path: /home/zc/wmt26/data/raw/official/llms-limited-resources2025/Sorbian/dsb/QA/DSB_A2.csv
+  lang: dsb
+  data_type: task_data
+  reason: QA/SC/GC/MR task data excluded from CPT v1
+- repo_name: llms-limited-resources2025
+  relative_path: Sorbian/dsb/QA/DSB_A2.json
+  absolute_path: /home/zc/wmt26/data/raw/official/llms-limited-resources2025/Sorbian/dsb/QA/DSB_A2.json
+  lang: dsb
+  data_type: task_data
+  reason: QA/SC/GC/MR task data excluded from CPT v1
+- repo_name: llms-limited-resources2025
+  relative_path: Sorbian/dsb/QA/DSB_B1.csv
+  absolute_path: /home/zc/wmt26/data/raw/official/llms-limited-resources2025/Sorbian/dsb/QA/DSB_B1.csv
+  lang: dsb
+  data_type: task_data
+  reason: QA/SC/GC/MR task data excluded from CPT v1
+- repo_name: llms-limited-resources2025
+  relative_path: Sorbian/dsb/QA/DSB_B1.json
+  absolute_path: /home/zc/wmt26/data/raw/official/llms-limited-resources2025/Sorbian/dsb/QA/DSB_B1.json
+  lang: dsb
+  data_type: task_data
+  reason: QA/SC/GC/MR task data excluded from CPT v1
+- repo_name: llms-limited-resources2025
+  relative_path: Sorbian/dsb/QA/DSB_B2.csv
+  absolute_path: /home/zc/wmt26/data/raw/official/llms-limited-resources2025/Sorbian/dsb/QA/DSB_B2.csv
+  lang: dsb
+  data_type: task_data
+  reason: QA/SC/GC/MR task data excluded from CPT v1
+- repo_name: llms-limited-resources2025
+  relative_path: Sorbian/dsb/QA/DSB_B2.json
+  absolute_path: /home/zc/wmt26/data/raw/official/llms-limited-resources2025/Sorbian/dsb/QA/DSB_B2.json
+  lang: dsb
+  data_type: task_data
+  reason: QA/SC/GC/MR task data excluded from CPT v1
+- repo_name: llms-limited-resources2025
+  relative_path: Sorbian/hsb/QA/HSB_A1.csv
+  absolute_path: /home/zc/wmt26/data/raw/official/llms-limited-resources2025/Sorbian/hsb/QA/HSB_A1.csv
+  lang: hsb
+  data_type: task_data
+  reason: QA/SC/GC/MR task data excluded from CPT v1
+- repo_name: llms-limited-resources2025
+  relative_path: Sorbian/hsb/QA/HSB_A1.json
+  absolute_path: /home/zc/wmt26/data/raw/official/llms-limited-resources2025/Sorbian/hsb/QA/HSB_A1.json
+  lang: hsb
+  data_type: task_data
+  reason: QA/SC/GC/MR task data excluded from CPT v1
+- repo_name: llms-limited-resources2025
+  relative_path: Sorbian/hsb/QA/HSB_A2.csv
+  absolute_path: /home/zc/wmt26/data/raw/official/llms-limited-resources2025/Sorbian/hsb/QA/HSB_A2.csv
+  lang: hsb
+  data_type: task_data
+  reason: QA/SC/GC/MR task data excluded from CPT v1
+- repo_name: llms-limited-resources2025
+  relative_path: Sorbian/hsb/QA/HSB_A2.json
+  absolute_path: /home/zc/wmt26/data/raw/official/llms-limited-resources2025/Sorbian/hsb/QA/HSB_A2.json
+  lang: hsb
+  data_type: task_data
+  reason: QA/SC/GC/MR task data excluded from CPT v1
+- repo_name: llms-limited-resources2025
+  relative_path: Sorbian/hsb/QA/HSB_B1.csv
+  absolute_path: /home/zc/wmt26/data/raw/official/llms-limited-resources2025/Sorbian/hsb/QA/HSB_B1.csv
+  lang: hsb
+  data_type: task_data
+  reason: QA/SC/GC/MR task data excluded from CPT v1
+- repo_name: llms-limited-resources2025
+  relative_path: Sorbian/hsb/QA/HSB_B1.json
+  absolute_path: /home/zc/wmt26/data/raw/official/llms-limited-resources2025/Sorbian/hsb/QA/HSB_B1.json
+  lang: hsb
+  data_type: task_data
+  reason: QA/SC/GC/MR task data excluded from CPT v1
+- repo_name: llms-limited-resources2025
+  relative_path: Sorbian/hsb/QA/HSB_B2.csv
+  absolute_path: /home/zc/wmt26/data/raw/official/llms-limited-resources2025/Sorbian/hsb/QA/HSB_B2.csv
+  lang: hsb
+  data_type: task_data
+  reason: QA/SC/GC/MR task data excluded from CPT v1
+- repo_name: llms-limited-resources2025
+  relative_path: Sorbian/hsb/QA/HSB_B2.json
+  absolute_path: /home/zc/wmt26/data/raw/official/llms-limited-resources2025/Sorbian/hsb/QA/HSB_B2.json
+  lang: hsb
+  data_type: task_data
+  reason: QA/SC/GC/MR task data excluded from CPT v1
+- repo_name: llms-limited-resources2025
+  relative_path: Ukrainian/MT/dev.cs-uk.cs
+  absolute_path: /home/zc/wmt26/data/raw/official/llms-limited-resources2025/Ukrainian/MT/dev.cs-uk.cs
+  lang: unknown
+  data_type: task_data
+  reason: Ukrainian data excluded from Sorbian CPT v1
+- repo_name: llms-limited-resources2025
+  relative_path: Ukrainian/MT/dev.cs-uk.uk
+  absolute_path: /home/zc/wmt26/data/raw/official/llms-limited-resources2025/Ukrainian/MT/dev.cs-uk.uk
+  lang: unknown
+  data_type: task_data
+  reason: Ukrainian data excluded from Sorbian CPT v1
+- repo_name: llms-limited-resources2025
+  relative_path: Ukrainian/MT/dev.en-uk.en
+  absolute_path: /home/zc/wmt26/data/raw/official/llms-limited-resources2025/Ukrainian/MT/dev.en-uk.en
+  lang: unknown
+  data_type: task_data
+  reason: Ukrainian data excluded from Sorbian CPT v1
+- repo_name: llms-limited-resources2025
+  relative_path: Ukrainian/MT/dev.en-uk.uk
+  absolute_path: /home/zc/wmt26/data/raw/official/llms-limited-resources2025/Ukrainian/MT/dev.en-uk.uk
+  lang: unknown
+  data_type: task_data
+  reason: Ukrainian data excluded from Sorbian CPT v1
+- repo_name: llms-limited-resources2025
+  relative_path: Ukrainian/MT/test.cs_uk.jsonl
+  absolute_path: /home/zc/wmt26/data/raw/official/llms-limited-resources2025/Ukrainian/MT/test.cs_uk.jsonl
+  lang: unknown
+  data_type: task_data
+  reason: Ukrainian data excluded from Sorbian CPT v1
+- repo_name: llms-limited-resources2025
+  relative_path: Ukrainian/MT/test.en_uk.jsonl
+  absolute_path: /home/zc/wmt26/data/raw/official/llms-limited-resources2025/Ukrainian/MT/test.en_uk.jsonl
+  lang: unknown
+  data_type: task_data
+  reason: Ukrainian data excluded from Sorbian CPT v1
+- repo_name: llms-limited-resources2025
+  relative_path: Ukrainian/QA/dev.json
+  absolute_path: /home/zc/wmt26/data/raw/official/llms-limited-resources2025/Ukrainian/QA/dev.json
+  lang: unknown
+  data_type: task_data
+  reason: Ukrainian data excluded from Sorbian CPT v1
+- repo_name: llms-limited-resources2025
+  relative_path: Ukrainian/QA/test.json
+  absolute_path: /home/zc/wmt26/data/raw/official/llms-limited-resources2025/Ukrainian/QA/test.json
+  lang: unknown
+  data_type: task_data
+  reason: Ukrainian data excluded from Sorbian CPT v1
+- repo_name: llms-limited-resources2025
+  relative_path: Ukrainian/QA/train.json
+  absolute_path: /home/zc/wmt26/data/raw/official/llms-limited-resources2025/Ukrainian/QA/train.json
+  lang: unknown
+  data_type: task_data
+  reason: Ukrainian data excluded from Sorbian CPT v1
+- repo_name: llms-limited-resources2025
+  relative_path: Ukrainian/README.md
+  absolute_path: /home/zc/wmt26/data/raw/official/llms-limited-resources2025/Ukrainian/README.md
+  lang: unknown
+  data_type: metadata
+  reason: readme/license/metadata
+- repo_name: llms-limited-resources2025
+  relative_path: dummy_submission/dsb/de-dsb_preds.jsonl
+  absolute_path: /home/zc/wmt26/data/raw/official/llms-limited-resources2025/dummy_submission/dsb/de-dsb_preds.jsonl
+  lang: dsb
+  data_type: metadata
+  reason: baseline or dummy submission output
+- repo_name: llms-limited-resources2025
+  relative_path: dummy_submission/dsb/dsb_qa_preds.jsonl
+  absolute_path: /home/zc/wmt26/data/raw/official/llms-limited-resources2025/dummy_submission/dsb/dsb_qa_preds.jsonl
+  lang: dsb
+  data_type: metadata
+  reason: baseline or dummy submission output
+- repo_name: llms-limited-resources2025
+  relative_path: dummy_submission/hsb/de-hsb_preds.jsonl
+  absolute_path: /home/zc/wmt26/data/raw/official/llms-limited-resources2025/dummy_submission/hsb/de-hsb_preds.jsonl
+  lang: hsb
+  data_type: metadata
+  reason: baseline or dummy submission output
+- repo_name: llms-limited-resources2025
+  relative_path: dummy_submission/hsb/hsb_qa_preds.jsonl
+  absolute_path: /home/zc/wmt26/data/raw/official/llms-limited-resources2025/dummy_submission/hsb/hsb_qa_preds.jsonl
+  lang: hsb
+  data_type: metadata
+  reason: baseline or dummy submission output
+- repo_name: llms-limited-resources2025
+  relative_path: dummy_submission/ukr/cs-uk_preds.jsonl
+  absolute_path: /home/zc/wmt26/data/raw/official/llms-limited-resources2025/dummy_submission/ukr/cs-uk_preds.jsonl
+  lang: unknown
+  data_type: metadata
+  reason: baseline or dummy submission output
+- repo_name: llms-limited-resources2025
+  relative_path: dummy_submission/ukr/en-uk_preds.jsonl
+  absolute_path: /home/zc/wmt26/data/raw/official/llms-limited-resources2025/dummy_submission/ukr/en-uk_preds.jsonl
+  lang: unknown
+  data_type: metadata
+  reason: baseline or dummy submission output
+- repo_name: llms-limited-resources2025
+  relative_path: dummy_submission/ukr/ukrqa-test_preds.jsonl
+  absolute_path: /home/zc/wmt26/data/raw/official/llms-limited-resources2025/dummy_submission/ukr/ukrqa-test_preds.jsonl
+  lang: unknown
+  data_type: metadata
+  reason: baseline or dummy submission output
+- repo_name: llms-limited-resources2025
+  relative_path: results.md
+  absolute_path: /home/zc/wmt26/data/raw/official/llms-limited-resources2025/results.md
+  lang: unknown
+  data_type: metadata
+  reason: readme/license/metadata
+- repo_name: llms-limited-resources2026
+  relative_path: README.md
+  absolute_path: /home/zc/wmt26/data/raw/official/llms-limited-resources2026/README.md
+  lang: unknown
+  data_type: metadata
+  reason: readme/license/metadata
+- repo_name: llms-limited-resources2026
+  relative_path: Sorbian/README.md
+  absolute_path: /home/zc/wmt26/data/raw/official/llms-limited-resources2026/Sorbian/README.md
+  lang: unknown
+  data_type: metadata
+  reason: readme/license/metadata
+- repo_name: llms-limited-resources2026
+  relative_path: Ukrainian/GC/ukr_gc_dev.jsonl
+  absolute_path: /home/zc/wmt26/data/raw/official/llms-limited-resources2026/Ukrainian/GC/ukr_gc_dev.jsonl
+  lang: unknown
+  data_type: task_data
+  reason: Ukrainian data excluded from Sorbian CPT v1
+- repo_name: llms-limited-resources2026
+  relative_path: Ukrainian/MR/ukr_mr_dev.jsonl
+  absolute_path: /home/zc/wmt26/data/raw/official/llms-limited-resources2026/Ukrainian/MR/ukr_mr_dev.jsonl
+  lang: unknown
+  data_type: task_data
+  reason: Ukrainian data excluded from Sorbian CPT v1
+- repo_name: llms-limited-resources2026
+  relative_path: Ukrainian/MT/cs-ukr_mt_dev.jsonl
+  absolute_path: /home/zc/wmt26/data/raw/official/llms-limited-resources2026/Ukrainian/MT/cs-ukr_mt_dev.jsonl
+  lang: unknown
+  data_type: task_data
+  reason: Ukrainian data excluded from Sorbian CPT v1
+- repo_name: llms-limited-resources2026
+  relative_path: Ukrainian/MT/en-ukr_mt_dev.jsonl
+  absolute_path: /home/zc/wmt26/data/raw/official/llms-limited-resources2026/Ukrainian/MT/en-ukr_mt_dev.jsonl
+  lang: unknown
+  data_type: task_data
+  reason: Ukrainian data excluded from Sorbian CPT v1
+- repo_name: llms-limited-resources2026
+  relative_path: Ukrainian/QA/ukr_mmlu_qa_dev.jsonl
+  absolute_path: /home/zc/wmt26/data/raw/official/llms-limited-resources2026/Ukrainian/QA/ukr_mmlu_qa_dev.jsonl
+  lang: unknown
+  data_type: task_data
+  reason: Ukrainian data excluded from Sorbian CPT v1
+- repo_name: llms-limited-resources2026
+  relative_path: Ukrainian/QA/ukr_mmlu_qa_train.jsonl
+  absolute_path: /home/zc/wmt26/data/raw/official/llms-limited-resources2026/Ukrainian/QA/ukr_mmlu_qa_train.jsonl
+  lang: unknown
+  data_type: task_data
+  reason: Ukrainian data excluded from Sorbian CPT v1
+- repo_name: llms-limited-resources2026
+  relative_path: Ukrainian/QA/ukr_qa_dev.jsonl
+  absolute_path: /home/zc/wmt26/data/raw/official/llms-limited-resources2026/Ukrainian/QA/ukr_qa_dev.jsonl
+  lang: unknown
+  data_type: task_data
+  reason: Ukrainian data excluded from Sorbian CPT v1
+- repo_name: llms-limited-resources2026
+  relative_path: Ukrainian/QA/ukr_qa_train.jsonl
+  absolute_path: /home/zc/wmt26/data/raw/official/llms-limited-resources2026/Ukrainian/QA/ukr_qa_train.jsonl
+  lang: unknown
+  data_type: task_data
+  reason: Ukrainian data excluded from Sorbian CPT v1
+- repo_name: llms-limited-resources2026
+  relative_path: Ukrainian/README.md
+  absolute_path: /home/zc/wmt26/data/raw/official/llms-limited-resources2026/Ukrainian/README.md
+  lang: unknown
+  data_type: metadata
+  reason: readme/license/metadata
+- repo_name: llms-limited-resources2026
+  relative_path: Ukrainian/SC/ukr_sc_dev.jsonl
+  absolute_path: /home/zc/wmt26/data/raw/official/llms-limited-resources2026/Ukrainian/SC/ukr_sc_dev.jsonl
+  lang: unknown
+  data_type: task_data
+  reason: Ukrainian data excluded from Sorbian CPT v1
+- repo_name: llms-limited-resources2026
+  relative_path: baseline_dev/README.md
+  absolute_path: /home/zc/wmt26/data/raw/official/llms-limited-resources2026/baseline_dev/README.md
+  lang: unknown
+  data_type: metadata
+  reason: readme/license/metadata
+- repo_name: llms-limited-resources2026
+  relative_path: baseline_dev/Sorbian/deu-dsb_preds.jsonl
+  absolute_path: /home/zc/wmt26/data/raw/official/llms-limited-resources2026/baseline_dev/Sorbian/deu-dsb_preds.jsonl
+  lang: dsb
+  data_type: metadata
+  reason: baseline or dummy submission output
+- repo_name: llms-limited-resources2026
+  relative_path: baseline_dev/Sorbian/deu-hsb_preds.jsonl
+  absolute_path: /home/zc/wmt26/data/raw/official/llms-limited-resources2026/baseline_dev/Sorbian/deu-hsb_preds.jsonl
+  lang: hsb
+  data_type: metadata
+  reason: baseline or dummy submission output
+- repo_name: llms-limited-resources2026
+  relative_path: baseline_dev/Sorbian/dsb-deu_preds.jsonl
+  absolute_path: /home/zc/wmt26/data/raw/official/llms-limited-resources2026/baseline_dev/Sorbian/dsb-deu_preds.jsonl
+  lang: dsb
+  data_type: metadata
+  reason: baseline or dummy submission output
+- repo_name: llms-limited-resources2026
+  relative_path: baseline_dev/Sorbian/dsb-gc_preds.jsonl
+  absolute_path: /home/zc/wmt26/data/raw/official/llms-limited-resources2026/baseline_dev/Sorbian/dsb-gc_preds.jsonl
+  lang: dsb
+  data_type: metadata
+  reason: baseline or dummy submission output
+- repo_name: llms-limited-resources2026
+  relative_path: baseline_dev/Sorbian/dsb-hsb_preds.jsonl
+  absolute_path: /home/zc/wmt26/data/raw/official/llms-limited-resources2026/baseline_dev/Sorbian/dsb-hsb_preds.jsonl
+  lang: hsb
+  data_type: metadata
+  reason: baseline or dummy submission output
+- repo_name: llms-limited-resources2026
+  relative_path: baseline_dev/Sorbian/dsb-mr_preds.jsonl
+  absolute_path: /home/zc/wmt26/data/raw/official/llms-limited-resources2026/baseline_dev/Sorbian/dsb-mr_preds.jsonl
+  lang: dsb
+  data_type: metadata
+  reason: baseline or dummy submission output
+- repo_name: llms-limited-resources2026
+  relative_path: baseline_dev/Sorbian/dsb-sc_preds.jsonl
+  absolute_path: /home/zc/wmt26/data/raw/official/llms-limited-resources2026/baseline_dev/Sorbian/dsb-sc_preds.jsonl
+  lang: dsb
+  data_type: metadata
+  reason: baseline or dummy submission output
+- repo_name: llms-limited-resources2026
+  relative_path: baseline_dev/Sorbian/dsb_qa_preds.jsonl
+  absolute_path: /home/zc/wmt26/data/raw/official/llms-limited-resources2026/baseline_dev/Sorbian/dsb_qa_preds.jsonl
+  lang: dsb
+  data_type: metadata
+  reason: baseline or dummy submission output
+- repo_name: llms-limited-resources2026
+  relative_path: baseline_dev/Sorbian/hsb-deu_preds.jsonl
+  absolute_path: /home/zc/wmt26/data/raw/official/llms-limited-resources2026/baseline_dev/Sorbian/hsb-deu_preds.jsonl
+  lang: hsb
+  data_type: metadata
+  reason: baseline or dummy submission output
+- repo_name: llms-limited-resources2026
+  relative_path: baseline_dev/Sorbian/hsb-dsb_preds.jsonl
+  absolute_path: /home/zc/wmt26/data/raw/official/llms-limited-resources2026/baseline_dev/Sorbian/hsb-dsb_preds.jsonl
+  lang: hsb
+  data_type: metadata
+  reason: baseline or dummy submission output
+- repo_name: llms-limited-resources2026
+  relative_path: baseline_dev/Sorbian/hsb-gc_preds.jsonl
+  absolute_path: /home/zc/wmt26/data/raw/official/llms-limited-resources2026/baseline_dev/Sorbian/hsb-gc_preds.jsonl
+  lang: hsb
+  data_type: metadata
+  reason: baseline or dummy submission output
+- repo_name: llms-limited-resources2026
+  relative_path: baseline_dev/Sorbian/hsb-mr_preds.jsonl
+  absolute_path: /home/zc/wmt26/data/raw/official/llms-limited-resources2026/baseline_dev/Sorbian/hsb-mr_preds.jsonl
+  lang: hsb
+  data_type: metadata
+  reason: baseline or dummy submission output
+- repo_name: llms-limited-resources2026
+  relative_path: baseline_dev/Sorbian/hsb-sc_preds.jsonl
+  absolute_path: /home/zc/wmt26/data/raw/official/llms-limited-resources2026/baseline_dev/Sorbian/hsb-sc_preds.jsonl
+  lang: hsb
+  data_type: metadata
+  reason: baseline or dummy submission output
+- repo_name: llms-limited-resources2026
+  relative_path: baseline_dev/Sorbian/hsb_qa_preds.jsonl
+  absolute_path: /home/zc/wmt26/data/raw/official/llms-limited-resources2026/baseline_dev/Sorbian/hsb_qa_preds.jsonl
+  lang: hsb
+  data_type: metadata
+  reason: baseline or dummy submission output
+- repo_name: llms-limited-resources2026
+  relative_path: baseline_dev/Ukrainian/ces-ukr_preds.jsonl
+  absolute_path: /home/zc/wmt26/data/raw/official/llms-limited-resources2026/baseline_dev/Ukrainian/ces-ukr_preds.jsonl
+  lang: unknown
+  data_type: metadata
+  reason: baseline or dummy submission output
+- repo_name: llms-limited-resources2026
+  relative_path: baseline_dev/Ukrainian/eng-ukr_preds.jsonl
+  absolute_path: /home/zc/wmt26/data/raw/official/llms-limited-resources2026/baseline_dev/Ukrainian/eng-ukr_preds.jsonl
+  lang: unknown
+  data_type: metadata
+  reason: baseline or dummy submission output
+- repo_name: llms-limited-resources2026
+  relative_path: baseline_dev/Ukrainian/ukr-gc_preds.jsonl
+  absolute_path: /home/zc/wmt26/data/raw/official/llms-limited-resources2026/baseline_dev/Ukrainian/ukr-gc_preds.jsonl
+  lang: unknown
+  data_type: metadata
+  reason: baseline or dummy submission output
+- repo_name: llms-limited-resources2026
+  relative_path: baseline_dev/Ukrainian/ukr-mr_preds.jsonl
+  absolute_path: /home/zc/wmt26/data/raw/official/llms-limited-resources2026/baseline_dev/Ukrainian/ukr-mr_preds.jsonl
+  lang: unknown
+  data_type: metadata
+  reason: baseline or dummy submission output
+- repo_name: llms-limited-resources2026
+  relative_path: baseline_dev/Ukrainian/ukr-qa_mmlu_preds.jsonl
+  absolute_path: /home/zc/wmt26/data/raw/official/llms-limited-resources2026/baseline_dev/Ukrainian/ukr-qa_mmlu_preds.jsonl
+  lang: unknown
+  data_type: metadata
+  reason: baseline or dummy submission output
+- repo_name: llms-limited-resources2026
+  relative_path: baseline_dev/Ukrainian/ukr-qa_preds.jsonl
+  absolute_path: /home/zc/wmt26/data/raw/official/llms-limited-resources2026/baseline_dev/Ukrainian/ukr-qa_preds.jsonl
+  lang: unknown
+  data_type: metadata
+  reason: baseline or dummy submission output
+- repo_name: llms-limited-resources2026
+  relative_path: baseline_dev/Ukrainian/ukr-sc_preds.jsonl
+  absolute_path: /home/zc/wmt26/data/raw/official/llms-limited-resources2026/baseline_dev/Ukrainian/ukr-sc_preds.jsonl
+  lang: unknown
+  data_type: metadata
+  reason: baseline or dummy submission output
+unknown_needs_review:
+- repo_name: WMT22_UnsupVeryLowResMT_Data
+  relative_path: 40194_train_dsb_de.de.gz
+  absolute_path: /home/zc/wmt26/data/raw/official/WMT22_UnsupVeryLowResMT_Data/40194_train_dsb_de.de.gz
+  lang: deu
+  data_type: unknown
+  reason: not confidently classifiable for CPT v1
+- repo_name: WMT22_UnsupVeryLowResMT_Data
+  relative_path: 40194_train_dsb_de.dsb.gz
+  absolute_path: /home/zc/wmt26/data/raw/official/WMT22_UnsupVeryLowResMT_Data/40194_train_dsb_de.dsb.gz
+  lang: dsb
+  data_type: unknown
+  reason: not confidently classifiable for CPT v1
+- repo_name: WMT22_UnsupVeryLowResMT_Data
+  relative_path: HSB-DE_train.tsv.gz
+  absolute_path: /home/zc/wmt26/data/raw/official/WMT22_UnsupVeryLowResMT_Data/HSB-DE_train.tsv.gz
+  lang: hsb
+  data_type: unknown
+  reason: not confidently classifiable for CPT v1
+- repo_name: WMT22_UnsupVeryLowResMT_Data
+  relative_path: train.hsb-de.de.gz
+  absolute_path: /home/zc/wmt26/data/raw/official/WMT22_UnsupVeryLowResMT_Data/train.hsb-de.de.gz
+  lang: deu
+  data_type: unknown
+  reason: not confidently classifiable for CPT v1
+- repo_name: WMT22_UnsupVeryLowResMT_Data
+  relative_path: train.hsb-de.hsb.gz
+  absolute_path: /home/zc/wmt26/data/raw/official/WMT22_UnsupVeryLowResMT_Data/train.hsb-de.hsb.gz
+  lang: hsb
+  data_type: unknown
+  reason: not confidently classifiable for CPT v1
+- repo_name: WMT22_UnsupVeryLowResMT_Data
+  relative_path: train2021.hsb-de.de.gz
+  absolute_path: /home/zc/wmt26/data/raw/official/WMT22_UnsupVeryLowResMT_Data/train2021.hsb-de.de.gz
+  lang: deu
+  data_type: unknown
+  reason: not confidently classifiable for CPT v1
+- repo_name: WMT22_UnsupVeryLowResMT_Data
+  relative_path: train2021.hsb-de.hsb.gz
+  absolute_path: /home/zc/wmt26/data/raw/official/WMT22_UnsupVeryLowResMT_Data/train2021.hsb-de.hsb.gz
+  lang: hsb
+  data_type: unknown
+  reason: not confidently classifiable for CPT v1
+- repo_name: WMT22_UnsupVeryLowResMT_Data
+  relative_path: train_dsb_hsb_62564.dsb.gz
+  absolute_path: /home/zc/wmt26/data/raw/official/WMT22_UnsupVeryLowResMT_Data/train_dsb_hsb_62564.dsb.gz
+  lang: dsb
+  data_type: unknown
+  reason: not confidently classifiable for CPT v1
+- repo_name: llms-limited-resources2025
+  relative_path: Sorbian/dsb/MT/train.de-dsb.de
+  absolute_path: /home/zc/wmt26/data/raw/official/llms-limited-resources2025/Sorbian/dsb/MT/train.de-dsb.de
+  lang: deu
+  data_type: unknown
+  reason: not confidently classifiable for CPT v1
+- repo_name: llms-limited-resources2025
+  relative_path: Sorbian/hsb/MT/train.de-hsb.de
+  absolute_path: /home/zc/wmt26/data/raw/official/llms-limited-resources2025/Sorbian/hsb/MT/train.de-hsb.de
+  lang: deu
+  data_type: unknown
+  reason: not confidently classifiable for CPT v1
