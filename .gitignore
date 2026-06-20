@@ -82,3 +82,7 @@ Thumbs.db
 # scripts/
 # docs/
 # README.md
+
+# Claude Code session state (not project config)
+.claude/scheduled_tasks.json
+.claude/scheduled_tasks.lock
