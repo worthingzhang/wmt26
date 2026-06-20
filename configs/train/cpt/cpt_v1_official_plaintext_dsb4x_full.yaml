@@ -19,20 +19,19 @@ dataloader_num_workers: 4
 
 ### output
 output_dir: /home/zc/wmt26/models/cpt/cpt_v1_official_plaintext_dsb4x_full
-logging_steps: 20
+logging_steps: 10
 save_strategy: steps
-save_steps: 500
-save_total_limit: 4
+save_steps: 200
+save_total_limit: 3
 save_only_model: false
 plot_loss: true
 overwrite_output_dir: false
 report_to: none
 
 ### train
-# needs_manual_review before full CPT launch
-num_train_epochs: 1.0
+max_steps: 1000
 per_device_train_batch_size: 1
-gradient_accumulation_steps: 8
+gradient_accumulation_steps: 4
 learning_rate: 1.0e-5
 lr_scheduler_type: cosine
 warmup_ratio: 0.03

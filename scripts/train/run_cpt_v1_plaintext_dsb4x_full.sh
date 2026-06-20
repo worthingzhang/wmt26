@@ -19,5 +19,4 @@ LOG_DIR=/home/zc/wmt26/logs/train/cpt_v1_official_plaintext_dsb4x
 LOG_FILE="${LOG_DIR}/full.log"
 mkdir -p "${LOG_DIR}"
 
-echo "Full CPT config is marked needs_manual_review. Confirm before launching this script."
 FORCE_TORCHRUN=1 llamafactory-cli train /home/zc/wmt26/configs/train/cpt/cpt_v1_official_plaintext_dsb4x_full.yaml 2>&1 | tee "${LOG_FILE}"
