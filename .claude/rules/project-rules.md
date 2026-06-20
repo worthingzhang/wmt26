@@ -29,3 +29,4 @@
 - **OPD/verl dependency conflicts**: The official install script may produce pip dependency conflicts (especially numpy versions). Verify imports and `torch.cuda.is_available()` after install, but don't blindly reinstall unless a runtime error occurs.
 - **`parallelize=True` incompatible with custom architectures**: Qwen3.5-2B's custom attention causes device mismatch with `parallelize=True`. Use single-GPU `cuda:0` and tune `batch_size` instead.
 - **RTX 4000 series NCCL**: Set `NCCL_P2P_DISABLE=1` and `NCCL_IB_DISABLE=1` when running multi-GPU-aware frameworks on RTX 4090s to avoid the "RTX 4000 series doesn't support faster communication broadband" error.
+- **tmux config compatibility on Ubuntu**: `allow-passthrough` is only available in tmux >= 3.3. On tmux 3.2a (default on this system) it causes tmux to error/restart and can silently kill attached training sessions. Keep it commented out in `~/.tmux.conf` for long-running training sessions.

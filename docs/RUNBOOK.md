@@ -2,27 +2,24 @@
 
 项目脚本会自动加载 `configs/env/mirrors.env`；手动调试时才需要 `source` 它。
 
-## 当前里程碑（Checkpoint 2026-06-15）
+## 当前里程碑（Checkpoint 2026-06-20）
 
 ### 已完成
 
-- 项目骨架提交到 git：`configs/`、`scripts/`、`docs/`、`models/registry/`、`data/manifests/`。
-- 外部仓库已 clone 并配置 upstream：
-  - `repos/thunlp_opd`（origin: worthingzhang/OPD，upstream: thunlp/OPD）
-  - `repos/official_eval`（origin: worthingzhang/llms-lim-res-eval-2026，upstream: TUM-NLP/llms-limited-resources2026）
-- 三个训练/评测环境全部就绪：
-  - 主项目/评测 `.venv`（Python 3.12，torch 2.6.0+cu124）✅
-  - LlamaFactory CPT/SFT `.venvs/llamafactory`（Python 3.11，torch 2.7.0+cu126）✅
-  - OPD/verl/vLLM/sglang `.conda/envs/verl`（Python 3.12，torch 2.8.0+cu128）✅
-- Base 模型 `Qwen/Qwen3.5-2B` 已整理到标准路径 `/home/zc/wmt26/models/base/Qwen3.5-2B`。
-- 镜像配置已集中管理：`configs/env/mirrors.env`，所有项目脚本自动加载。
-- `tmux` 3.2a 已安装，可用于后台长时间任务。
+- 项目骨架、外部仓库、三个训练/评测环境、base model、镜像配置、tmux 均已就绪。
 - **Sorbian baseline 评测已完成**：
-  - QA smoke（hsbqa limit=5）成功。
-  - 完整 QA（hsbqa + dsbqa，无 limit）成功：hsbqa=0.5159，dsbqa=0.4682。
-  - 生成式 smoke（sorbian_dev limit=5）成功。
-  - 完整生成式 baseline（sorbian_dev，无 limit，batch_size=8）成功：MT chrf++ avg=22.04，bleu avg=3.99；SC corrected avg=0.084；GC corrected avg=0.004；MR exact_match avg=0.042。
-- `repos/official_eval` 已做最小修复：将 Sorbian MR 任务的 `acc` metric 改为 `exact_match`，解决生成式 baseline 的 TypeError。commit `1e6ab97b`。
+  - QA smoke（hsbqa limit=5）：acc=0.85。
+  - 完整 QA（hsbqa + dsbqa）：hsbqa=0.5159，dsbqa=0.4682。
+  - 完整生成式 baseline（sorbian_dev，batch_size=8）：MT chrf++=22.04，bleu=3.99；SC=0.084；GC=0.004；MR=0.042。
+- `repos/official_eval` 已做最小修复：Sorbian MR `acc` → `exact_match`，commit `1e6ab97b`。
+- **CPT V1 Official Plaintext DSB4X 数据处理完成**：
+  - processed file: `data/processed/llamafactory/cpt/cpt_v1_official_plaintext_dsb4x.jsonl`
+  - line count: 3,824,702
+  - estimated tokens: ~135M
+  - hsb/dsb ratio: 59.98% / 40.02%
+- **CPT smoke 完成**：`models/cpt/cpt_v1_official_plaintext_dsb4x_smoke`，20/20 steps，final loss 4.086。
+- **CPT probe4096 完成**：`models/cpt/cpt_v1_official_plaintext_dsb4x_probe4096`，50/50 steps，cutoff_len=4096，DeepSpeed ZeRO-3，final loss 3.4468，~24.5 s/step。
+- **Full CPT 已启动**：tmux `cpt-v1-dsb4x-full`，step 12/1000，loss ~4.40，预计 7–8 小时完成。
 
 ### 已验证命令
 
@@ -46,6 +43,22 @@ source /data/wyt/miniconda3/etc/profile.d/conda.sh
 conda activate /home/zc/wmt26/.conda/envs/verl
 python -c "import torch; print(torch.__version__, torch.cuda.is_available())"
 python -c "import verl, vllm, sglang, math_verify; print('imports ok')"
+```
+
+### 已验证训练命令
+
+```bash
+# CPT smoke
+bash scripts/train/run_cpt_v1_plaintext_dsb4x_smoke.sh
+
+# CPT probe4096（cutoff_len=4096，ZeRO-3，50 steps）
+bash scripts/train/run_cpt_v1_plaintext_dsb4x_probe4096.sh
+
+# Full CPT（cutoff_len=4096，ZeRO-3，1000 steps）— 推荐在 tmux 中运行
+tmux new -s cpt-v1-dsb4x-full
+cd /home/zc/wmt26
+bash scripts/train/run_cpt_v1_plaintext_dsb4x_full.sh
+# detach: Ctrl-b d
 ```
 
 ### 已验证评测命令
@@ -72,9 +85,11 @@ python -m lm_eval run \
 
 ### 未完成的下一步
 
-1. 准备/检查 CPT/SFT 数据格式，跑通 CPT smoke training。
-2. 跑通 SFT smoke training 和 OPD smoke training（可选，按实验计划）。
-3. 用 `scripts/eval/eval_model.sh` 评测 smoke checkpoints，并与 base model baseline 对比。
+1. **监控并完成 full CPT**：tmux `cpt-v1-dsb4x-full` 预计 7–8 小时跑完 1000 steps；完成后验证 checkpoint、loss、日志，并更新 `docs/train/CPT_V1_OFFICIAL_PLAINTEXT_DSB4X_STATUS.md`。
+2. **Full CPT 完成后评测**：使用 `scripts/eval/eval_model.sh` 对 `models/cpt/cpt_v1_official_plaintext_dsb4x_full` 做 zero-shot 评测，与 base model baseline 对比。
+3. **注册训练产出模型**：将 `cpt_v1_official_plaintext_dsb4x_full` 登记到 `models/registry/models.jsonl` 和 `runs/train_registry.csv`。
+
+本文档给出常用命令模板。
 
 本文档给出常用命令模板。
 

@@ -124,27 +124,23 @@ bash scripts/eval/eval_model.sh --eval-id ... --model-id ... --model-path ... --
 
 ## Current State (Checkpoint)
 
-- Project scaffold committed.
-- External repos cloned with upstreams.
+- Project scaffold committed; external repos cloned with upstreams.
 - Base model `Qwen/Qwen3.5-2B` copied to `models/base/Qwen3.5-2B`.
-- Main/Eval env ready; `torch==2.6.0+cu124`, CUDA available, 8 × RTX 4090.
-- LlamaFactory env ready; `torch==2.7.0+cu126`, `llamafactory-cli` 0.9.5.dev0 available.
-- OPD/verl env ready; `torch==2.8.0+cu128`, `verl`/`vllm`/`sglang`/`math_verify` importable.
+- Three environments ready:
+  - Main/Eval `.venv`: torch 2.6.0+cu124
+  - LlamaFactory `.venvs/llamafactory`: torch 2.7.0+cu126, llamafactory-cli 0.9.5.dev0
+  - OPD/verl `.conda/envs/verl`: torch 2.8.0+cu128
 - `tmux` 3.2a available.
-- **Sorbian baseline evaluation completed**:
-  - QA smoke (`hsbqa`, limit=5): acc=0.85.
-  - Full QA (`hsbqa` + `dsbqa`): hsbqa=0.5159, dsbqa=0.4682.
-  - Generative smoke (`sorbian_dev`, limit=5): success.
-  - Full generative (`sorbian_dev`, no limit, batch_size=8): success.
-    - MT chrf++ avg=22.04, bleu avg=3.99
-    - SC exact_match_corrected avg=0.084
-    - GC exact_match_corrected avg=0.004
-    - MR exact_match avg=0.042
-- `repos/official_eval` patched: Sorbian MR tasks use `exact_match` instead of `acc` to fix `generate_until` aggregation. Commit `1e6ab97b`.
-- Latest un-pushed main project commit: `a91335d`.
+- Sorbian baseline evaluation completed (QA + generative).
+- `repos/official_eval` patched for Sorbian MR exact_match metric, commit `1e6ab97b`.
+- **CPT V1 Official Plaintext DSB4X**:
+  - Processed data ready: 3,824,702 lines, ~135M tokens, 60/40 hsb/dsb.
+  - Smoke (cutoff_len=1024) completed: 20/20 steps, final loss 4.086.
+  - Probe4096 (cutoff_len=4096, ZeRO-3) completed: 50/50 steps, final loss 3.4468, ~24.5 s/step.
+  - **Full CPT running**: tmux `cpt-v1-dsb4x-full`, step 12/1000, loss ~4.40, ~24 s/step, estimated 7–8 hours.
 
 ## Next TODOs
 
-1. Prepare/check CPT/SFT data formats and run CPT smoke training.
-2. Run SFT smoke training and optionally OPD smoke training.
-3. Evaluate smoke checkpoints with `scripts/eval/eval_model.sh` and compare against the recorded baseline.
+1. Monitor full CPT to completion (1000 steps), validate checkpoints/loss/log, update status docs.
+2. Run zero-shot evaluation of `cpt_v1_official_plaintext_dsb4x_full` and compare to base model baseline.
+3. Register the full CPT model in `models/registry/models.jsonl` and `runs/train_registry.csv`.

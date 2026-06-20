@@ -1,5 +1,75 @@
 # Session Log
 
+## Session: 2026-06-20（CPT V1 DSB4X probe4096 与 full CPT 启动）
+
+### Summary
+
+本次会话完成了 CPT V1 Official Plaintext DSB4X 的 probe4096 验证和 full CPT 启动。probe4096 成功证明 cutoff_len=4096 + DeepSpeed ZeRO-3 在 8× RTX 4090 上稳定可行；full CPT 第一次自动启动因 tmux 配置兼容性问题在 step 0 静默退出，修复 `.tmux.conf` 后由用户在 tmux 中手动启动，目前已稳定推进到 step 12/1000。
+
+### Files Changed / Created
+
+- `configs/train/cpt/cpt_v1_official_plaintext_dsb4x_full.yaml`
+  - `max_steps: 1000`
+  - `gradient_accumulation_steps: 4`
+  - `logging_steps: 10`
+  - `save_steps: 200`
+  - `save_total_limit: 3`
+  - 移除 `num_train_epochs` 和 `needs_manual_review` 注释
+- `scripts/train/run_cpt_v1_plaintext_dsb4x_full.sh` — 移除 manual review 提示
+- `docs/train/CPT_V1_OFFICIAL_PLAINTEXT_DSB4X_STATUS.md` — 新增 Probe 4096 章节、Full CPT Plan 与两次 launch 记录
+- `models/cpt/cpt_v1_official_plaintext_dsb4x_full/TRAINING_RUN.md` — 新建 full CPT 运行记录
+- `docs/RUNBOOK.md` — 更新里程碑、已验证训练命令、下一步
+- `.claude/rules/project-rules.md` — 新增 tmux 配置兼容性 pitfall
+- `CLAUDE.md` — 更新当前状态与 TODOs
+
+### Commands / Tests Run
+
+```bash
+# probe4096 状态检查与验证
+git status --short
+ps -ef | grep -E "cpt_v1_official_plaintext_dsb4x_probe4096|llamafactory-cli|torchrun"
+tmux ls
+tail -n 80 logs/train/cpt_v1_official_plaintext_dsb4x/probe4096.log
+ls -lah models/cpt/cpt_v1_official_plaintext_dsb4x_probe4096
+python3 -m py_compile scripts/data/processed/build_cpt_v1_plaintext_dataset.py
+bash -n scripts/train/run_cpt_v1_plaintext_dsb4x_probe4096.sh
+
+# full CPT 启动前检查
+ls -lh data/processed/llamafactory/cpt/cpt_v1_official_plaintext_dsb4x.jsonl
+wc -l data/processed/llamafactory/cpt/cpt_v1_official_plaintext_dsb4x.jsonl
+nvidia-smi
+df -h /home/zc/wmt26
+python3 -m py_compile scripts/data/processed/build_cpt_v1_plaintext_dataset.py
+bash -n scripts/train/run_cpt_v1_plaintext_dsb4x_full.sh
+
+# full CPT 启动与监控
+tmux new -d -s cpt-v1-dsb4x-full "bash scripts/train/run_cpt_v1_plaintext_dsb4x_full.sh"
+tmux ls
+tail -n 60 logs/train/cpt_v1_official_plaintext_dsb4x/full.log
+```
+
+### Key Results
+
+| 部分 | 状态 | 关键指标 |
+|---|---|---|
+| probe4096 | ✅ success | 50/50 steps, final loss 3.4468, ~24.49 s/step, ZeRO-3 active, no OOM |
+| full CPT launch attempt 1 | ❌ failed | 静默退出于 step 0，无 OOM/Traceback |
+| full CPT launch attempt 2 | 🔄 running | step 12/1000, loss ~4.40, ~24 s/step，tmux `cpt-v1-dsb4x-full` |
+
+### Notes / Issues
+
+- `.tmux.conf` 中 `allow-passthrough on` 与 tmux 3.2a 不兼容，已注释掉。
+- 自动化 `tmux new -d -s ...` 在同样配置下两次都在 step 0 静默退出；用户在修复 tmux 后手动创建的 attached session 正常推进。
+- full CPT 预计 7–8 小时完成。
+
+### Unresolved Issues
+
+1. **full CPT 尚未完成**：当前运行中，需持续监控至 1000 steps。
+2. **full CPT 完成后需评测**：使用 `scripts/eval/eval_model.sh` 对最终模型做 zero-shot 评测。
+3. **训练产出需注册**：`cpt_v1_official_plaintext_dsb4x_full` 需登记到 `models/registry/models.jsonl` 和 `runs/train_registry.csv`。
+
+---
+
 ## Session: 2026-06-14 / 2026-06-15
 
 ### Summary

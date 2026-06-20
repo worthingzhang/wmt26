@@ -106,3 +106,31 @@
 - 结果正确性优先于速度。
 - `parallelize=True` 的设备分配逻辑与部分自定义 layer 不兼容，强行使用会导致运行时 device mismatch。
 - 单卡 batch_size 调优（如生成式任务从 1 提到 8）已能在合理时间内完成 full dev 评测。
+
+## ADR-9: Full-model CPT on 8× RTX 4090 requires DeepSpeed ZeRO-3
+
+**Decision**:
+
+- Full CPT of Qwen3.5-2B with `cutoff_len=4096` on 8× RTX 4090 (24GB) uses DeepSpeed ZeRO-3 via LlamaFactory.
+- Do not fall back to plain DDP or non-sharded full-model training for this workload.
+
+**Rationale**:
+
+- Plain DDP and non-sharded 1024/4096 smoke attempts OOM on 24GB cards.
+- ZeRO-3 shards optimizer states, gradients, and parameters across GPUs, fitting the model and 4096-length sequences.
+- Verified by probe4096 (50 steps) and currently running full CPT (1000 steps).
+
+**Configuration**:
+
+- `deepspeed: /home/zc/wmt26/repos/thunlp_opd/LlamaFactory/examples/deepspeed/ds_z3_config.json`
+- `finetuning_type: full`
+- `cutoff_len: 4096`
+- `per_device_train_batch_size: 1`
+- `gradient_accumulation_steps: 4`
+- `bf16: true`
+- `gradient_checkpointing: true`
+
+**Notes**:
+
+- ZeRO-3 init is slower than DDP due to parameter partitioning, but training step time stabilizes at ~24 s/step.
+- Launch must be via `FORCE_TORCHRUN=1 llamafactory-cli train ...` to ensure 8-GPU torchrun.
