@@ -49,7 +49,7 @@ fi
 # Update hardcoded paths in scripts and configs
 echo ""
 echo "=== Step 4: Update hardcoded paths in scripts/configs ==="
-find scripts configs -type f \( -name "*.sh" -o -name "*.yaml" -o -o -name "*.py" -o -name "*.md" \) \
+find scripts configs -type f \( -name "*.sh" -o -name "*.yaml" -o -name "*.py" -o -name "*.md" \) \
     -exec grep -l "${OLD_PROJECT_ROOT}" {} \; | while read -r f; do
     echo "Updating paths in: $f"
     sed -i "s|${OLD_PROJECT_ROOT}|${PROJECT_ROOT}|g" "$f"
