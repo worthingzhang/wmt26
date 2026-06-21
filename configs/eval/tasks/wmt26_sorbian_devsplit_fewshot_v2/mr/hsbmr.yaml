@@ -1,0 +1,38 @@
+task: hsbmr_devsplit_fs2_v2
+dataset_path: json
+dataset_name: null
+dataset_kwargs:
+  data_files:
+    test: /home/zc/wmt26/configs/eval/devsplits/sorbian_devsplit_fewshot_v2/eval/hsbmr.jsonl
+test_split: test
+num_fewshot: 2
+fewshot_config:
+  sampler: first_n
+  samples: !function utils.hsbmr_shots
+  doc_to_target: !function utils.target_answer
+fewshot_delimiter: "\n\n"
+target_delimiter: " "
+doc_to_text: "Answer this mathematical reasoning question. Place your final answer, using LateX when appropriate, in this format: <answer> answer </answer> {{question}}"
+doc_to_target: "{{answer}}"
+generation_kwargs:
+  until:
+    - "<|endoftext|>"
+    - "<|im_end|>"
+  max_gen_toks: 512
+  temperature: 1
+  top_p: 1.0
+  top_k: 20
+  min_p: 0.0
+  repetition_penalty: 1.0
+filter_list:
+  - name: "remove_tags"
+    filter:
+      - function: "strip_thinking"
+      - function: "regex"
+        regex_pattern: "<answer>\\s*(.*?)\\s*</answer>"
+      - function: "take_first"
+metric_list:
+  - metric: chrf
+  - metric: exact_match
+metadata:
+  version: 2.0

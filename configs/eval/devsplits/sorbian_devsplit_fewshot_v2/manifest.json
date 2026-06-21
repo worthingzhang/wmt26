@@ -1,0 +1,213 @@
+{
+  "profile": "sorbian_devsplit_fewshot_v2",
+  "raw_dir": "/home/zc/wmt26/data/raw/llms-limited-resources2026/Sorbian",
+  "tasks": [
+    {
+      "task": "hsbqa",
+      "source_file": "/home/zc/wmt26/data/raw/llms-limited-resources2026/Sorbian/QA/hsb_qa_dev.jsonl",
+      "shots_file": "/home/zc/wmt26/configs/eval/devsplits/sorbian_devsplit_fewshot_v2/shots/hsbqa.jsonl",
+      "eval_file": "/home/zc/wmt26/configs/eval/devsplits/sorbian_devsplit_fewshot_v2/eval/hsbqa.jsonl",
+      "source_count": 158,
+      "shot_count": 3,
+      "eval_count": 155,
+      "selected_indices": [
+        0,
+        1,
+        30
+      ],
+      "strategy": "qa_stratified",
+      "shot_levels": [
+        "A1",
+        "A1",
+        "A2"
+      ],
+      "shot_answers": [
+        1,
+        2,
+        3
+      ],
+      "shots_sha256": "8c059c60d3c13ba78efe03527c2c3263cbdfcfb97daf6ffcdd3789d784bb1063",
+      "eval_sha256": "5df7fb384ee61523d624c4aac8ee18f5cbe59e50b8d3134c046cd2c46c2a4055"
+    },
+    {
+      "task": "dsbqa",
+      "source_file": "/home/zc/wmt26/data/raw/llms-limited-resources2026/Sorbian/QA/dsb_qa_dev.jsonl",
+      "shots_file": "/home/zc/wmt26/configs/eval/devsplits/sorbian_devsplit_fewshot_v2/shots/dsbqa.jsonl",
+      "eval_file": "/home/zc/wmt26/configs/eval/devsplits/sorbian_devsplit_fewshot_v2/eval/dsbqa.jsonl",
+      "source_count": 158,
+      "shot_count": 3,
+      "eval_count": 155,
+      "selected_indices": [
+        0,
+        1,
+        30
+      ],
+      "strategy": "qa_stratified",
+      "shot_levels": [
+        "A1",
+        "A1",
+        "A2"
+      ],
+      "shot_answers": [
+        1,
+        2,
+        3
+      ],
+      "shots_sha256": "8d1cec756b38b52e3c288d54321820c89b18b9cb1d1d59d132aa26b4c19d74be",
+      "eval_sha256": "2ba2136fca518e4c0e37cae764dbeee29bafe7732552eed421a9ea86cca4f934"
+    },
+    {
+      "task": "hsbsc",
+      "source_file": "/home/zc/wmt26/data/raw/llms-limited-resources2026/Sorbian/SC/hsb_sc_dev.jsonl",
+      "shots_file": "/home/zc/wmt26/configs/eval/devsplits/sorbian_devsplit_fewshot_v2/shots/hsbsc.jsonl",
+      "eval_file": "/home/zc/wmt26/configs/eval/devsplits/sorbian_devsplit_fewshot_v2/eval/hsbsc.jsonl",
+      "source_count": 2000,
+      "shot_count": 2,
+      "eval_count": 1998,
+      "selected_indices": [
+        0,
+        2
+      ],
+      "strategy": "correctness_balanced",
+      "shots_sha256": "8166027a411a69f95776b9f11a6c50d8ef773ac6f75fbb469c6a1ed7cb0e8bd9",
+      "eval_sha256": "8ddc6bb601bc3abbed1186c3c9af9e6f7d5cafb348a74e7a028ddb44656a27b0"
+    },
+    {
+      "task": "dsbsc",
+      "source_file": "/home/zc/wmt26/data/raw/llms-limited-resources2026/Sorbian/SC/dsb_sc_dev.jsonl",
+      "shots_file": "/home/zc/wmt26/configs/eval/devsplits/sorbian_devsplit_fewshot_v2/shots/dsbsc.jsonl",
+      "eval_file": "/home/zc/wmt26/configs/eval/devsplits/sorbian_devsplit_fewshot_v2/eval/dsbsc.jsonl",
+      "source_count": 2000,
+      "shot_count": 2,
+      "eval_count": 1998,
+      "selected_indices": [
+        0,
+        2
+      ],
+      "strategy": "correctness_balanced",
+      "shots_sha256": "a09b0ede25efe5b0db4b901b82de9660eae300f17b2fbdc57ea6780e08f2da94",
+      "eval_sha256": "993429de0fbfdbab9b0453b186ad60a3201d18f1d01945ce06ebb3303b3390d9"
+    },
+    {
+      "task": "hsbgc",
+      "source_file": "/home/zc/wmt26/data/raw/llms-limited-resources2026/Sorbian/GC/hsb_gc_dev.jsonl",
+      "shots_file": "/home/zc/wmt26/configs/eval/devsplits/sorbian_devsplit_fewshot_v2/shots/hsbgc.jsonl",
+      "eval_file": "/home/zc/wmt26/configs/eval/devsplits/sorbian_devsplit_fewshot_v2/eval/hsbgc.jsonl",
+      "source_count": 2000,
+      "shot_count": 2,
+      "eval_count": 1998,
+      "selected_indices": [
+        0,
+        1
+      ],
+      "strategy": "correctness_balanced",
+      "shots_sha256": "7b86d60c4c5fb5b2cb6c0017ce217a976430bd6ca84039cc46075bcd64c9de15",
+      "eval_sha256": "2106c4d9b2fd912c1d0f386a99d7696ffd5963526a19f4a68018b07d58a2f52d"
+    },
+    {
+      "task": "dsbgc",
+      "source_file": "/home/zc/wmt26/data/raw/llms-limited-resources2026/Sorbian/GC/dsb_gc_dev.jsonl",
+      "shots_file": "/home/zc/wmt26/configs/eval/devsplits/sorbian_devsplit_fewshot_v2/shots/dsbgc.jsonl",
+      "eval_file": "/home/zc/wmt26/configs/eval/devsplits/sorbian_devsplit_fewshot_v2/eval/dsbgc.jsonl",
+      "source_count": 1250,
+      "shot_count": 2,
+      "eval_count": 1248,
+      "selected_indices": [
+        0,
+        3
+      ],
+      "strategy": "correctness_balanced",
+      "shots_sha256": "d04ad2969f6a8f2ab65fcbfa57629c9b83c2cc1dd0fedd3bc57c9ffaae1f122e",
+      "eval_sha256": "aa113e6da2d692d56989c6445670876ed64bb1803aa521fdf6a9f9b789bf339e"
+    },
+    {
+      "task": "hsbmr",
+      "source_file": "/home/zc/wmt26/data/raw/llms-limited-resources2026/Sorbian/MR/hsb_mr_dev.jsonl",
+      "shots_file": "/home/zc/wmt26/configs/eval/devsplits/sorbian_devsplit_fewshot_v2/shots/hsbmr.jsonl",
+      "eval_file": "/home/zc/wmt26/configs/eval/devsplits/sorbian_devsplit_fewshot_v2/eval/hsbmr.jsonl",
+      "source_count": 24,
+      "shot_count": 2,
+      "eval_count": 22,
+      "selected_indices": [
+        0,
+        1
+      ],
+      "strategy": "mr_diverse",
+      "shots_sha256": "30adf317bcfa70217b75813bbfec24122d752abd661752306787c82998d30185",
+      "eval_sha256": "dcc5a08568132abc12f3828d166cf740f95d7244537aef8e69faeca87c28de6a"
+    },
+    {
+      "task": "dsbmr",
+      "source_file": "/home/zc/wmt26/data/raw/llms-limited-resources2026/Sorbian/MR/dsb_mr_dev.jsonl",
+      "shots_file": "/home/zc/wmt26/configs/eval/devsplits/sorbian_devsplit_fewshot_v2/shots/dsbmr.jsonl",
+      "eval_file": "/home/zc/wmt26/configs/eval/devsplits/sorbian_devsplit_fewshot_v2/eval/dsbmr.jsonl",
+      "source_count": 24,
+      "shot_count": 2,
+      "eval_count": 22,
+      "selected_indices": [
+        0,
+        1
+      ],
+      "strategy": "mr_diverse",
+      "shots_sha256": "5f9fc9277b3927981230a7bdc4acf50dcf9217f387685cd57ae3786171ae839d",
+      "eval_sha256": "587bdee9e850bc5c2d44a459a62b757aa71ae2a4850f037ad582bad8e4574a7b"
+    },
+    {
+      "task": "de-hsb_mt",
+      "source_file": "/home/zc/wmt26/data/raw/llms-limited-resources2026/Sorbian/MT/de-hsb_mt_dev.jsonl",
+      "shots_file": "/home/zc/wmt26/configs/eval/devsplits/sorbian_devsplit_fewshot_v2/shots/de-hsb_mt.jsonl",
+      "eval_file": "/home/zc/wmt26/configs/eval/devsplits/sorbian_devsplit_fewshot_v2/eval/de-hsb_mt.jsonl",
+      "source_count": 4000,
+      "shot_count": 5,
+      "eval_count": 3995,
+      "selected_indices": [
+        0,
+        1,
+        2,
+        2577,
+        3860
+      ],
+      "strategy": "mt_diverse",
+      "shots_sha256": "9d45aef73d65b4bc603486a0d367be3a3b7704f8513d2c099407ef0dd4efe7e3",
+      "eval_sha256": "833af8747ba7e914290bbcd17ee97fea9c0ac4247aab7ab56a62b27615e3a25e"
+    },
+    {
+      "task": "de-dsb_mt",
+      "source_file": "/home/zc/wmt26/data/raw/llms-limited-resources2026/Sorbian/MT/de-dsb_mt_dev.jsonl",
+      "shots_file": "/home/zc/wmt26/configs/eval/devsplits/sorbian_devsplit_fewshot_v2/shots/de-dsb_mt.jsonl",
+      "eval_file": "/home/zc/wmt26/configs/eval/devsplits/sorbian_devsplit_fewshot_v2/eval/de-dsb_mt.jsonl",
+      "source_count": 4000,
+      "shot_count": 5,
+      "eval_count": 3995,
+      "selected_indices": [
+        0,
+        1,
+        2,
+        1385,
+        3533
+      ],
+      "strategy": "mt_diverse",
+      "shots_sha256": "8ed0fccd8a347bf847aa9df4a2531780230b58d4015773e23b881dd269ab5206",
+      "eval_sha256": "44bc720d9037455ec944e0dbb598503c71be7f9a25a5e340f11c7af46ec9c31d"
+    },
+    {
+      "task": "hsb-dsb_mt",
+      "source_file": "/home/zc/wmt26/data/raw/llms-limited-resources2026/Sorbian/MT/hsb-dsb_mt_dev.jsonl",
+      "shots_file": "/home/zc/wmt26/configs/eval/devsplits/sorbian_devsplit_fewshot_v2/shots/hsb-dsb_mt.jsonl",
+      "eval_file": "/home/zc/wmt26/configs/eval/devsplits/sorbian_devsplit_fewshot_v2/eval/hsb-dsb_mt.jsonl",
+      "source_count": 4000,
+      "shot_count": 5,
+      "eval_count": 3995,
+      "selected_indices": [
+        0,
+        1,
+        2,
+        181,
+        3976
+      ],
+      "strategy": "mt_diverse",
+      "shots_sha256": "216fa8bad65e2f03b3a40a9e62d8069ae091df3deabd5c471b0aaac8f22c7080",
+      "eval_sha256": "190fa535673ac2884363ef6730ce97ae832afe7ef2ce026af88be1b5e3f74fea"
+    }
+  ]
+}

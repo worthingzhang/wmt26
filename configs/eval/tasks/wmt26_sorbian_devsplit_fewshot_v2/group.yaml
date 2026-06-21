@@ -1,0 +1,18 @@
+group: wmt26_sorbian_devsplit_fewshot_v2
+task:
+  - deu-hsb_devsplit_fs5_v2
+  - hsb-deu_devsplit_fs5_v2
+  - deu-dsb_devsplit_fs5_v2
+  - dsb-deu_devsplit_fs5_v2
+  - dsb-hsb_devsplit_fs5_v2
+  - hsb-dsb_devsplit_fs5_v2
+  - hsbqa_devsplit_fs3_v2
+  - dsbqa_devsplit_fs3_v2
+  - hsbsc_devsplit_fs2_v2
+  - dsbsc_devsplit_fs2_v2
+  - hsbgc_devsplit_fs2_v2
+  - dsbgc_devsplit_fs2_v2
+  - hsbmr_devsplit_fs2_v2
+  - dsbmr_devsplit_fs2_v2
+metadata:
+  version: 2.0
