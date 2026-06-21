@@ -2,6 +2,30 @@
 
 Report generated: 2026-06-15
 
+## Lab Cluster (New Training Server)
+
+A second, more stable server has been set up for long-running training.
+
+| Item | Value |
+|---|---|
+| Hostname/IP | `10.249.45.139` |
+| SSH | `ssh zc@10.249.45.139` |
+| Project root | `/data1/zc/wmt26` |
+| OS | Ubuntu 22.04 |
+| NVIDIA Driver | 570+ |
+| CUDA Version (driver) | 12.8 |
+| GPUs | 8 × NVIDIA RTX 4090 (48 GB each) |
+| conda | `~/miniconda3` |
+| uv | installed |
+| Status | ✅ setup complete, CPT v1 full finished |
+
+### Environment Notes for Lab Cluster
+
+- `.venv`, `.venvs/llamafactory`, and uv Python interpreters were copied from the original server and path-corrected (`/home/zc/wmt26` → `/data1/zc/wmt26`).
+- `configs/env/mirrors.env` points to `/data1/zc/wmt26/.cache/huggingface`.
+- The OPD/verl conda env path is `/data1/zc/wmt26/.conda/envs/verl`.
+- Git repo is at `/data1/zc/wmt26`; code sync should happen via `git pull` after pushes from the original server.
+
 ## System Information
 
 | Item | Value |

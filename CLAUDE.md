@@ -54,6 +54,15 @@ CPT, SFT, and OPD are parallel operators; any model can feed any later training 
 └── submissions/    # final outputs
 ```
 
+## Servers
+
+| Server | Address | Project root | GPUs | Role | Status |
+|---|---|---|---|---|---|
+| Development / original | `zc@10.249.46.1` (port 8888) | `/home/zc/wmt26` | 8 × RTX 4090 24 GB | 开发、轻量评测 | ⚠️ 不稳定，今日多次系统重启 |
+| Lab cluster / training | `zc@10.249.45.139` | `/data1/zc/wmt26` | 8 × RTX 4090 48 GB | 长时间训练、大显存任务 | ✅ 已 setup，CPT v1 full 完成 |
+
+Both servers share the same git repo but do **not** auto-sync files. Move code via `git push/pull` and move data/models via `rsync`.
+
 ## Environments
 
 | Environment | Path | Python | Purpose |
@@ -126,7 +135,7 @@ bash scripts/eval/eval_model.sh --eval-id ... --model-id ... --model-path ... --
 
 - Project scaffold committed; external repos cloned with upstreams.
 - Base model `Qwen/Qwen3.5-2B` copied to `models/base/Qwen3.5-2B`.
-- Three environments ready:
+- Three environments ready on **both** servers:
   - Main/Eval `.venv`: torch 2.6.0+cu124
   - LlamaFactory `.venvs/llamafactory`: torch 2.7.0+cu126, llamafactory-cli 0.9.5.dev0
   - OPD/verl `.conda/envs/verl`: torch 2.8.0+cu128
@@ -137,10 +146,10 @@ bash scripts/eval/eval_model.sh --eval-id ... --model-id ... --model-path ... --
   - Processed data ready: 3,824,702 lines, ~135M tokens, 60/40 hsb/dsb.
   - Smoke (cutoff_len=1024) completed: 20/20 steps, final loss 4.086.
   - Probe4096 (cutoff_len=4096, ZeRO-3) completed: 50/50 steps, final loss 3.4468, ~24.5 s/step.
-  - **Full CPT running**: tmux `cpt-v1-dsb4x-full`, step 12/1000, loss ~4.40, ~24 s/step, estimated 7–8 hours.
+  - **Full CPT completed on lab cluster**: 1000/1000 steps, final loss 2.148, runtime 3:48:05, checkpoint saved at `models/cpt/cpt_v1_official_plaintext_dsb4x_full/checkpoint-1000/`.
 
 ## Next TODOs
 
-1. Monitor full CPT to completion (1000 steps), validate checkpoints/loss/log, update status docs.
+1. Register the full CPT model in `models/registry/models.jsonl` and `runs/train_registry.csv`.
 2. Run zero-shot evaluation of `cpt_v1_official_plaintext_dsb4x_full` and compare to base model baseline.
-3. Register the full CPT model in `models/registry/models.jsonl` and `runs/train_registry.csv`.
+3. Update `docs/train/CPT_V1_OFFICIAL_PLAINTEXT_DSB4X_STATUS.md` with final results.

@@ -2,11 +2,21 @@
 
 项目脚本会自动加载 `configs/env/mirrors.env`；手动调试时才需要 `source` 它。
 
-## 当前里程碑（Checkpoint 2026-06-20）
+## 服务器分工
+
+| 服务器 | 地址 | 项目路径 | GPU | 主要用途 |
+|---|---|---|---|---|
+| 开发服务器（本机） | `zc@10.249.46.1:8888` | `/home/zc/wmt26` | 8 × RTX 4090 24 GB | 代码开发、文档、git、轻量评测 |
+| 实验室训练集群 | `zc@10.249.45.139` | `/data1/zc/wmt26` | 8 × RTX 4090 48 GB | 长时间 CPT/SFT/OPD 训练 |
+
+同步方式：代码走 `git push/pull`，数据/模型/环境走 `rsync`。
+
+## 当前里程碑（Checkpoint 2026-06-21）
 
 ### 已完成
 
 - 项目骨架、外部仓库、三个训练/评测环境、base model、镜像配置、tmux 均已就绪。
+- **服务器分工已确定**：老服务器做开发/评测，新 lab cluster（48GB GPU）做训练。
 - **Sorbian baseline 评测已完成**：
   - QA smoke（hsbqa limit=5）：acc=0.85。
   - 完整 QA（hsbqa + dsbqa）：hsbqa=0.5159，dsbqa=0.4682。
@@ -19,7 +29,7 @@
   - hsb/dsb ratio: 59.98% / 40.02%
 - **CPT smoke 完成**：`models/cpt/cpt_v1_official_plaintext_dsb4x_smoke`，20/20 steps，final loss 4.086。
 - **CPT probe4096 完成**：`models/cpt/cpt_v1_official_plaintext_dsb4x_probe4096`，50/50 steps，cutoff_len=4096，DeepSpeed ZeRO-3，final loss 3.4468，~24.5 s/step。
-- **Full CPT 已启动**：tmux `cpt-v1-dsb4x-full`，step 12/1000，loss ~4.40，预计 7–8 小时完成。
+- **Full CPT 已完成（lab cluster）**：`models/cpt/cpt_v1_official_plaintext_dsb4x_full/checkpoint-1000/`，1000/1000 steps，final loss 2.148，runtime 3:48:05。
 
 ### 已验证命令
 
@@ -85,9 +95,10 @@ python -m lm_eval run \
 
 ### 未完成的下一步
 
-1. **监控并完成 full CPT**：tmux `cpt-v1-dsb4x-full` 预计 7–8 小时跑完 1000 steps；完成后验证 checkpoint、loss、日志，并更新 `docs/train/CPT_V1_OFFICIAL_PLAINTEXT_DSB4X_STATUS.md`。
+1. **注册 full CPT 模型**：将 `cpt_v1_official_plaintext_dsb4x_full` 登记到 `models/registry/models.jsonl` 和 `runs/train_registry.csv`。
 2. **Full CPT 完成后评测**：使用 `scripts/eval/eval_model.sh` 对 `models/cpt/cpt_v1_official_plaintext_dsb4x_full` 做 zero-shot 评测，与 base model baseline 对比。
-3. **注册训练产出模型**：将 `cpt_v1_official_plaintext_dsb4x_full` 登记到 `models/registry/models.jsonl` 和 `runs/train_registry.csv`。
+3. **更新训练状态文档**：更新 `docs/train/CPT_V1_OFFICIAL_PLAINTEXT_DSB4X_STATUS.md` 为完成状态。
+4. **推进后续实验节点**：基于 CPT 结果启动 SFT / OPD smoke。
 
 本文档给出常用命令模板。
 
