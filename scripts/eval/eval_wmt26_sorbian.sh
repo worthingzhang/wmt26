@@ -2,18 +2,17 @@
 # Evaluate a model on WMT26 Sorbian devsplit few-shot profiles.
 # Usage:
 #   bash scripts/eval/eval_wmt26_sorbian.sh MODEL_PATH devsplit_fewshot_v1 [--debug]
+#   bash scripts/eval/eval_wmt26_sorbian.sh MODEL_PATH devsplit_fewshot_v2 [--debug]
 
 set -euo pipefail
 
 PROJECT_ROOT="/home/zc/wmt26"
 OFFICIAL_EVAL_DIR="${PROJECT_ROOT}/repos/official_eval"
-TASKS_DIR="${PROJECT_ROOT}/configs/eval/tasks/wmt26_sorbian_devsplit_fewshot_v1"
-DEVSPLIT_DIR="${PROJECT_ROOT}/configs/eval/devsplits/sorbian_devsplit_fewshot_v1"
 EVAL_REGISTRY="${PROJECT_ROOT}/runs/eval_registry.csv"
 
 if [[ $# -lt 2 ]]; then
     echo "Usage: $(basename "$0") MODEL_PATH PROFILE [OPTIONS]"
-    echo "  PROFILE: devsplit_fewshot_v1"
+    echo "  PROFILE: devsplit_fewshot_v1 | devsplit_fewshot_v2"
     echo "  OPTIONS: --debug (adds --limit 3 --write_out)"
     exit 1
 fi
@@ -21,6 +20,16 @@ fi
 MODEL_PATH="$1"
 PROFILE="$2"
 shift 2
+
+if [[ "${PROFILE}" != "devsplit_fewshot_v1" && "${PROFILE}" != "devsplit_fewshot_v2" ]]; then
+    echo "Error: unsupported profile: ${PROFILE}"
+    exit 1
+fi
+
+TASKS_DIR="${PROJECT_ROOT}/configs/eval/tasks/wmt26_sorbian_${PROFILE}"
+DEVSPLIT_DIR="${PROJECT_ROOT}/configs/eval/devsplits/sorbian_${PROFILE}"
+TASKS_GROUP="wmt26_sorbian_${PROFILE}"
+
 DEBUG=false
 while [[ $# -gt 0 ]]; do
     case "$1" in
@@ -28,11 +37,6 @@ while [[ $# -gt 0 ]]; do
         *) echo "Unknown option: $1"; exit 1 ;;
     esac
 done
-
-if [[ "${PROFILE}" != "devsplit_fewshot_v1" ]]; then
-    echo "Error: unsupported profile: ${PROFILE}"
-    exit 1
-fi
 
 if [[ ! -d "${MODEL_PATH}" ]]; then
     echo "Error: model path does not exist: ${MODEL_PATH}"
@@ -67,7 +71,7 @@ COMMAND=(
     --model hf
     --model_args "pretrained=${MODEL_PATH},trust_remote_code=True,dtype=${DTYPE},enable_thinking=False"
     --include_path "${TASKS_DIR}"
-    --tasks wmt26_sorbian_devsplit_fewshot_v1
+    --tasks "${TASKS_GROUP}"
     --apply_chat_template
     --batch_size "${BATCH_SIZE}"
     --device "${DEVICE}"
@@ -98,11 +102,11 @@ manifest = {
     "debug": sys.argv[5].lower() == "true",
     "timestamp": sys.argv[6],
     "output_dir": sys.argv[7],
-    "tasks_group": "wmt26_sorbian_devsplit_fewshot_v1",
-    "tasks_group_config": sys.argv[8],
+    "tasks_group": sys.argv[8],
+    "tasks_group_config": sys.argv[9],
 }
-Path(sys.argv[9]).write_text(json.dumps(manifest, indent=2) + "\n")
-' "${EVAL_ID}" "${MODEL_NAME}" "${MODEL_PATH}" "${PROFILE}" "${DEBUG}" "${TIMESTAMP}" "${OUTPUT_DIR}" "${TASKS_DIR}/group.yaml" "${OUTPUT_DIR}/manifest.json"
+Path(sys.argv[10]).write_text(json.dumps(manifest, indent=2) + "\n")
+' "${EVAL_ID}" "${MODEL_NAME}" "${MODEL_PATH}" "${PROFILE}" "${DEBUG}" "${TIMESTAMP}" "${OUTPUT_DIR}" "${TASKS_GROUP}" "${TASKS_DIR}/group.yaml" "${OUTPUT_DIR}/manifest.json"
 
 # Save fewshot split manifest
 cp "${DEVSPLIT_DIR}/manifest.json" "${OUTPUT_DIR}/fewshot_split_manifest.json"
@@ -137,7 +141,7 @@ cd "${PROJECT_ROOT}"
     echo "overlay tasks dir: ${TASKS_DIR}"
     git rev-parse HEAD
     echo "---"
-    git diff -- "configs/eval/tasks/wmt26_sorbian_devsplit_fewshot_v1" || true
+    git diff -- "${TASKS_DIR}" || true
 } > "${OUTPUT_DIR}/overlay_task_git_or_diff.txt"
 
 # Run eval
