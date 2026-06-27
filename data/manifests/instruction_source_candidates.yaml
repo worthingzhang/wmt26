@@ -1,16 +1,36 @@
 instruction_sources:
-  - name: Magpie
-    status: needs_verification
-    notes: "Find exact dataset id used or compatible with TartuNLP-style instruction data."
+  - name: Magpie MT
+    status: downloaded
+    dataset_id: "Magpie-Align/Magpie-Llama-3.1-Pro-MT-300K-v0.1"
+    output: "data/raw/instruction/magpie_mt.jsonl"
+    rows: 50000
+    lang_field: "language"
+    notes: "Multilingual Magpie. 99.9% English in filtered output (few DE/PL/RUS/UKR/CES). Streaming, max_docs=50000."
+
   - name: Aya
-    status: needs_verification
-    notes: "Find exact dataset id and language fields; later filter to English, German, and close Slavic languages."
+    status: downloaded
+    dataset_id: "CohereForAI/aya_dataset"
+    output: "data/raw/instruction/aya.jsonl"
+    rows: 6765
+    lang_field: "language_code"
+    notes: "Scanned 202k rows for 6.7k target-lang records. eng=3944, pol=1483, ukr=522, rus=423, deu=241, srp=152. No ces/slk/hsb/dsb."
+
   - name: EuroBlocks
-    status: needs_verification
-    notes: "Find exact dataset id and license."
+    status: not_found
+    notes: "Not found on HuggingFace Hub under any known org/name combination. Skipped."
+
   - name: OpenAssistant2
-    status: needs_verification
-    notes: "Find exact dataset id, license, and conversation format."
+    status: downloaded
+    dataset_id: "OpenAssistant/oasst2"
+    output: "data/raw/instruction/oasst2.jsonl"
+    rows: 50000
+    lang_field: "lang"
+    notes: "128k total rows. Filtered: eng=37830, rus=7844, deu=3506, ukr=534, pol=286. Deleted messages excluded."
+
   - name: FLAN v2
-    status: needs_verification
-    notes: "Find exact dataset id and size; do not download full data without sampling plan."
+    status: downloaded
+    dataset_id: "Muennighoff/flan"
+    output: "data/raw/instruction/flan_v2_en.jsonl"
+    rows: 50000
+    lang_field: null
+    notes: "English only (no language field). inputs/targets/task format. 50k sampled."
