@@ -11,6 +11,42 @@
 
 同步方式：代码走 `git push/pull`，数据/模型/环境走 `rsync`。
 
+## 当前里程碑（Checkpoint 2026-06-24：官方评测链路对齐）
+
+暂停 few-shot 主线，转向**官方 zero-shot 口径**。详见 `docs/eval/OFFICIAL_EVAL_ALIGNMENT_PLAN.md`。
+
+### 已完成（本次）
+
+- `repos/official_eval` remote 命名修正：`origin`=fork、`upstream`=官方 eval-code（`TUM-NLP/llms-lim-res-eval-2026`）、`data`=官方 data repo。
+- eval-code 对齐到官方 `upstream/main = 711a2b4f`（`reset --hard`，丢弃本地 `1e6ab97b`，tag `pre-align-1e6ab97b` 备份）。
+- data 副本（symlink → `data/raw/llms-limited-resources2026`）对齐到官方 `2b712ac6`。
+- few-shot v1/v2 标记 **experimental**（不删、不修）；v2 的 MT→deu/SC/GC 确认 invalid/regressed。
+- 开发服务器确认可直连 GitHub；codex 代理为 Windows 反向隧道（备用）。
+
+### 已验证命令（本次，全部成功）
+
+```bash
+cd /home/zc/wmt26/repos/official_eval
+git remote rename upstream data
+git remote add upstream https://github.com/TUM-NLP/llms-lim-res-eval-2026.git
+git fetch upstream && git fetch data
+git tag pre-align-1e6ab97b
+git reset --hard upstream/main                               # -> 711a2b4f
+git -C llms-limited-resources2026 fetch origin
+git -C llms-limited-resources2026 reset --hard origin/main   # -> 2b712ac6
+# 备用代理（仅 github，不影响 pip/hf）：先在 Windows 跑 `ssh -N -T WMT-codex-tunnel`
+git -c http.https://github.com/.proxy=http://127.0.0.1:17890 fetch upstream
+```
+
+### 下一步（本主线）
+
+1. 设计结果存储结构与命名规范（`reports/eval` 布局），再统一设计官方评测入口（**暂不**创建 `eval_official_sorbian.sh`、**暂不**改 `eval_base_full.sh`）。
+2. 用官方口径重跑并固化 `base_qwen35_2b` zero-shot baseline（SC/GC/MR 受正则/指标变更影响需重跑；MT/QA 可复用）。
+3. 评测 `run.yaml` 须记录 eval-code commit (`711a2b4f`) 与 data commit (`2b712ac6`)。
+4. vLLM 作为下一阶段单独处理（暂不安装/配置/测试）。
+
+> 以下为上一里程碑（CPT）记录。
+
 ## 当前里程碑（Checkpoint 2026-06-21）
 
 ### 已完成

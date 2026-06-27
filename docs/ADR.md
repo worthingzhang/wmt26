@@ -93,6 +93,7 @@
 - Sorbian MR 任务在 `generate_until` 输出下错误使用 `acc` metric，导致 `mean` 聚合 TypeError。
 - 未修改 `lm_eval/api/metrics.py`，而是将 `lm_eval/tasks/wmt26-lrl/sorbian/mr/{hsbmr,dsbmr}.yaml` 中的 `acc` 改为 `exact_match`。
 - 修改 commit：`repos/official_eval@1e6ab97b005464fc0e4581cc850499eac4dc2bc9`。
+- **更新（2026-06-24）**：该补丁已被官方 `8be394d6` 取代（见 ADR-10），对齐时丢弃，仅以 tag `pre-align-1e6ab97b` 备份。
 
 ## ADR-8: 单卡 fallback 作为多 GPU 不兼容时的默认策略
 
@@ -134,3 +135,23 @@
 
 - ZeRO-3 init is slower than DDP due to parameter partitioning, but training step time stabilizes at ~24 s/step.
 - Launch must be via `FORCE_TORCHRUN=1 llamafactory-cli train ...` to ensure 8-GPU torchrun.
+
+## ADR-10: 官方口径优先（official zero-shot），暂停 few-shot 实验线
+
+**Decision**：
+
+- 项目评测主线切换为 **官方 zero-shot 口径**：使用 `repos/official_eval` 官方任务（`sorbian_dev` group + QA），`enable_thinking=False`、`--apply_chat_template`、零样本。
+- few-shot v1/v2 保留但**标记为 experimental**，v2 明确标 `invalid/regressed`；不再作为 baseline 或对外汇报依据。
+- `repos/official_eval` 与官方 eval-code 仓库 `TUM-NLP/llms-lim-res-eval-2026` 对齐（`upstream`=eval-code、`data`=data repo），采纳**纯官方口径**，不保留本地 MR 补丁 `1e6ab97b`，仅通过 tag `pre-align-1e6ab97b` 备份。
+- data repo 运行副本通过 symlink 固定到官方 commit，并在 `run.yaml` 中记录 (eval-code commit, data commit)，确保所有 baseline 可比。
+
+**Rationale**：
+
+- WMT26 排行榜以官方 zero-shot 为准，few-shot 是内部探索。
+- 自研 few-shot 结果对 prompt/shots 顺序极度敏感（v2 的 MT 标签不一致、SC/GC CORRECT 约定崩溃），已证明不可靠。
+- 与官方 eval-code 对齐可复用其上游修复（MR `exact_match`、SC/GC 正则放宽 `\s*`），避免本地补丁分叉。
+
+**本次应用**：
+
+- eval-code 对齐到 `repos/official_eval@711a2b4f`（官方 `upstream/main`）；data repo @ `2b712ac6`。
+- 旧本地 MR 补丁 `1e6ab97b` 由 `pre-align-1e6ab97b` tag 备份。

@@ -1,5 +1,53 @@
 # Session Log
 
+## Session: 2026-06-23 / 2026-06-24（官方评测链路对齐 + 状态栏/代理排查）
+
+### Summary
+
+暂停 few-shot 主线，专注**官方 zero-shot 口径**。确认 `repos/official_eval` 的 remote 配错（`upstream` 错指 data repo），官方 eval-code repo `TUM-NLP/llms-lim-res-eval-2026` 未配 remote。执行完整的代码/仓库对齐：修正 remote 命名 → fetch → tag 备份 → `reset --hard` 到官方 eval-code main → 对齐 data 副本 → 标注 few-shot 为 experimental。**未运行任何评测、未生成新结果、未 push。** 另排查修好 Claude Code 状态栏（Kimi 真实 256k 窗口），确认开发服务器当前可直连 GitHub（此前超时为瞬时抖动），并定位 codex 的 Windows 反向隧道代理（`codex-wmt` → `127.0.0.1:17890` → Windows Clash `7897`）。
+
+### Files Changed / Created
+
+- `docs/eval/OFFICIAL_EVAL_ALIGNMENT_PLAN.md` — 新建（调查清单 + §0.5 执行记录）。
+- `docs/EXTERNAL_REPOS.md` — 重写 official_eval 段（remote 命名、`711a2b4f`、对齐记录）+ 新增官方 data repo 段。
+- `reports/eval/eval_index.csv` — v1/v2 行 notes 加 `[EXPERIMENTAL]`/`[REGRESSED]`（**不改分数**）。
+- `configs/eval/tasks/wmt26_sorbian_devsplit_fewshot_v1/README.md` — 加 experimental banner。
+- `configs/eval/tasks/.../fewshot_v{1,2}/EXPERIMENTAL.md` + `configs/eval/devsplits/sorbian_devsplit_fewshot_v{1,2}/EXPERIMENTAL.md` — 新建 4 个标记。
+- `docs/eval/DEVSPLIT_FEWSHOT_V2_REGRESSION_REPORT.md` — 加状态 banner（v2 invalid/regressed）。
+- `repos/official_eval/.gitignore` — 新增 `llms-limited-resources2026`（symlink，无斜杠）。
+- 项目仓外：`~/.claude/statusline-command.sh`、记忆 `kimi-256k-context-limit.md`。
+
+### Commands / Tests Run（关键，全部成功）
+
+```bash
+cd /home/zc/wmt26/repos/official_eval
+git remote rename upstream data
+git remote add upstream https://github.com/TUM-NLP/llms-lim-res-eval-2026.git
+git fetch upstream && git fetch data          # upstream/main=711a2b4f, data/main=2b712ac6
+git tag pre-align-1e6ab97b                     # 备份旧 HEAD（含本地 MR 补丁）
+git reset --hard upstream/main                 # 1e6ab97b -> 711a2b4f
+# data 副本（symlink -> data/raw/llms-limited-resources2026）
+git -C llms-limited-resources2026 fetch origin
+git -C llms-limited-resources2026 reset --hard origin/main   # 16fa568 -> 2b712ac6
+```
+
+### Key Findings
+
+- 官方 `8be394d6 "Minor metric update."`：MR `acc`→`exact_match`（删 chrf，加 mean/higher_is_better）+ SC/GC 抽取正则放宽 `\s*`。本地 `1e6ab97b` 被其取代。
+- harness 的 MT 用 `<deu>` 零样本，已对齐；`<de>` 回归只在自研 few-shot v2，不在 harness。
+- Math-Verify 不在 harness 内；MR 用 YAML filter 正则 + `exact_match`。
+- 开发服务器可直连 GitHub（curl 多次 200，~0.8s）；codex 代理是 Windows `ssh -N -T WMT-codex-tunnel` 反向隧道，按需 `git -c http.https://github.com/.proxy=http://127.0.0.1:17890 …`。
+
+### Unresolved Issues
+
+1. eval fork 本地 `main` 领先 GitHub `origin/main` 2 个 commit（`711a2b4f`），**未 push**。
+2. 主仓文档/标注改动 + eval 仓 `.gitignore` 改动**未 commit**。
+3. data repo 第二个文物副本 `data/raw/official/llms-limited-resources2026`（`cc3579a`）未同步，非运行路径。
+4. 官方口径 zero-shot baseline 待重跑（SC/GC/MR 受正则/指标变更影响）；先设计结果存储结构与命名规范，再做统一入口。
+5. CPT full 模型仍未注册、未评测（沿用上一 session 未决项）。
+
+---
+
 ## Session: 2026-06-20（CPT V1 DSB4X probe4096 与 full CPT 启动）
 
 ### Summary

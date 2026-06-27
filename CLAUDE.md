@@ -18,6 +18,8 @@ CPT, SFT, and OPD are parallel operators; any model can feed any later training 
 - [docs/EXTERNAL_REPOS.md](docs/EXTERNAL_REPOS.md) — external backend repos
 - [docs/ADR.md](docs/ADR.md) — durable architecture decisions
 - [docs/eval/EVAL_RESULT_STANDARD.md](docs/eval/EVAL_RESULT_STANDARD.md) — tracked eval summary layout
+- [docs/eval/OFFICIAL_EVAL_ALIGNMENT_PLAN.md](docs/eval/OFFICIAL_EVAL_ALIGNMENT_PLAN.md) — official eval alignment (current mainline)
+- [docs/eval/OFFICIAL_ZEROSHOT_RUNBOOK.md](docs/eval/OFFICIAL_ZEROSHOT_RUNBOOK.md) — official zero-shot eval script usage
 - [docs/SESSION_LOG.md](docs/SESSION_LOG.md) — session history
 - [docs/agents/git.md](docs/agents/git.md) — commit conventions
 - [.claude/rules/project-rules.md](.claude/rules/project-rules.md) — rules and pitfalls
@@ -130,6 +132,11 @@ bash scripts/eval/eval_model.sh --eval-id ... --model-id ... --model-path ... --
 - Register every model/train/eval in the registry CSVs/JSONL.
 - Don't auto-push; ask first.
 - Don't install verl/vLLM/sglang unless asked.
+- **Eval mainline = official zero-shot.** All checkpoints (base / CPT / SFT / OPD) must first run `official_zeroshot` under aligned `repos/official_eval` + data repo.
+- **few-shot v1/v2 are experimental**, not baseline; v2 MT→deu / SC / GC are invalid/regressed.
+- `runs/` holds raw evidence (`results_*.json`, `samples_*.jsonl`, logs, shards); `reports/` holds human-readable aggregates (`RESULTS.md`, `scores.csv`, `run.yaml`).
+- Every formal eval result must have a `run.yaml` with `model_tag`, `backend`, `eval_code_commit`, `data_commit`, and `official` flag.
+- Do not use timestamps as `reports/` directory names; timestamps belong in `runs/<run_id>` only.
 
 ## Current State (Checkpoint)
 
@@ -141,7 +148,9 @@ bash scripts/eval/eval_model.sh --eval-id ... --model-id ... --model-path ... --
   - OPD/verl `.conda/envs/verl`: torch 2.8.0+cu128
 - `tmux` 3.2a available.
 - Sorbian baseline evaluation completed (QA + generative).
-- `repos/official_eval` patched for Sorbian MR exact_match metric, commit `1e6ab97b`.
+- **Eval mainline = official zero-shot.** `repos/official_eval` aligned to official **eval-code** `upstream/main = 711a2b4f` (pure official 口径). Remotes: `origin`=fork, `upstream`=eval-code (`TUM-NLP/llms-lim-res-eval-2026`), `data`=data repo (`TUM-NLP/llms-limited-resources2026`). Local MR patch `1e6ab97b` dropped (superseded by official `8be394d6`), backed up as tag `pre-align-1e6ab97b`. data repo @ `2b712ac6` (symlink → `data/raw/llms-limited-resources2026`).
+- few-shot devsplit **v1/v2 marked experimental** (not official baseline); v2 MT→deu/SC/GC invalid/regressed. See `docs/eval/OFFICIAL_EVAL_ALIGNMENT_PLAN.md` + `docs/eval/DEVSPLIT_FEWSHOT_V2_REGRESSION_REPORT.md`.
+- Dev-server GitHub is directly reachable (flaky; codex Windows reverse tunnel `127.0.0.1:17890` as fallback).
 - **CPT V1 Official Plaintext DSB4X**:
   - Processed data ready: 3,824,702 lines, ~135M tokens, 60/40 hsb/dsb.
   - Smoke (cutoff_len=1024) completed: 20/20 steps, final loss 4.086.
@@ -150,6 +159,7 @@ bash scripts/eval/eval_model.sh --eval-id ... --model-id ... --model-path ... --
 
 ## Next TODOs
 
-1. Register the full CPT model in `models/registry/models.jsonl` and `runs/train_registry.csv`.
-2. Run zero-shot evaluation of `cpt_v1_official_plaintext_dsb4x_full` and compare to base model baseline.
-3. Update `docs/train/CPT_V1_OFFICIAL_PLAINTEXT_DSB4X_STATUS.md` with final results.
+1. ~~Design `reports/eval` result-storage structure + naming~~ ✅ Done (see updated `docs/eval/EVAL_RESULT_STANDARD.md` and `reports/eval/eval_index.csv`). Build a unified **official zero-shot** eval entry only after explicit approval (still do NOT create `eval_official_sorbian.sh` or modify `eval_base_full.sh` yet).
+2. Re-run + freeze `base_qwen35_2b` official zero-shot baseline (SC/GC/MR changed by official regex/metric; MT/QA reusable); record eval-code `711a2b4f` + data `2b712ac6` in `run.yaml`.
+3. Register full CPT model `cpt_v1_official_plaintext_dsb4x_full` in registries; then eval it under the official entry vs base.
+4. vLLM is a separate later phase (don't install/configure/test yet).

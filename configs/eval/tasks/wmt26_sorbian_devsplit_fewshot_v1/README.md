@@ -1,3 +1,5 @@
+> ⚠️ **EXPERIMENTAL — 非官方 baseline。** 主线已转 official zero-shot；详见本目录 `EXPERIMENTAL.md` 与 `docs/eval/OFFICIAL_EVAL_ALIGNMENT_PLAN.md`。
+
 # WMT26 Sorbian Devsplit Few-Shot Overlay Tasks
 
 This directory is a **local overlay task directory** for the `devsplit_fewshot_v1` evaluation profile.

@@ -32,9 +32,16 @@ This is the first file every coding agent should read in this repository. It is 
 
 ## Eval Workflow Rules
 
-- Save raw evaluation outputs under `runs/eval/...`; this directory is ignored and should not be committed.
-- Save small, human-readable, Git-trackable result summaries under `reports/eval/<model_tag>__<eval_setting>/`.
-- Use `scripts/eval/aggregate_eval_results.py` or `scripts/eval/finalize_8gpu_eval_run.sh` to create `RESULTS.md`, `scores.csv`, `run.yaml`, and `reports/eval/eval_index.csv`.
+- **Current eval mainline = official zero-shot.** Use `repos/official_eval` official tasks (`sorbian_dev` group + QA) with `enable_thinking=False`, `--apply_chat_template`, zero samples.
+- **few-shot v1/v2 are experimental.** They must not be reported as official baseline. v2 MT→deu / SC / GC are known invalid/regressed.
+- **Every new checkpoint (base / CPT / SFT / OPD) must first run `official_zeroshot`.** Other settings (few-shot, backend_compare, smoke) go into `reports/eval_experimental/`.
+- Save raw evaluation outputs under `runs/eval_official/` or `runs/eval_experimental/`; these directories are ignored and should not be committed.
+- Save small, human-readable, Git-trackable result summaries under `reports/eval_official/<model_tag>/official_zeroshot/` or `reports/eval_experimental/<category>/<model_tag>/<eval_setting>/`.
+- Use `scripts/eval/aggregate_eval_results.py` or `scripts/eval/finalize_8gpu_eval_run.sh` to create `RESULTS.md`, `scores.csv`, `run.yaml`, and update `reports/eval/eval_index.csv`.
+- Every formal evaluation must write a `run.yaml` containing at least: `model_tag`, `model_path`, `checkpoint_type`, `eval_setting`, `shot_setting`, `backend`, `backend_role`, `official`, `eval_code_commit`, `data_commit`, `tasks_qa`, `tasks_gen`, `batch_size`, `gpu_setting`, `command`, `source_run_dir`, `generated_at`, `status`, `notes`.
+- Do not create a formal evaluation result that lacks `model_tag`, `backend`, `eval_code_commit`, or `data_commit`.
+- Do not place smoke, debug, or few-shot results into `reports/eval_official/`.
+- Do not use a timestamp as the main directory name under `reports/`; timestamps belong in `runs/<run_id>` only.
 - Record commands, manifests, source paths, and result paths for reproducibility.
 - Register eval runs in `runs/eval_registry.csv` when a workflow produces a meaningful result.
 - For few-shot or devsplit tasks, verify that fixed shots are removed from eval data and that logs do not show few-shot fallback/leakage warnings.
