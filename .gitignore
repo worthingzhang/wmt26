@@ -26,11 +26,18 @@ models/base/
 models/checkpoints/
 models/teachers/
 models/final/
+models/cpt/
 
 # Experimental run outputs
 runs/train/
 runs/eval/
 runs/analysis/
+runs/eval_experimental/
+runs/eval_official/
+
+# Evaluation reports (raw outputs, not summaries)
+reports/eval_experimental/
+reports/eval_official/
 
 # Python / uv artifacts
 __pycache__/
@@ -86,3 +93,9 @@ Thumbs.db
 # Claude Code session state (not project config)
 .claude/scheduled_tasks.json
 .claude/scheduled_tasks.lock
+
+# MiMoCode agent state
+.mimocode/
+
+# Training and rsync logs
+logs/
